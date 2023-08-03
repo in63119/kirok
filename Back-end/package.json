@@ -1,0 +1,11 @@
+{
+  "name": "KIROK_server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/ny-plus-ny/KIROK",
+  "author": "U_and_Crew",
+  "license": "MIT",
+  "dependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
