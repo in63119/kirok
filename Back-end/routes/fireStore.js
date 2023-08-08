@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { test } = require("../controllers/conFireStore");
+const { test } = require("../controllers/test");
 
 router.get("/test", test);
 
