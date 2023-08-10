@@ -8,9 +8,9 @@ app.get("/", (req, res) => {
   res.send("키록 서버에 연결 되었습니다!");
 });
 
-// route
-const test = require("./routes/fireStore");
-app.use("/firestore", test);
+// route: 기관 관련
+const institutions = require("./routes/institutions");
+app.use("/institutions", institutions);
 
 app.listen(port, () => {
   console.log(`server is listening at localhost:${process.env.PORT}`);
