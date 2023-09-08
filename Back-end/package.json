@@ -5,7 +5,17 @@
   "repository": "https://github.com/ny-plus-ny/KIROK",
   "author": "U_and_Crew",
   "license": "MIT",
+  "scripts": {
+    "start": "node index.js",
+    "start:dev": "nodemon --watch index.js"
+  },
   "dependencies": {
-    "nodemon": "^3.0.1"
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "firebase": "10.1.0",
+    "install": "^0.13.0",
+    "nodemon": "^3.0.1",
+    "npm": "^9.8.1"
   }
 }
