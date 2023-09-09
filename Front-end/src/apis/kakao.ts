@@ -1,10 +1,17 @@
 import axios from "axios";
-// axios.defaults.withCredentials = true;
+axios.defaults.withCredentials = true;
 
 const apiKey = process.env.REACT_APP_KAKAO_API_KEY;
-const redirect_uri = "http://localhost:3000/kakao";
+const redirect_uri = "http://localhost:3000/callback";
 const kakaoUri = `https://kauth.kakao.com/oauth/authorize?client_id=${apiKey}&redirect_uri=${redirect_uri}&response_type=code`;
 
-export const kakaoLogin = async () => {
+const serverURL = process.env.REACT_APP_SERVER_URL;
+
+export const kakaoOpen = async () => {
   window.location.href = kakaoUri;
+};
+
+export const postCodeToServer = async (code: string) => {
+  const res = await axios.post(`${serverURL}/login/kakao`, { code });
+  return res.data;
 };
