@@ -37,7 +37,8 @@ const Callback = () => {
   useEffect(() => {
     console.log(kakaoCode);
     handleKakao();
-  }, [kakaoCode.isLogin, handleKakao, kakaoCode]);
+    // eslint-disable-next-line
+  }, [kakaoCode.isLogin]);
 
   return (
     <div>
