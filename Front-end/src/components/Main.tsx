@@ -35,7 +35,7 @@ import { kakaoState } from "../recoil/kakaoState";
         ```
       - Atom 구성
         Front-end/src/recoil/kakaoState.ts를 살펴봅시다.(따로 제가 만든 구성이에요. 이거 나중에 복사해서 다른 상태 만들때 사용면 됩니다.)
-        현재 kakaoCode라는 전역 상태를 만들어서 디폴트 값을 ""로 만들었습니다.
+        현재 kakaoState.kakaoEmail, kakaoState.isLogin 전역 상태를 만들어서 디폴트 값을 "" & false로 만들었습니다.
         이건 React.State의 const state = useState(""); 같은 느낌이라고 생각하시면 됩니다.
           ```code
             // kakaoState.ts
@@ -43,7 +43,7 @@ import { kakaoState } from "../recoil/kakaoState";
             export const kakaoState = atom({
               key: "kakao",
               default: {
-                kakaoCode: "",
+                kakaoEmail: "",
                 isLogin: false,
               },
               effects_UNSTABLE: [persistAtom],
