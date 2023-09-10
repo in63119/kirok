@@ -3,8 +3,8 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // Components
-import Main from "./components/Main";
-import Callback from "./components/Callback";
+import Main from "./pages/Main";
+import Callback from "./pages/Callback";
 
 function App() {
   return (

@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
 // recoil
-import { useRecoilState, useResetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { kakaoState } from "../recoil/kakaoState";
 
 // type
@@ -17,7 +17,7 @@ const Callback = () => {
     new URL(window.location.href).searchParams.get("code") ?? "";
   const [kakaoCode, setKakaoCode] = useRecoilState(kakaoState);
 
-  const handleKakao = async () => {
+  const handleKakao = useCallback(async () => {
     setKakaoCode((prev: TkakaoState) => ({
       ...prev,
       isLogin: true,
@@ -32,12 +32,12 @@ const Callback = () => {
       }));
       navigate("/");
     }
-  };
+  }, [codeFromUri, kakaoCode.isLogin, navigate, setKakaoCode]);
 
   useEffect(() => {
     console.log(kakaoCode);
     handleKakao();
-  }, [kakaoCode.isLogin]);
+  }, [kakaoCode.isLogin, handleKakao, kakaoCode]);
 
   return (
     <div>
