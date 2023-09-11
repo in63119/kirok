@@ -68,7 +68,7 @@ const Main = () => {
 
   useEffect(() => {
     console.log("카카오 상태 : ", kakao);
-  }, [kakao.isLogin]);
+  }, [kakao, kakao.isLogin]);
 
   return (
     <div>
