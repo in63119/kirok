@@ -1,5 +1,14 @@
 const { db } = require("../fireStore");
-const { collection, getDocs } = require("firebase/firestore");
+const {
+  collection,
+  getDocs,
+  query,
+  where,
+  getDoc,
+  doc,
+  addDoc,
+  setDoc,
+} = require("firebase/firestore");
 
 module.exports = {
   // 모든 institution 이름
@@ -16,6 +25,7 @@ module.exports = {
       res.status(400).send(err);
     }
   },
+
   // 모든 유저 Id
   getAllUsers: async () => {
     const result = [];
@@ -30,11 +40,40 @@ module.exports = {
       console.log(err);
     }
   },
-  getUser: async (fieldName, value) => {
-    const q = query(collection(db, "user"), where(fieldName, "==", value));
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      console.log(doc.id, " => ", doc.data());
-    });
+
+  // 유저 확인
+  checkUser: async (docName) => {
+    const document = doc(db, "user", `${docName}`);
+    const documentSnapshot = await getDoc(document);
+
+    const result = documentSnapshot.exists();
+    const test2 = documentSnapshot.id;
+    const test3 = documentSnapshot.data();
+
+    // console.log("docName : ", docName);
+    // console.log("documentSnapshot.exists() : ", result);
+    // console.log("documentSnapshot.id : ", test2);
+    // console.log("documentSnapshot.data() : ", test3);
+
+    return result;
+  },
+
+  // 유저 추가
+  addUser: async (kakaoId, kakaoEmail) => {
+    const document = await doc(db, "user", `${kakaoId}`);
+    const data = {
+      email: kakaoEmail,
+      "wallet-address": "",
+      "wallet-name": "",
+    };
+
+    await setDoc(document, data);
+    const addedDocumentId = document.id;
+
+    if (addedDocumentId === `${kakaoId}`) {
+      return true;
+    } else {
+      return false;
+    }
   },
 };

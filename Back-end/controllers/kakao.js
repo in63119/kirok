@@ -5,7 +5,7 @@ const axios = require("axios");
 const { KAKAO_API_KEY, FRONT_REDIRECT_URI } = process.env;
 const kakaoUrl = "https://kauth.kakao.com";
 
-const { getUser } = require("../controllers/kirokDB");
+const { checkUser, addUser } = require("../controllers/kirokDB");
 
 module.exports = {
   kakaoLogin: async (req, res) => {
@@ -47,15 +47,25 @@ module.exports = {
 
     const email = userInfo.data.kakao_account.email;
     const kakaoId = userInfo.data.id;
-    console.log(email);
-    console.log(userInfo.data.id);
 
-    // await getUser()
+    const isExists = await checkUser(kakaoId);
 
-    try {
-      res.status(200).send(email);
-    } catch (err) {
-      res.status(400).send(err);
+    // kirok DB에 있으면
+    if (isExists) {
+      try {
+        res.status(200).send(email);
+      } catch (err) {
+        res.status(400).send(err);
+      }
+      // kirok DB에 없으면
+    } else {
+      const added = await addUser(kakaoId, email);
+
+      if (added) {
+        res.status(200).send(email);
+      } else {
+        res.status(400).send("DB 추가 중 실패");
+      }
     }
   },
 };
