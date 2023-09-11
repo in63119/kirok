@@ -5,6 +5,8 @@ const axios = require("axios");
 const { KAKAO_API_KEY, FRONT_REDIRECT_URI } = process.env;
 const kakaoUrl = "https://kauth.kakao.com";
 
+const { getUser } = require("../controllers/kirokDB");
+
 module.exports = {
   kakaoLogin: async (req, res) => {
     const { code } = req.body;
@@ -28,7 +30,7 @@ module.exports = {
       { headers: header }
     );
     const acceseToken = kakaoToken.data.access_token;
-    console.log(kakaoToken.data);
+
     const getUserInfo = async (token) => {
       header.Authorization += token;
       const propertyKeys = {
@@ -39,12 +41,16 @@ module.exports = {
         headers: header,
         propertyKeys,
       });
-      //   const result = get.data;
       return get;
     };
     const userInfo = await getUserInfo(acceseToken);
+
     const email = userInfo.data.kakao_account.email;
+    const kakaoId = userInfo.data.id;
     console.log(email);
+    console.log(userInfo.data.id);
+
+    // await getUser()
 
     try {
       res.status(200).send(email);

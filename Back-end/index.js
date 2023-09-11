@@ -21,9 +21,10 @@ app.get("/", (req, res) => {
 // routes
 const institutions = require("./routes/institutions");
 app.use("/institutions", institutions);
-
 const kakao = require("./routes/kakao");
 app.use("/login", kakao);
+const user = require("./routes/users");
+app.use("/user", user);
 
 app.listen(port, () => {
   console.log(`server is listening at localhost:${process.env.PORT}`);
