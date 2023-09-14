@@ -7,7 +7,11 @@ const port = process.env.PORT || 4000;
 
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://kirok.net/"],
+    origin: [
+      "http://localhost:3000",
+      "https://kirok.net/",
+      "https://kirokserver.net",
+    ],
     credentials: true,
     optionsSuccessStatus: 200,
   })
