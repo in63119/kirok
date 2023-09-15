@@ -7,7 +7,11 @@ const port = process.env.PORT || 4000;
 
 app.use(
   cors({
-    origin: "http://localhost:3000", // 나중에 배포된 프론트 도메인으로 바꿔야 함.
+    origin: [
+      "http://localhost:3000",
+      "https://kirok.net",
+      "https://kirokserver.net",
+    ],
     credentials: true,
     optionsSuccessStatus: 200,
   })
