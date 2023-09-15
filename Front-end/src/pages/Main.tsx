@@ -7,6 +7,10 @@ import { kakaoOpen } from "../apis/kakao";
 import { useResetRecoilState, useRecoilValue } from "recoil";
 import { kakaoState } from "../recoil/kakaoState";
 
+import styled from 'styled-components'
+import ShortBtn from '../components/ShortBtn'
+import {Link} from 'react-router-dom'
+
 /* 
   Inbrew의 Recoil 강좌! 
 
@@ -82,8 +86,42 @@ const Main = () => {
         </>
       )}
       <button onClick={handleResetKakao}>카카오 상태 리셋</button>
+
+      <Container>
+        <Logo src='/images/KIROK.png'></Logo>
+        <ButtonsWrap>
+            <Link to="/">
+            <ShortBtn title ={"부모님용"} btncolor={"true"} />
+            </Link>
+            <ShortBtn title ={"선생님용"} btncolor={"false"}/>
+        </ButtonsWrap>
+        
+        </Container>
     </div>
+
+    
   );
 };
 
 export default Main;
+
+const Container = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+width: 100vw;
+height: 100vh;
+`
+
+const Logo = styled.img`
+    margin-bottom: 180px;
+    width: 260px;
+    height: 76px;
+`
+
+const ButtonsWrap = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+`
