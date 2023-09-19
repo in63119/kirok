@@ -1,21 +1,36 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 // recoil
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { kidState } from "../recoil/kidState";
+import { kakaoState } from "../recoil/kakaoState";
 
 // apis
 import { childRegistration } from "../apis/kids";
+import { getAllInstitution } from "../apis/institution";
 
 const InputKids = () => {
   const [kid, setKid] = useRecoilState(kidState);
+  const kakaoData = useRecoilValue(kakaoState);
+  const [institutions, setIntitutions] = useState<string | null>(null);
+  const [selectedOption, setSelectedOption] = useState<string[] | any>("");
+  const [gender, setGender] = useState("");
 
-  const handleInputInstitution = (value: string) => {
+  const institutionName = async () => {
+    const result = await getAllInstitution();
+
+    if (result) {
+      setIntitutions(result);
+    }
+  };
+  const handleChange = (e: any) => {
+    setSelectedOption(e.target.value);
     setKid((prev: any) => ({
       ...prev,
-      institution: value,
+      institution: e.target.value,
     }));
   };
+
   const handleInputKidName = (value: string) => {
     setKid((prev: any) => ({
       ...prev,
@@ -34,11 +49,16 @@ const InputKids = () => {
     if (
       kid.institution.length === 0 ||
       kid.name.length === 0 ||
-      kid.birth.length === 0
+      kid.birth.length === 0 ||
+      gender.length === 0
     ) {
       alert("뭔가 비었네?");
     } else {
-      await childRegistration();
+      const data = Object.assign({}, kid, kakaoData);
+      data.gender = gender;
+      delete data.isLogin;
+      console.log("이렇게 보내요 : ", data);
+      await childRegistration(data);
     }
   };
 
@@ -46,14 +66,22 @@ const InputKids = () => {
     console.log(kid);
   }, [kid]);
 
+  useEffect(() => {
+    institutionName();
+  }, []);
+
   return (
     <div>
       <div>자녀 등록</div>
-      <input
-        type="text"
-        placeholder="어린이집 이름"
-        onChange={(event) => handleInputInstitution(event.target.value)}
-      />
+      <div>
+        <select value={selectedOption} onChange={handleChange}>
+          {institutions?.map((option: any) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+      </div>
       <input
         type="text"
         placeholder="아이 이름"
@@ -64,7 +92,25 @@ const InputKids = () => {
         placeholder="생년월일"
         onChange={(event) => handleInputBirth(event.target.value)}
       />
-      <button onClick={handleInputClick}>요청 보내기</button>
+      <div>
+        <input
+          type="radio"
+          name="option"
+          value="남아"
+          checked={gender === "남아"}
+          onChange={(e) => setGender(e.target.value)}
+        />{" "}
+        남아
+        <input
+          type="radio"
+          name="option"
+          value="여아"
+          checked={gender === "여아"}
+          onChange={(e) => setGender(e.target.value)}
+        />{" "}
+        여아
+      </div>
+      <button onClick={handleInputClick}>등록 하기</button>
     </div>
   );
 };

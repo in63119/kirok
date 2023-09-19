@@ -76,4 +76,35 @@ module.exports = {
       return false;
     }
   },
+
+  // 자녀가 있는지 확인
+  getKids: async (kakaoId, name) => {
+    let result = false;
+    const q = query(collection(db, "user", `${kakaoId}`, "kids"));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      const docObj = {
+        ...doc.data(),
+        id: doc.id,
+      };
+      if (doc.id === name) {
+        result = true;
+      }
+    });
+
+    return result;
+  },
+
+  // 자녀 등록
+  addKid: async (kakaoId, name, info) => {
+    const docRef = doc(collection(db, "user", `${kakaoId}`, "kids"), name);
+    await setDoc(docRef, info);
+
+    const addedDocumentId = docRef.id;
+    if (addedDocumentId === name) {
+      return true;
+    } else {
+      return false;
+    }
+  },
 };

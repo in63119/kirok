@@ -1,8 +1,13 @@
+// Type
+import { TuserKidsRegist } from "../utils/type";
+
 import axios from "axios";
 axios.defaults.withCredentials = true;
 
 const serverURL = process.env.REACT_APP_SERVER_URL;
 
-export const childRegistration = async () => {
-  console.log("ok");
+export const childRegistration = async (data: TuserKidsRegist) => {
+  const result = await axios.post(`${serverURL}/user/kid`, data);
+  console.log(result.data);
+  return result.data;
 };
