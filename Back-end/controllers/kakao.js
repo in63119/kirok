@@ -53,7 +53,7 @@ module.exports = {
     // kirok DB에 있으면
     if (isExists) {
       try {
-        res.status(200).send(email);
+        res.status(200).send({ email: email, kakaoId: kakaoId });
       } catch (err) {
         res.status(400).send(err);
       }
@@ -62,7 +62,7 @@ module.exports = {
       const added = await addUser(kakaoId, email);
 
       if (added) {
-        res.status(200).send(email);
+        res.status(200).send({ email: email, kakaoId: kakaoId });
       } else {
         res.status(400).send("DB 추가 중 실패");
       }
