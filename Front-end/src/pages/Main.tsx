@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 // recoil
 import { useResetRecoilState, useRecoilValue } from "recoil";
@@ -6,6 +6,8 @@ import { kakaoState } from "../recoil/kakaoState";
 
 import styled from "styled-components";
 import ShortBtn from "../components/ShortBtn";
+
+// eslint-disable-next-line
 import { Link } from "react-router-dom";
 
 /* 
@@ -59,17 +61,15 @@ import { Link } from "react-router-dom";
       - useResetRecoilState : 상태를 최초의 디폴트 값으로 reset할 때 'const resetCode = useResetRecoilState(kakaoState)' 처럼 사용하면 됩니다.
 */
 
+// Components
+import InputKids from "../components/InputKids";
+
 const Main = () => {
   const resetKakaoState = useResetRecoilState(kakaoState);
   const kakao = useRecoilValue(kakaoState);
-  const [isClick, setIsClick] = useState(false);
 
   const handleResetKakao = () => {
     resetKakaoState();
-  };
-
-  const handleClick = () => {
-    setIsClick(true);
   };
 
   useEffect(() => {
@@ -80,18 +80,25 @@ const Main = () => {
     <div>
       <div>여긴 메인 페이지 입니다.</div>
 
-      {kakao.isLogin ? kakao.kakaoEmail : null}
-      <button onClick={handleResetKakao}>카카오 상태 리셋</button>
-
-      <Container>
-        <Logo src="/images/KIROK.png"></Logo>
-        <ButtonsWrap>
-          {/* <Link to="/"> */}
-          <ShortBtn title={"부모님용"} btncolor={"true"} />
-          {/* </Link> */}
-          <ShortBtn title={"선생님용"} btncolor={"false"} />
-        </ButtonsWrap>
-      </Container>
+      {kakao.isLogin ? (
+        <div>
+          <button onClick={handleResetKakao}>카카오 상태 리셋</button>
+          <div>{kakao.kakaoEmail}</div>
+          <InputKids />
+        </div>
+      ) : (
+        <div>
+          <Container>
+            <Logo src="/images/KIROK.png"></Logo>
+            <ButtonsWrap>
+              {/* <Link to="/"> */}
+              <ShortBtn title={"부모님용"} btncolor={"true"} />
+              {/* </Link> */}
+              <ShortBtn title={"선생님용"} btncolor={"false"} />
+            </ButtonsWrap>
+          </Container>
+        </div>
+      )}
     </div>
   );
 };

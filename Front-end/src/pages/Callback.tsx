@@ -28,7 +28,8 @@ const Callback = () => {
       console.log(result);
       setKakaoCode((prev: TkakaoState) => ({
         ...prev,
-        kakaoEmail: result,
+        kakaoEmail: result.email,
+        kakaoId: result.kakaoId,
       }));
       navigate("/");
     }

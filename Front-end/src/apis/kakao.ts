@@ -13,5 +13,6 @@ export const kakaoOpen = async () => {
 
 export const postCodeToServer = async (code: string) => {
   const res = await axios.post(`${serverURL}/login/kakao`, { code });
+
   return res.data;
 };
