@@ -7,7 +7,6 @@ import { kakaoState } from "../recoil/kakaoState";
 import styled from "styled-components";
 import ShortBtn from "../components/ShortBtn";
 
-// eslint-disable-next-line
 import { Link } from "react-router-dom";
 
 /* 
@@ -91,10 +90,10 @@ const Main = () => {
           <Container>
             <Logo src="/images/KIROK.png"></Logo>
             <ButtonsWrap>
-              {/* <Link to="/"> */}
               <ShortBtn title={"부모님용"} btncolor={"true"} />
-              {/* </Link> */}
-              <ShortBtn title={"선생님용"} btncolor={"false"} />
+              <Link to="/institution">
+                <ShortBtn title={"선생님용"} btncolor={"false"} />
+              </Link>
             </ButtonsWrap>
           </Container>
         </div>

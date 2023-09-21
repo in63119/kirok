@@ -11,3 +11,14 @@ export type TuserKidsRegist = {
   kakaoEmail: string;
   kakaoId: number;
 };
+
+export type TinstitutionState = {
+  id: string;
+  password: string;
+  isLogin: boolean;
+};
+
+export type TinstitutionLogin = {
+  id: string;
+  password: string;
+};

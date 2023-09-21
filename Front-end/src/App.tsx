@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Main from "./pages/Main";
 import Callback from "./pages/Callback";
 import SelectIntro from "./pages/SelectIntro";
+import Institution from "./pages/Institution";
 
 function App() {
   return (
@@ -13,7 +14,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/callback" element={<Callback />} />
-        <Route path="/Intro" element={<SelectIntro/>} />
+        <Route path="/Intro" element={<SelectIntro />} />
+        <Route path="/institution" element={<Institution />} />
       </Routes>
     </BrowserRouter>
   );
