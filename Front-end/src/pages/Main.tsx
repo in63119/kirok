@@ -8,7 +8,6 @@ import styled from "styled-components";
 import ShortBtn from "../components/ShortBtn";
 
 // eslint-disable-next-line
-import { Link } from "react-router-dom";
 
 /* 
   Inbrew의 Recoil 강좌! 
@@ -78,7 +77,7 @@ const Main = () => {
 
   return (
     <div>
-      <div>여긴 메인 페이지 입니다.</div>
+      {/* <div>여긴 메인 페이지 입니다.000</div> */}
 
       {kakao.isLogin ? (
         <div>
@@ -87,17 +86,13 @@ const Main = () => {
           <InputKids />
         </div>
       ) : (
-        <div>
           <Container>
-            <Logo src="/images/KIROK.png"></Logo>
+            <Logo src="/images/logo_kirok.png"></Logo>
             <ButtonsWrap>
-              {/* <Link to="/"> */}
               <ShortBtn title={"부모님용"} btncolor={"true"} />
-              {/* </Link> */}
               <ShortBtn title={"선생님용"} btncolor={"false"} />
             </ButtonsWrap>
           </Container>
-        </div>
       )}
     </div>
   );

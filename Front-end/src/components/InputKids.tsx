@@ -18,7 +18,7 @@ const InputKids = () => {
 
   const institutionName = async () => {
     const result = await getAllInstitution();
-
+    console.log(result)
     if (result) {
       setIntitutions(result);
     }

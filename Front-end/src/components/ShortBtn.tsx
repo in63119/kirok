@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 // recoil
 import { useRecoilValue } from "recoil";
@@ -11,10 +12,12 @@ import { kakaoOpen } from "../apis/kakao";
 const ShortBtn = (props: any) => {
   const { title, btncolor } = props;
   const { isLogin } = useRecoilValue(kakaoState);
+  const navigate = useNavigate();
 
   const handleClick = () => {
     if (title === "부모님용" && !isLogin) {
-      kakaoOpen();
+      // kakaoOpen();
+      navigate('/login')
     }
   };
 
@@ -35,6 +38,7 @@ const Container = styled.div<{ btncolor: boolean }>`
   width: 168px;
   height: 54px;
   border-radius: 14px;
+  cursor: pointer;
 `;
 
 const Title = styled.div`
