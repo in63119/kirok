@@ -107,4 +107,37 @@ module.exports = {
       return false;
     }
   },
+
+  // 기업 로그인
+  getInstitutionInfo: async (data) => {
+    let result = {
+      result: false,
+      message: "",
+      incorrectData: "",
+      name: "",
+    };
+
+    const querySnapshot = await getDocs(collection(db, "institution"));
+    querySnapshot.forEach((doc) => {
+      const innerData = doc.data();
+      // console.log(doc.id, " => ", doc.data());
+
+      if (innerData.id === data.id) {
+        if (innerData.password === data.password) {
+          result.result = true;
+          result.message = "정보가 일치합니다.";
+          result.incorrectData = "success";
+          result.name = doc.id;
+        } else {
+          result.message = "비밀번호가 잘못됨.";
+          result.incorrectData = "password";
+        }
+      } else {
+        result.message = "아이디가 잘못됨.";
+        result.incorrectData = "id";
+      }
+    });
+
+    return result;
+  },
 };
