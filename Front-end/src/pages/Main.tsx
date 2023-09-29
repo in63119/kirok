@@ -61,7 +61,7 @@ import ShortBtn from "../components/ShortBtn";
 */
 
 // Components
-import InputKids from "../components/InputKids";
+import InputKids from "../components/Input/InputKids";
 
 const Main = () => {
   const resetKakaoState = useResetRecoilState(kakaoState);

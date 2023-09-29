@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 
 // recoil
 import { useRecoilState, useRecoilValue } from "recoil";
-import { kidState } from "../recoil/kidState";
-import { kakaoState } from "../recoil/kakaoState";
+import { kidState } from "../../recoil/kidState";
+import { kakaoState } from "../../recoil/kakaoState";
 
 // apis
-import { childRegistration } from "../apis/kids";
-import { getAllInstitution } from "../apis/institution";
+import { childRegistration } from "../../apis/kids";
+import { getAllInstitution } from "../../apis/institution";
 
 const InputKids = () => {
   const [kid, setKid] = useRecoilState(kidState);
@@ -25,6 +25,7 @@ const InputKids = () => {
   };
   const handleChange = (e: any) => {
     setSelectedOption(e.target.value);
+    console.log(selectedOption)
     setKid((prev: any) => ({
       ...prev,
       institution: e.target.value,
