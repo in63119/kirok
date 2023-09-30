@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { styled } from 'styled-components'
 import BottomSheet from '../components/BottomSheetModal/BottomSheet';
-import KidsInfo from '../components/Input/KidsInfo';
 
 import { getAllInstitution } from "../apis/institution";
 
@@ -9,8 +8,6 @@ import { parentsState } from "../recoil/parentsState";
 import { useRecoilState } from 'recoil';
 import useValid from '../hooks/useValid';
 import InputText from '../components/Input/InputText';
-import Base from '../components/BottomSheetModal/Base';
-import Test from './Test';
 import LastBottomSheet from '../components/BottomSheetModal/LastBottomSheet'
 import GenderBtn from '../components/Input/GenderBtn';
 
@@ -25,6 +22,7 @@ const Parents = () => {
         gender: '',
     })
     const [isGender, setIsGender] = useState("");
+    const [isGenderChoiced, setIsGenderChoiced] = useState(null);
 
   const {isValid} = useValid(form);
 
@@ -42,9 +40,7 @@ const Parents = () => {
     }
 
     const handleChoice = (e) => {
-        // console.log("클릭", e.currentTarget.innerText)
         setIsChoiced(e.target.innerText)
-        // console.log(isChoiced)
         setParent((prev)=>({
             ...prev,
             institution: e.target.innerText,
@@ -54,6 +50,11 @@ const Parents = () => {
 
     const handleGender = (e) => {
         console.log(e.target.innerText);
+        setIsGender(e.target.innerText)
+        setParent((prev)=>({
+            ...prev,
+            gender: e.target.innerText,
+        }))
     }
 
     useEffect(()=>{
@@ -63,8 +64,6 @@ const Parents = () => {
     useEffect(()=>{
         console.log(parent)
     },[parent])
-  
-    
 
   return (
         <Container>
@@ -88,22 +87,6 @@ const Parents = () => {
                 </Wrapper>
             </ChoiceBtn>
     
-            {/* {isModalOpen && ( <BottomSheet handleChoice={handleChoice} institutions={institutions} closeModal={()=> setIsModalOpen(false)} />)} */}
-
-            {/* isChoiced -> modalClose값으로 변경 ?? */}
-            {/* {isChoiced &&          
-            <KidsInfoContainer>
-            <Title>자녀 정보 입력</Title>
-            <InfoContainer>
-                <Photo src='images/icon_profile.png'></Photo>
-                <InputWrapper>
-                    <KidsInfo title={"이름"} parent={parent.institution} />
-                    <KidsInfo title={"생년월일(8자리)"} parent={parent.institution} />
-                </InputWrapper>
-            </InfoContainer>
-        </KidsInfoContainer>} */}
-
-
         {isChoiced && !isModalOpen &&         
             <KidsInfoContainer>
                 <Title>자녀 정보 입력</Title>
@@ -113,16 +96,25 @@ const Parents = () => {
                         <InputText 
                             place='이름을 입력하세요'
                             type='name' value={form.name} 
-                            onChange={e => setForm({...form, name: e.target.value})} 
+                            onChange={e => {setForm({...form, name: e.target.value})
+                            setParent({...parent, name: e.target.value})        
+                        }
+                        } 
                             valid={!isValid.isName}
                         />
                         <InputText 
                             place='생년월일을 입력하세요'
                             type='birth' value={form.birth} 
-                            onChange={e => setForm({...form, birth: e.target.value})} 
+                            onChange={e => {
+                                setForm({...form, birth: e.target.value})
+                                setParent({...parent, birth: e.target.value})
+                            }} 
                             valid={!isValid.isBirth}
                         />
-                    <GenderBtn />
+                        <BtnWrapper>
+                            <GenderBtn type="남아" title="남아" isGender={isGender}  handleGender={handleGender} />
+                            <GenderBtn type="여아" title="여아" isGender={isGender}  handleGender={handleGender} />
+                        </BtnWrapper>
                     </InputWrapper>
                 </InfoContainer>
             </KidsInfoContainer>}
@@ -212,4 +204,9 @@ height: 80px;
 const InputWrapper = styled.div`
 display: flex;
 flex-direction: column;
+`
+
+const BtnWrapper = styled.div`
+    display: flex;
+    gap: 8px;
 `

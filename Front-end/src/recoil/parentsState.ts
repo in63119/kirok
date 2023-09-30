@@ -9,6 +9,7 @@ export const parentsState = atom({
         institution: "",
         name: "",
         birth: "",
+        gender: "",
         isRegistered: false,
     },
     effects_UNSTABLE: [persistAtom],

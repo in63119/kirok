@@ -1,19 +1,17 @@
 import React from 'react'
+
 import { styled } from 'styled-components'
 
-interface Prop {
-    gender: "남아" | "여아"
-}
+const GenderBtn = (prop) => {
+    const {title, type, handleGender, isGender} = prop
 
-const GenderBtn = (prop: Prop) => {
-
+    const list = [
+        {type: "male",title:"남아"}, 
+        {type: "female",title:"여아"}
+    ]
   return (
         <Container>
-            <BtnWrapper>
-                <Btn>
-
-                </Btn>
-            </BtnWrapper>
+            <Btn className={`${type === isGender ? "choiced" : "" }`} onClick={handleGender}>{title}</Btn>
         </Container>
   )
 }
@@ -22,11 +20,18 @@ export default GenderBtn
 
 const Container = styled.div``
 
-const BtnWrapper = styled.div``
-
 const Btn = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 114px;
     height: 44px;
     border-radius: 12px;
-    border: 1.5px solid #A1DC2E;
+    border: 1.5px solid #E0E3DA;
+    text-align: center;
+    
+    &.choiced {
+        border: 1.5px solid #A1DC2E;
+    }
 `
+
