@@ -10,7 +10,7 @@ import { kakaoState } from "../recoil/kakaoState";
 import { kakaoOpen } from "../apis/kakao";
 
 const ShortBtn = (props: any) => {
-  const { title, btncolor } = props;
+  const { title } = props;
   const { isLogin } = useRecoilValue(kakaoState);
   const navigate = useNavigate();
 
@@ -22,7 +22,7 @@ const ShortBtn = (props: any) => {
   };
 
   return (
-    <Container btncolor={btncolor} onClick={handleClick}>
+    <Container title={title} onClick={handleClick}>
       <Title>{title}</Title>
     </Container>
   );
@@ -30,8 +30,8 @@ const ShortBtn = (props: any) => {
 
 export default ShortBtn;
 
-const Container = styled.div<{ btncolor: boolean }>`
-  background-color: ${({ btncolor }) => (btncolor ? "#55B5E6" : "#A1DC2E")};
+const Container = styled.div<{ title: string }>`
+  background-color: ${({ title }) => (title === "선생님용" ? "#55B5E6" : "#A1DC2E")};
   display: flex;
   justify-content: center;
   align-items: center;
