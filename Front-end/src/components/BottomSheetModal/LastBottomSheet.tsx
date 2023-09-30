@@ -35,14 +35,14 @@ const StyledBottomSheet = styled.div`
   min-width: 100vw;
   height: fit-content;
   height: 100vh;
-  max-height: 40%;
+  max-height: 30%;
   overflow-y: scroll;
   &::-webkit-scrollbar {
     display: none;
   }
   bottom: 0;
   border-radius: 1rem 1rem 0 0;
-  background-color: yellow;
+  background-color: white;
 `;
 
 const StyledBottomSheetHeader = styled.div`

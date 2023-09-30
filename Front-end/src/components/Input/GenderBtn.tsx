@@ -18,7 +18,11 @@ const GenderBtn = (prop) => {
 
 export default GenderBtn
 
-const Container = styled.div``
+const Container = styled.div`
+    cursor: pointer;
+    -webkit-tap-highlight-color : transparent;
+
+`
 
 const Btn = styled.div`
     display: flex;
@@ -29,9 +33,14 @@ const Btn = styled.div`
     border-radius: 12px;
     border: 1.5px solid #E0E3DA;
     text-align: center;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 500;
+    color: #E0E3DA;
     
     &.choiced {
         border: 1.5px solid #A1DC2E;
+        color: #A1DC2E;
     }
 `
 

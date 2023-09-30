@@ -10,6 +10,7 @@ import useValid from '../hooks/useValid';
 import InputText from '../components/Input/InputText';
 import LastBottomSheet from '../components/BottomSheetModal/LastBottomSheet'
 import GenderBtn from '../components/Input/GenderBtn';
+import ProgressBtn from '../components/ProgressBtn';
 
 const Parents = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -55,6 +56,10 @@ const Parents = () => {
             ...prev,
             gender: e.target.innerText,
         }))
+    }
+
+    const addKids = () => {
+
     }
 
     useEffect(()=>{
@@ -117,6 +122,10 @@ const Parents = () => {
                         </BtnWrapper>
                     </InputWrapper>
                 </InfoContainer>
+                <BtnWrapper>
+                    <ProgressBtn title="자녀 추가 등록"/>
+                    <ProgressBtn title="다음"/>
+                </BtnWrapper>
             </KidsInfoContainer>}
         </Container>
   )
@@ -150,12 +159,13 @@ const ChoiceBtn = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
-    /* width: 335px; */
-    width: 100%;
+    width: 335px;
+    /* width: 100%; */
     height: 51px;
     border: 1.5px solid #E0E5D6;
     border-radius: 12px;
     cursor: pointer;
+    -webkit-tap-highlight-color : transparent;
 `
 
 const Wrapper = styled.div`
@@ -180,7 +190,8 @@ const Arrow = styled.img`
 `
 
 const KidsInfoContainer = styled.div`
-margin-top: 40px;
+    margin-top: 40px;
+    /* height: 70%; */
 `
 
 const Title = styled.div`
