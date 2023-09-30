@@ -87,10 +87,10 @@ const Main = () => {
         </div>
       ) : (
           <Container>
-            <Logo src="/images/logo_kirok.png"></Logo>
+            <Logo src="/images/logo_kirok.png" />
             <ButtonsWrap>
-              <ShortBtn title={"부모님용"} btncolor={"true"} />
-              <ShortBtn title={"선생님용"} btncolor={"false"} />
+              <ShortBtn title={"선생님용"} />
+              <ShortBtn title={"부모님용"} />
             </ButtonsWrap>
           </Container>
       )}
