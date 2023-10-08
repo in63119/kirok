@@ -62,10 +62,12 @@ import ShortBtn from "../components/ShortBtn";
 
 // Components
 import InputKids from "../components/Input/InputKids";
+import { useNavigate } from "react-router-dom";
 
 const Main = () => {
   const resetKakaoState = useResetRecoilState(kakaoState);
   const kakao = useRecoilValue(kakaoState);
+  const navigate = useNavigate();
 
   const handleResetKakao = () => {
     resetKakaoState();
@@ -73,19 +75,19 @@ const Main = () => {
 
   useEffect(() => {
     console.log("카카오 상태 : ", kakao);
-  }, [kakao, kakao.isLogin]);
+    if (kakao.kakaoEmail && kakao.kakaoId) {
+      navigate("/parents");
+    }
+  }, [kakao, kakao.isLogin, navigate, kakao.kakaoEmail, kakao.kakaoId]);
+
+
+  if(kakao.kakaoEmail && kakao.kakaoId){
+    navigate("/parents")
+  }
+
 
   return (
-    <div>
-      {/* <div>여긴 메인 페이지 입니다.000</div> */}
-
-      {kakao.isLogin ? (
-        <div>
-          <button onClick={handleResetKakao}>카카오 상태 리셋</button>
-          <div>{kakao.kakaoEmail}</div>
-          <InputKids />
-        </div>
-      ) : (
+      
           <Container>
             <Logo src="/images/logo_kirok.png" />
             <ButtonsWrap>
@@ -93,8 +95,7 @@ const Main = () => {
               <ShortBtn title={"부모님용"} />
             </ButtonsWrap>
           </Container>
-      )}
-    </div>
+
   );
 };
 

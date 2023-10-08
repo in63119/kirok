@@ -5,7 +5,6 @@ import { kakaoState } from "../recoil/kakaoState";
 import { kakaoOpen } from "../apis/kakao";
 
 const Login = () => {
-    // const navigate = useNavigate()
     const { isLogin } = useRecoilValue(kakaoState);
 
     const handleClick = () => {
@@ -63,6 +62,7 @@ text-align: center;
 `
 
 const LoginBtn = styled.img`
+cursor: pointer;
 width: 335px;
 height: 54px;
 `
