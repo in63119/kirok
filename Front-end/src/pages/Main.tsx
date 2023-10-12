@@ -5,7 +5,7 @@ import { useResetRecoilState, useRecoilValue } from "recoil";
 import { kakaoState } from "../recoil/kakaoState";
 
 import styled from "styled-components";
-import ShortBtn from "../components/ShortBtn";
+import ShortBtn from "../components/Button/ShortBtn";
 
 // eslint-disable-next-line
 
