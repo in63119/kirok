@@ -8,6 +8,7 @@ import Callback from "./pages/Callback";
 import SelectIntro from "./pages/SelectIntro";
 import Login from "./pages/Login";
 import Parents from "./pages/Parents";
+import CheckKidsinfo from "./pages/CheckKidsinfo";
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Route path="/Intro" element={<SelectIntro/>} />
         <Route path="/login" element={<Login/>}/>
         <Route path="/parents" element={<Parents/>}/>
+        <Route path="/checkKidsinfo" element={<CheckKidsinfo />} />
       </Routes>
     </BrowserRouter>
   );

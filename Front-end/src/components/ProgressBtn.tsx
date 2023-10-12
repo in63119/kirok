@@ -1,8 +1,11 @@
 import React from 'react'
-import { styled } from 'styled-components'
+import { useNavigate } from 'react-router-dom';
+import { styled } from 'styled-components';
+import {fonts} from '../constants/index'
 
 const ProgressBtn = (props) => {
     const { title, onclick } = props;
+    const navivate = useNavigate();
 
   return (
         <Container>
@@ -31,6 +34,7 @@ const Btn = styled.div<{title: string}>`
     border-radius: 14px;
     background-color: ${({title})=>(title === "다음" ? "#A1DC2E" : "#F1F6E2" )};
     color: ${({title})=>(title === "다음" ? "#FFFFFF" : "#76AB00" )};
+    font-family: ${fonts.suit.regular};
     font-size: 18px;
     line-height: 24px;
     font-weight: 600;
