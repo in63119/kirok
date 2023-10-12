@@ -11,6 +11,8 @@ import InputText from '../components/Input/InputText';
 import LastBottomSheet from '../components/BottomSheetModal/LastBottomSheet'
 import GenderBtn from '../components/Input/GenderBtn';
 import ProgressBtn from '../components/ProgressBtn';
+import { useNavigate } from 'react-router-dom';
+import { fonts } from '../constants';
 
 const Parents = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -24,6 +26,7 @@ const Parents = () => {
     })
     const [isGender, setIsGender] = useState("");
     const [isGenderChoiced, setIsGenderChoiced] = useState(null);
+    const navigate = useNavigate();
 
   const {isValid} = useValid(form);
 
@@ -62,6 +65,10 @@ const Parents = () => {
 
     }
 
+    const Checkinfo = () => {
+        navigate("/checkKidsinfo")
+    }
+
     useEffect(()=>{
         institutionsName();
     },[])
@@ -78,12 +85,12 @@ const Parents = () => {
             </LastBottomSheet> }
 
             <Description>
-            안녕하세요! <br/>
-            키록에 오신 걸 환영합니다.<br/>
-            소중한 자녀의 정보를 등록해주세요
-                <LowerText>
-                    *정확한 자녀의 확인을 위해 실명을 입력해주세요
-                </LowerText>
+                안녕하세요! <br/>
+                키록에 오신 걸 환영합니다.<br/>
+                소중한 자녀의 정보를 등록해주세요
+                    <LowerText>
+                        *정확한 자녀의 확인을 위해 실명을 입력해주세요
+                    </LowerText>
             </Description>
             <ChoiceBtn onClick={handleClick}>
                 <Wrapper>
@@ -124,7 +131,7 @@ const Parents = () => {
                 </InfoContainer>
                 <BtnWrapper>
                     <ProgressBtn title="자녀 추가 등록"/>
-                    <ProgressBtn title="다음"/>
+                    <ProgressBtn title="다음" onclick={Checkinfo} parent={parent} />
                 </BtnWrapper>
             </KidsInfoContainer>}
         </Container>
@@ -134,9 +141,10 @@ const Parents = () => {
 export default Parents
 
 const Container = styled.div`
-padding: 60px 25px 0;
-height: 100vh;
-/* width: 100vw; */
+    padding: 60px 25px 0;
+    height: 100vh;
+    /* width: 100vw; */
+    font-family: ${fonts.suit.regular};
 `
 
 const Description = styled.div`
