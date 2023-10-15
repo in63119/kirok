@@ -17,7 +17,9 @@ const ShortBtn = (props: any) => {
   const handleClick = () => {
     if (title === "부모님용" && !isLogin) {
       // kakaoOpen();
-      navigate('/login')
+      navigate("/login");
+    } else {
+      navigate("/Institution");
     }
   };
 
@@ -31,7 +33,8 @@ const ShortBtn = (props: any) => {
 export default ShortBtn;
 
 const Container = styled.div<{ title: string }>`
-  background-color: ${({ title }) => (title === "선생님용" ? "#55B5E6" : "#A1DC2E")};
+  background-color: ${({ title }) =>
+    title === "선생님용" ? "#55B5E6" : "#A1DC2E"};
   display: flex;
   justify-content: center;
   align-items: center;
