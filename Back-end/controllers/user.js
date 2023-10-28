@@ -7,7 +7,14 @@ const { db } = require("../fireStore");
 const { collection, getDocs } = require("firebase/firestore");
 
 // kirokDB functions
-const { getAllUsers, getKids, addKid } = require("./kirokDB");
+const {
+  getAllUsers,
+  getKids,
+  addKid,
+  getKidRegistered,
+  registrationRequest,
+  checkRegistrationRequest,
+} = require("./kirokDB");
 
 // Team Secret Key
 const { SECRET_KEY, PRIVATE_KEY, TEAM_CODE } = process.env;
@@ -34,36 +41,32 @@ module.exports = {
     }
   },
 
-  // 사용자 정보에 자녀등록
+  // 사용자 자녀등록 요청
   setUserKids: async (req, res) => {
-    const {
-      institution,
-      name,
-      birth,
-      isRegistered,
-      kakaoEmail,
-      kakaoId,
-      gender,
-    } = req.body;
+    const { requestKidInfo, kakaoId } = req.body;
+    const checkKid = await getKids(kakaoId, requestKidInfo.name);
 
-    const checkKid = await getKids(kakaoId, name);
-
-    const addData = {
-      birth: birth,
-      gender: gender,
-      institution: institution,
-      isRegistered: isRegistered,
-    };
-
+    // 아이가 등록이 되어있는지
     if (checkKid) {
-      res.status(400).send("이미 아이가 등록되어 있습니다.");
+      res.status(201).send("이미 아이가 등록되어 있습니다.");
+
+      // 등록이 되어있지 않으면
     } else {
-      const added = await addKid(kakaoId, name, addData);
-      console.log(added);
-      if (added) {
-        res.status(200).send("등록이 되었습니다.");
+      const checkRegistered = await checkRegistrationRequest(requestKidInfo);
+
+      // 기관 대기열에 등록 되어있는지 확인
+      if (checkRegistered) {
+        res.status(201).send("기관 등록 후 수락 대기중입니다.");
+
+        // 아직 등록 대기 전이면
       } else {
-        res.status(400).send("DB 추가 중 실패");
+        const added = await registrationRequest(requestKidInfo);
+
+        if (added) {
+          res.status(200).send("기관 요청대기 등록이 되었습니다.");
+        } else {
+          res.status(400).send("DB 추가 중 실패");
+        }
       }
     }
   },

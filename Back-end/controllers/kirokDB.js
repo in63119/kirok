@@ -95,6 +95,20 @@ module.exports = {
     return result;
   },
 
+  // 자녀가 기관에 등록 되있는지 확인
+  getKidRegistered: async (kakaoId, name) => {
+    let result;
+    const q = query(collection(db, "user", `${kakaoId}`, "kids"));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      if (name === doc.id) {
+        result = doc.data().isRegistered;
+      }
+    });
+
+    return result;
+  },
+
   // 자녀 등록
   addKid: async (kakaoId, name, info) => {
     const docRef = doc(collection(db, "user", `${kakaoId}`, "kids"), name);
@@ -135,6 +149,52 @@ module.exports = {
       } else {
         result.message = "아이디가 잘못됨.";
         result.incorrectData = "id";
+      }
+    });
+
+    return result;
+  },
+
+  // 기관 등록 요청 대기열에 추가
+  registrationRequest: async (info) => {
+    const docRef = doc(
+      collection(
+        db,
+        "institution",
+        `${info.institution}`,
+        "RegistrationRequest"
+      ),
+      info.name
+    );
+    await setDoc(docRef, info);
+
+    const addedDocumentId = docRef.id;
+    if (addedDocumentId === info.name) {
+      return true;
+    } else {
+      return false;
+    }
+  },
+
+  // 아이가 기관 등록 대기열에 있는지 조회
+  checkRegistrationRequest: async (info) => {
+    let result = false;
+    const q = query(
+      collection(
+        db,
+        "institution",
+        `${info.institution}`,
+        "RegistrationRequest"
+      )
+    );
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      if (
+        info.name === doc.id &&
+        info.birth === doc.data().birth &&
+        info.gender === doc.data().gender
+      ) {
+        result = true;
       }
     });
 

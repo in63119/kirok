@@ -4,12 +4,8 @@ export type TkakaoState = {
 };
 
 export type TuserKidsRegist = {
-  institution: string;
-  birth: string;
-  isRegistered: boolean;
-  name: string;
-  kakaoEmail: string;
   kakaoId: number;
+  requestKidInfo: requestKidInfo;
 };
 
 export type TinstitutionState = {
@@ -21,4 +17,10 @@ export type TinstitutionState = {
 export type TinstitutionLogin = {
   id: string;
   password: string;
+};
+type requestKidInfo = {
+  institution: string;
+  birth: string;
+  isRegistered: boolean;
+  name: string;
 };

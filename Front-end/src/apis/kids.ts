@@ -8,6 +8,6 @@ const serverURL = process.env.REACT_APP_SERVER_URL;
 
 export const childRegistration = async (data: TuserKidsRegist) => {
   const result = await axios.post(`${serverURL}/user/kid`, data);
-  console.log(result.data);
+
   return result.data;
 };

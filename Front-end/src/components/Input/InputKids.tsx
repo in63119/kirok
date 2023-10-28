@@ -18,14 +18,15 @@ const InputKids = () => {
 
   const institutionName = async () => {
     const result = await getAllInstitution();
-    console.log(result)
+
     if (result) {
       setIntitutions(result);
     }
   };
+
   const handleChange = (e: any) => {
     setSelectedOption(e.target.value);
-    console.log(selectedOption)
+    console.log(selectedOption);
     setKid((prev: any) => ({
       ...prev,
       institution: e.target.value,
@@ -62,10 +63,6 @@ const InputKids = () => {
       await childRegistration(data);
     }
   };
-
-  useEffect(() => {
-    console.log(kid);
-  }, [kid]);
 
   useEffect(() => {
     institutionName();
