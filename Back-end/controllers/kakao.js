@@ -7,6 +7,10 @@ const kakaoUrl = "https://kauth.kakao.com";
 
 const { checkUser, addUser } = require("../controllers/kirokDB");
 
+/*
+  카카오 API
+*/
+
 module.exports = {
   kakaoLogin: async (req, res) => {
     const { code } = req.body;

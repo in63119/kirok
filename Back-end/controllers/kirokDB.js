@@ -10,6 +10,10 @@ const {
   setDoc,
 } = require("firebase/firestore");
 
+/*
+  Firestore 기능 모음
+*/
+
 module.exports = {
   // 모든 institution 이름
   getInstitutions: async (req, res) => {

@@ -4,6 +4,10 @@ const { collection, getDocs, doc } = require("firebase/firestore");
 // DB
 const { getInstitutionInfo } = require("./kirokDB");
 
+/*
+  기관용 API
+*/
+
 module.exports = {
   // 모든 institution 이름
   getInstitutions: async (req, res) => {

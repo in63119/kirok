@@ -19,6 +19,10 @@ const {
 // Team Secret Key
 const { SECRET_KEY, PRIVATE_KEY, TEAM_CODE } = process.env;
 
+/*
+  유저용 API
+*/
+
 module.exports = {
   // 모든 user ID (Admin)
   getAllUsersId: async (req, res) => {
