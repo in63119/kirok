@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import ShortBtn from "../components/Button/ShortBtn";
 import { Link } from "react-router-dom";
+
+// Component
+import ShortBtn from "../components/Button/ShortBtn";
 
 const SelectIntro = () => {
   const clickBtn = () => {};

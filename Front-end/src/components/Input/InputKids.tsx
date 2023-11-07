@@ -9,6 +9,11 @@ import { kakaoState } from "../../recoil/kakaoState";
 import { childRegistration } from "../../apis/kids";
 import { getAllInstitution } from "../../apis/institution";
 
+/* 
+  이 파일은 테스트용으로 만들어봤던 파일임.
+  테스트 내용: 프론트 구현 안되었을 때 기관에 아이 등록하는 API 
+*/
+
 const InputKids = () => {
   const [kid, setKid] = useRecoilState(kidState);
   const kakaoData = useRecoilValue(kakaoState);

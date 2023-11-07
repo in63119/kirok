@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
-import BottomSheet from "../components/BottomSheetModal/BottomSheet";
-
-import { getAllInstitution } from "../apis/institution";
-
-import { parentsState } from "../recoil/parentsState";
-import { useRecoilState } from "recoil";
-import { addKidsState } from "../recoil/addKidsState";
 import useValid from "../hooks/useValid";
+import { useNavigate } from "react-router-dom";
+import { fonts } from "../constants";
+
+// Components
+import BottomSheet from "../components/BottomSheetModal/BottomSheet";
 import InputText from "../components/Input/InputText";
 import LastBottomSheet from "../components/BottomSheetModal/LastBottomSheet";
 import GenderBtn from "../components/Input/GenderBtn";
 import ProgressBtn from "../components/ProgressBtn";
-import { useNavigate } from "react-router-dom";
-import { fonts } from "../constants";
+
+// Api
+import { getAllInstitution } from "../apis/institution";
+
+// Recoil
+import { parentsState } from "../recoil/parentsState";
+import { useRecoilState } from "recoil";
+import { addKidsState } from "../recoil/addKidsState";
 
 const Parents = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);

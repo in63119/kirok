@@ -1,24 +1,23 @@
-import React from 'react'
-import { styled } from 'styled-components'
+import React from "react";
+import { styled } from "styled-components";
 
-const InputBox = ( props ) => {
-    const {title} = props
+const InputBox = (props) => {
+  const { title } = props;
   return (
-    <div>InputBox
-
-        <Container>
-            <Title></Title>
-            <InputBoxWrap>
-            </InputBoxWrap>
-        </Container>
+    <div>
+      InputBox
+      <Container>
+        <Title></Title>
+        <InputBoxWrap></InputBoxWrap>
+      </Container>
     </div>
-  )
-}
+  );
+};
 
-export default InputBox
+export default InputBox;
 
-const Container = styled.div``
+const Container = styled.div``;
 
-const Title = styled.div``
+const Title = styled.div``;
 
-const InputBoxWrap = styled.div``
+const InputBoxWrap = styled.div``;

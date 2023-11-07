@@ -1,11 +1,15 @@
 import React from "react";
-import { useRecoilState } from "recoil";
 import styled from "styled-components";
-import { parentsState } from "../recoil/parentsState";
-import CheckInfo from "../components/CheckKidsInfo/CheckInfo";
 import { fonts } from "../constants";
-import HeaderContainer from "../components/Header/HeaderContainer";
 import { useNavigate } from "react-router-dom";
+
+// Recoil
+import { useRecoilState } from "recoil";
+import { parentsState } from "../recoil/parentsState";
+
+// Components
+import CheckInfo from "../components/CheckKidsInfo/CheckInfo";
+import HeaderContainer from "../components/Header/HeaderContainer";
 import LongBtn from "../components/Button/LongBtn";
 
 const CheckKidsinfo = () => {
