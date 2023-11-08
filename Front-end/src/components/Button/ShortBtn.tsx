@@ -16,7 +16,7 @@ const ShortBtn = (props: any) => {
 
   const handleClick = () => {
     if (title === "부모님용" && !isLogin) {
-      // kakaoOpen();
+      kakaoOpen();
       navigate("/login");
     } else {
       navigate("/Institution");

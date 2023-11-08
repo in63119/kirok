@@ -31,7 +31,6 @@ const InputKids = () => {
 
   const handleChange = (e: any) => {
     setSelectedOption(e.target.value);
-    console.log(selectedOption);
     setKid((prev: any) => ({
       ...prev,
       institution: e.target.value,

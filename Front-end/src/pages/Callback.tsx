@@ -25,7 +25,6 @@ const Callback = () => {
 
     if (kakaoCode.isLogin) {
       const result = await postCodeToServer(codeFromUri);
-      console.log(result);
       setKakaoCode((prev: TkakaoState) => ({
         ...prev,
         kakaoEmail: result.email,
@@ -36,9 +35,8 @@ const Callback = () => {
   }, [codeFromUri, kakaoCode.isLogin, navigate, setKakaoCode]);
 
   useEffect(() => {
-    console.log(kakaoCode);
+    // console.log("kakaoCode : ", kakaoCode);
     handleKakao();
-    // eslint-disable-next-line
   }, [kakaoCode.isLogin]);
 
   return (

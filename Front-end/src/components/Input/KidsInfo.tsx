@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
 
 const KidsInfo = (props) => {
@@ -9,7 +9,10 @@ const KidsInfo = (props) => {
     gender: "",
   });
 
-  console.log(form);
+  useEffect(() => {
+    console.log(form);
+  }, []);
+
   return (
     <Container>
       <Title title={title}>

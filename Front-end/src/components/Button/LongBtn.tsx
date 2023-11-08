@@ -26,6 +26,7 @@ const LongBtn = (props: Prop) => {
     switch (type) {
       case "edit":
         navigate(path);
+        break;
       case "request":
         const reqData = {
           requestKidInfo,
@@ -34,7 +35,8 @@ const LongBtn = (props: Prop) => {
         const result = await childRegistration(reqData);
 
         // 기관 요청 등록 후 응답
-        console.log(result);
+        console.log("기관 요청 등록 후 응답 : ", result);
+        break;
     }
   }
 

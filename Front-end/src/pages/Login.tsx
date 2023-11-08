@@ -13,8 +13,8 @@ const Login = () => {
 
   const handleClick = () => {
     !isLogin && kakaoOpen();
-    console.log("ok");
   };
+
   return (
     <Container>
       <UpperWrap>

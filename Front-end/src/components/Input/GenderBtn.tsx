@@ -4,10 +4,10 @@ import { styled } from "styled-components";
 const GenderBtn = (prop) => {
   const { title, type, handleGender, isGender } = prop;
 
-  const list = [
-    { type: "male", title: "남아" },
-    { type: "female", title: "여아" },
-  ];
+  //   const list = [
+  //     { type: "male", title: "남아" },
+  //     { type: "female", title: "여아" },
+  //   ];
   return (
     <Container>
       <Btn

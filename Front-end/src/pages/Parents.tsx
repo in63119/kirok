@@ -38,13 +38,12 @@ const Parents = () => {
   const { isValid } = useValid(form);
 
   const handleClick = () => {
-    console.log(isModalOpen);
     setIsModalOpen(!isModalOpen);
   };
 
   const institutionsName = async () => {
     const res = await getAllInstitution();
-    console.log(res);
+
     if (res) {
       setIntitutions(res);
     }
@@ -60,7 +59,6 @@ const Parents = () => {
   };
 
   const handleGender = (e) => {
-    console.log(e.target.innerText);
     setIsGender(e.target.innerText);
     setParent((prev) => ({
       ...prev,
@@ -80,10 +78,7 @@ const Parents = () => {
     institutionsName();
   }, []);
 
-  useEffect(() => {
-    console.log(parent);
-    console.log(addKids);
-  }, [parent, addKids]);
+  useEffect(() => {}, [parent, addKids]);
 
   return (
     <Container>

@@ -11,8 +11,9 @@ interface Prop {
 }
 
 const InputText = (props: Prop) => {
+  console.log(props);
   return (
-    <Container isValid={props.valid}>
+    <Container isvalid={props.valid?.toString()}>
       <Title>{props.type === "name" ? "이름" : "생년월일(8자리)"}</Title>
       <input type={props.type} value={props.value} onChange={props.onChange} />
     </Container>
@@ -21,7 +22,7 @@ const InputText = (props: Prop) => {
 
 export default InputText;
 
-const Container = styled.div<{ isValid?: boolean }>`
+const Container = styled.div<{ isvalid?: string }>`
   margin-bottom: 14px;
   width: 237px;
   height: 56px;
@@ -36,7 +37,7 @@ const Container = styled.div<{ isValid?: boolean }>`
     border-style: none;
     outline: none;
     border-bottom: 1.5px solid
-      ${(props) => (props.isValid ? "#F18F8F" : "#A1DC2E")};
+      ${(props) => (props.isvalid === "true" ? "#F18F8F" : "#A1DC2E")};
   }
 `;
 

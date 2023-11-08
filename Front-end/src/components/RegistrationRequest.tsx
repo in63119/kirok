@@ -7,7 +7,7 @@ import { institutionState } from "../recoil/institutionState";
 
 // DB
 import { firestore } from "../utils/firestore";
-import { onSnapshot, query, collection, getDocs } from "firebase/firestore";
+import { onSnapshot, query, collection } from "firebase/firestore";
 
 /*
   이 파일은 Firebase에서 실시간으로 데이터 스냅샷 가져오는 파일
