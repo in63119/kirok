@@ -81,27 +81,22 @@ const Parents = () => {
 	}, [institutionsName]);
 
 	return (
-		<Layout>
+		<Layout
+			hasGoback={false}
+			title={{ text: '안녕하세요!\n키록에 오신 걸 환영합니다.\n소중한 자녀의 정보를 등록해주세요' }}
+			subTitle={{ text: '* 정확한 자녀의 확인을 위해 실명을 입력해주세요' }}
+		>
 			{isModalOpen && (
 				<LastBottomSheet closeModal={() => setIsModalOpen(false)}>
 					<BottomSheet handleChoice={handleChoice} institutions={institutions} />
 				</LastBottomSheet>
 			)}
-
-			<Description>
-				안녕하세요! <br />
-				키록에 오신 걸 환영합니다.
-				<br />
-				소중한 자녀의 정보를 등록해주세요
-				<LowerText>* 정확한 자녀의 확인을 위해 실명을 입력해주세요</LowerText>
-			</Description>
 			<ChoiceBtn onClick={handleClick}>
 				<Wrapper>
 					<Content>{isChoiced ? parent.institution : '어린이집을 선택해주세요.'}</Content>
 					<Arrow src="/images/icon_arrow.png" />
 				</Wrapper>
 			</ChoiceBtn>
-
 			{isChoiced && !isModalOpen && (
 				<KidsInfoContainer>
 					<Title>자녀 정보 입력</Title>
@@ -145,21 +140,6 @@ const Parents = () => {
 };
 
 export default Parents;
-
-const Description = styled.div`
-	/* margin-top : 50px; */
-	margin-bottom: 30px;
-	font-size: 20px;
-	font-weight: 600;
-	line-height: 28px;
-`;
-
-const LowerText = styled.div`
-	font-size: 15px;
-	font-weight: 400;
-	line-height: 19px;
-	color: #696969;
-`;
 
 const ChoiceBtn = styled.button`
 	background-color: transparent;
