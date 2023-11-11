@@ -11,7 +11,6 @@ interface Prop {
 }
 
 const InputText = (props: Prop) => {
-	console.log(props);
 	return (
 		<Container isvalid={props.valid?.toString()}>
 			<Title>{props.type === 'name' ? '이름' : '생년월일(8자리)'}</Title>

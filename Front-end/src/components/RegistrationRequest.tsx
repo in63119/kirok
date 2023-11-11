@@ -40,7 +40,7 @@ const RegistrationRequest = () => {
 				setRealTimeRequest(requests);
 			},
 			(err) => {
-				console.log(err);
+				console.log('TODO: error 처리 일관화', err);
 			},
 		);
 

@@ -32,11 +32,7 @@ const LongBtn = (props: Prop) => {
 					requestKidInfo,
 					kakaoId,
 				};
-				const result = await childRegistration(reqData);
-
-				// 기관 요청 등록 후 응답
-				console.log('기관 요청 등록 후 응답 : ', result);
-				break;
+				await childRegistration(reqData);
 		}
 	}
 
