@@ -24,7 +24,7 @@ const Parents = () => {
 	const [institutions, setIntitutions] = useState<string | null>(null);
 	const [isChoiced, setIsChoiced] = useState('');
 	const [parent, setParent] = useRecoilState(parentsState);
-	const [addKids, setAddKids] = useRecoilState(addKidsState);
+	const [, setAddKids] = useRecoilState(addKidsState);
 
 	const [form, setForm] = useState({
 		name: '',
@@ -73,9 +73,9 @@ const Parents = () => {
 		navigate('/checkKidsinfo');
 	};
 
-	useEffect(() => {
-		institutionsName();
-	}, []);
+	// useEffect(() => {
+	// 	institutionsName();
+	// }, [institutionsName]);
 
 	return (
 		<Container>

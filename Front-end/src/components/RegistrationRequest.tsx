@@ -47,7 +47,7 @@ const RegistrationRequest = () => {
 		return () => {
 			unsubscribe();
 		};
-	}, []);
+	}, [q]);
 
 	return (
 		<div>
