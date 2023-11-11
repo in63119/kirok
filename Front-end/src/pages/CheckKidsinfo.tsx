@@ -9,7 +9,7 @@ import { parentsState } from '../recoil/parentsState';
 // Components
 import CheckInfo from '../components/CheckKidsInfo/CheckInfo';
 import LongBtn from '../components/Button/LongBtn';
-import { PageUrls } from '@constants/page-urls';
+import { PageUrls } from '../constants/page-urls';
 import Layout from 'components/Layout';
 
 const CheckKidsinfo = () => {
@@ -20,11 +20,13 @@ const CheckKidsinfo = () => {
 			<Layout.Body>
 				<Title>{parent.institution}</Title>
 				<CheckInfo name={parent.name} birth={parent.birth} gender={parent.gender} />
-			</Contents>
-			<BtnWrapper>
-				<LongBtn type="edit" path={PageUrls.PARENTS} />
-				<LongBtn type="request" path={PageUrls.PARENTS} />
-			</BtnWrapper>
+			</Layout.Body>
+			<Layout.Footer>
+				<ButtonWrapper>
+					<LongBtn type="edit" path={PageUrls.PARENTS} />
+					<LongBtn type="request" path={PageUrls.PARENTS} />
+				</ButtonWrapper>
+			</Layout.Footer>
 		</Layout>
 	);
 };
