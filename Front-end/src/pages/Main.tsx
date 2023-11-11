@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 
 // recoil
-import { useResetRecoilState, useRecoilValue } from "recoil";
-import { kakaoState } from "../recoil/kakaoState";
+import { useResetRecoilState, useRecoilValue } from 'recoil';
+import { kakaoState } from '../recoil/kakaoState';
 
-import styled from "styled-components";
-import ShortBtn from "../components/Button/ShortBtn";
+import styled from 'styled-components';
+import ShortBtn from '../components/Button/ShortBtn';
 
 // eslint-disable-next-line
 
@@ -61,63 +61,54 @@ import ShortBtn from "../components/Button/ShortBtn";
 */
 
 // Components
-import InputKids from "../components/Input/InputKids";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 const Main = () => {
-  const resetKakaoState = useResetRecoilState(kakaoState);
-  const kakao = useRecoilValue(kakaoState);
-  const navigate = useNavigate();
+	const resetKakaoState = useResetRecoilState(kakaoState);
+	const kakao = useRecoilValue(kakaoState);
+	const navigate = useNavigate();
 
-  const handleResetKakao = () => {
-    resetKakaoState();
-  };
+	useEffect(() => {
+		console.log('카카오 상태 : ', kakao);
+		if (kakao.kakaoEmail && kakao.kakaoId) {
+			navigate('/parents');
+		}
+	}, [kakao, kakao.isLogin, navigate, kakao.kakaoEmail, kakao.kakaoId]);
 
-  useEffect(() => {
-    console.log("카카오 상태 : ", kakao);
-    if (kakao.kakaoEmail && kakao.kakaoId) {
-      navigate("/parents");
-    }
-  }, [kakao, kakao.isLogin, navigate, kakao.kakaoEmail, kakao.kakaoId]);
+	if (kakao.kakaoEmail && kakao.kakaoId) {
+		navigate('/parents');
+	}
 
-
-  if(kakao.kakaoEmail && kakao.kakaoId){
-    navigate("/parents")
-  }
-
-
-  return (
-      
-          <Container>
-            <Logo src="/images/logo_kirok.png" />
-            <ButtonsWrap>
-              <ShortBtn title={"선생님용"} />
-              <ShortBtn title={"부모님용"} />
-            </ButtonsWrap>
-          </Container>
-
-  );
+	return (
+		<Container>
+			<Logo src="/images/logo_kirok.png" />
+			<ButtonsWrap>
+				<ShortBtn title={'선생님용'} />
+				<ShortBtn title={'부모님용'} />
+			</ButtonsWrap>
+		</Container>
+	);
 };
 
 export default Main;
 
 const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100vw;
+	height: 100vh;
 `;
 
 const Logo = styled.img`
-  margin-bottom: 180px;
-  width: 260px;
-  height: 76px;
+	margin-bottom: 180px;
+	width: 260px;
+	height: 76px;
 `;
 
 const ButtonsWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
 `;

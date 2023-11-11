@@ -1,13 +1,13 @@
-import React from "react";
-import { styled } from "styled-components";
+import React from 'react';
+import { styled } from 'styled-components';
 
 const HeaderContainer = () => {
-  return (
-    <Container>
-      HeaderContainer
-      <GobackContainer></GobackContainer>
-    </Container>
-  );
+	return (
+		<Container>
+			HeaderContainer
+			<GobackContainer></GobackContainer>
+		</Container>
+	);
 };
 
 export default HeaderContainer;
