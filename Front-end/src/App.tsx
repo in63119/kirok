@@ -1,4 +1,5 @@
 import React from 'react';
+import GlobalStyle from 'GlobalStyle';
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
@@ -14,8 +15,10 @@ import { PageUrls } from '@constants/page-urls';
 
 function App() {
 	return (
-		<BrowserRouter>
-			<Routes>
+		<>
+			<GlobalStyle />
+			<BrowserRouter>
+				<Routes>
 				<Route path={PageUrls.INTRO} element={<Main />} />
 				<Route path="/callback" element={<Callback />} />
 				<Route path={PageUrls.SELECT_INTRO} element={<SelectIntro />} />
@@ -24,7 +27,8 @@ function App() {
 				<Route path={PageUrls.CHECK_KIDS_INFO} element={<CheckKidsinfo />} />
 				<Route path={PageUrls.INSTITUTION} element={<Institution />} />
 			</Routes>
-		</BrowserRouter>
+			</BrowserRouter>
+		</>
 	);
 }
 
