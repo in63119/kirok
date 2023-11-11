@@ -8,7 +8,10 @@ on:
       - 'release/**'
       - 'hotfix/**'
       - 'feature/**'
-name: build
+name: frontend-build
+defaults:
+  run:
+    working-directory: Front-end
 jobs:
   build:
     name: build
@@ -29,4 +32,6 @@ jobs:
           npm set-script prepare ""
           npm ci --no-optional
       - name: Build
+        env: 
+          CI: false
         run: npm run build
