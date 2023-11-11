@@ -32,4 +32,6 @@ jobs:
           npm set-script prepare ""
           npm ci --no-optional
       - name: Build
+        env: 
+          CI: false
         run: npm run build
