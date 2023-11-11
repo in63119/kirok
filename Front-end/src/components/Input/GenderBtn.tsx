@@ -1,7 +1,14 @@
 import React from 'react';
 import { styled } from 'styled-components';
 
-const GenderBtn = (prop) => {
+interface GenderBtnProps {
+	title: string;
+	type: string;
+	handleGender: (e: any) => void;
+	isGender: string; // TODO: 이름 고쳐야함.. 비교자 이상
+}
+
+const GenderBtn: React.FC<GenderBtnProps> = (prop) => {
 	const { title, type, handleGender, isGender } = prop;
 
 	//   const list = [

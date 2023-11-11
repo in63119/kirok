@@ -1,7 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const CheckInfo = (props) => {
+interface CheckInfoProps {
+	name: string;
+	birth: string;
+	gender: string;
+}
+
+const CheckInfo: React.FC<CheckInfoProps> = (props) => {
 	const { name, birth, gender } = props;
 	return (
 		<Container>

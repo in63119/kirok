@@ -1,7 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function BottomSheet({ closeModal, children }) {
+interface BottomSheetProps {
+	closeModal: () => void;
+	children: React.ReactNode;
+}
+
+const BottomSheet: React.FC<BottomSheetProps> = ({ closeModal, children }) => {
 	return (
 		<>
 			<StyledModalBackground onClick={closeModal} />
@@ -11,7 +16,7 @@ function BottomSheet({ closeModal, children }) {
 			</StyledBottomSheet>
 		</>
 	);
-}
+};
 
 export default BottomSheet;
 

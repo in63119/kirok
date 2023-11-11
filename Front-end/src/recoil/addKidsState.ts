@@ -3,7 +3,7 @@ import { recoilPersist } from 'recoil-persist';
 
 const { persistAtom } = recoilPersist();
 
-interface IAddKid {}
+type IAddKid = any[];
 
 // TODO: Delete 불필요한듯?
 export const addKidsState = atom<IAddKid>({

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 import useValid from '../hooks/useValid';
 import { useNavigate } from 'react-router-dom';
@@ -21,7 +21,7 @@ import { addKidsState } from '../recoil/addKidsState';
 
 const Parents = () => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
-	const [institutions, setIntitutions] = useState<string | null>(null);
+	const [institutions, setIntitutions] = useState<string[]>([]);
 	const [isChoiced, setIsChoiced] = useState('');
 	const [parent, setParent] = useRecoilState(parentsState);
 	const [, setAddKids] = useRecoilState(addKidsState);
@@ -40,15 +40,16 @@ const Parents = () => {
 		setIsModalOpen(!isModalOpen);
 	};
 
-	const institutionsName = async () => {
+	const institutionsName = useCallback(async () => {
 		const res = await getAllInstitution();
 
 		if (res) {
 			setIntitutions(res);
 		}
-	};
+	}, []);
 
-	const handleChoice = (e) => {
+	// TODO: 임시로 any
+	const handleChoice = (e: any) => {
 		setIsChoiced(e.target.innerText);
 		setParent((prev) => ({
 			...prev,
@@ -57,7 +58,7 @@ const Parents = () => {
 		setIsModalOpen(false);
 	};
 
-	const handleGender = (e) => {
+	const handleGender = (e: any) => {
 		setIsGender(e.target.innerText);
 		setParent((prev) => ({
 			...prev,
@@ -66,6 +67,7 @@ const Parents = () => {
 	};
 
 	const addKid = () => {
+		// TODO: addkid 와 parent 공존하는 이유?
 		setAddKids((prev) => [...prev, parent]);
 	};
 
@@ -73,14 +75,14 @@ const Parents = () => {
 		navigate('/checkKidsinfo');
 	};
 
-	// useEffect(() => {
-	// 	institutionsName();
-	// }, [institutionsName]);
+	useEffect(() => {
+		institutionsName();
+	}, [institutionsName]);
 
 	return (
 		<Container>
 			{isModalOpen && (
-				<LastBottomSheet isModalOpen={isModalOpen} closeModal={() => setIsModalOpen(false)}>
+				<LastBottomSheet closeModal={() => setIsModalOpen(false)}>
 					<BottomSheet handleChoice={handleChoice} institutions={institutions} />
 				</LastBottomSheet>
 			)}
@@ -133,7 +135,7 @@ const Parents = () => {
 					</InfoContainer>
 					<BtnWrapper>
 						<ProgressBtn title="자녀 추가 등록" onclick={addKid} />
-						<ProgressBtn title="다음" onclick={Checkinfo} parent={parent} />
+						<ProgressBtn title="다음" onclick={Checkinfo} />
 					</BtnWrapper>
 				</KidsInfoContainer>
 			)}

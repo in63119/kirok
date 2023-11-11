@@ -1,7 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const HeaderContainer = (props) => {
+interface HeaderContainerProps {
+	isGoback: boolean;
+	goBackHandler: () => void;
+}
+
+const HeaderContainer: React.FC<HeaderContainerProps> = (props) => {
 	const { isGoback, goBackHandler } = props;
 
 	return (

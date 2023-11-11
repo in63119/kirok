@@ -17,7 +17,8 @@ const Callback = () => {
 	const [kakaoCode, setKakaoCode] = useRecoilState(kakaoState);
 
 	const handleKakao = useCallback(async () => {
-		setKakaoCode((prev: TkakaoState) => ({
+		setKakaoCode((prev) => ({
+			// TODO: TkakaoState 제거
 			...prev,
 			isLogin: true,
 		}));

@@ -1,7 +1,12 @@
 import React from 'react';
 import { styled } from 'styled-components';
 
-const BottomSheet = (props) => {
+interface BottomSheetProps {
+	institutions: string[];
+	handleChoice: React.MouseEventHandler<HTMLDivElement>;
+}
+
+const BottomSheet: React.FC<BottomSheetProps> = (props) => {
 	const { institutions, handleChoice } = props;
 
 	return (
