@@ -20,6 +20,6 @@
       "@constants/*": ["constants/*"]
     }
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*"],
   "ignoreCase": true
 }

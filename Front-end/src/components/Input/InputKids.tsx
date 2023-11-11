@@ -55,8 +55,8 @@ const InputKids = () => {
 		if (kid.institution.length === 0 || kid.name.length === 0 || kid.birth.length === 0 || gender.length === 0) {
 			alert('뭔가 비었네?');
 		} else {
-			const data = Object.assign({}, kid, kakaoData);
-			data.gender = gender;
+			const data: any = Object.assign({}, kid, kakaoData); // TODO: 왜 kid, kakao 데이터를 같이 두는거지...?
+			data.gender = gender; // TODO: server 요청 시 타입 상세 필요.. 확장을 하는구만..
 			delete data.isLogin;
 			console.log('이렇게 보내요 : ', data);
 			await childRegistration(data);

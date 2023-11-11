@@ -1,7 +1,11 @@
 import React from 'react';
 import { styled } from 'styled-components';
 
-const InputBox = (props) => {
+interface InputBoxProps {
+	title: string;
+}
+
+const InputBox: React.FC<InputBoxProps> = (props) => {
 	const { title } = props;
 	return (
 		<div>

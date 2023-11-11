@@ -3,7 +3,13 @@ import { recoilPersist } from 'recoil-persist';
 
 const { persistAtom } = recoilPersist();
 
-export const kakaoState = atom({
+interface IKakaoState {
+	kakaoEmail: string;
+	kakaoId: number;
+	isLogin: boolean;
+}
+
+export const kakaoState = atom<IKakaoState>({
 	key: 'kakao',
 	default: {
 		kakaoEmail: '',

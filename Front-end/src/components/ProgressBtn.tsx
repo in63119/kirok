@@ -1,9 +1,13 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { fonts } from '../constants/index';
 
-const ProgressBtn = (props) => {
+interface ProgressBtnProps {
+	title: string;
+	onclick: () => void; // TODO: camelCase 로 바꾸기
+}
+
+const ProgressBtn: React.FC<ProgressBtnProps> = (props) => {
 	const { title, onclick } = props;
 
 	return (

@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import { styled } from 'styled-components';
 
-const KidsInfo = (props) => {
+interface KidsInfoProps {
+	title: string;
+	parent: string; // TODO: parentName 으로 명확하게
+}
+
+const KidsInfo: React.FC<KidsInfoProps> = (props) => {
 	const { title, parent } = props;
 	const [form, setForm] = useState({
 		name: '',
