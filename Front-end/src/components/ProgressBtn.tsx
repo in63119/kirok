@@ -25,13 +25,13 @@ const Container = styled.div`
 	margin-top: 70px;
 	cursor: pointer;
 	-webkit-tap-highlight-color: transparent;
+	width: 100%;
 `;
 
 const Btn = styled.div<{ title: string }>`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 163.5px;
 	height: 56px;
 	border-radius: 14px;
 	background-color: ${({ title }) => (title === '다음' ? '#A1DC2E' : '#F1F6E2')};

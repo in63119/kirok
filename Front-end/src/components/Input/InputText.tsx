@@ -23,15 +23,12 @@ export default InputText;
 
 const Container = styled.div<{ isvalid?: string }>`
 	margin-bottom: 14px;
-	width: 237px;
+
 	height: 56px;
-	/* text-align: center; */
 
 	& > input {
-		/* width: 80%;
-      height: 3rem; */
-		padding-top: 8px;
 		width: 100%;
+		padding-top: 8px;
 		height: 28px;
 		border-style: none;
 		outline: none;

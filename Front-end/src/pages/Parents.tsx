@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 import useValid from '../hooks/useValid';
 import { useNavigate } from 'react-router-dom';
-import { fonts } from '../constants';
 
 // Components
 import BottomSheet from '../components/BottomSheetModal/BottomSheet';
@@ -19,6 +18,7 @@ import { parentsState } from '../recoil/parentsState';
 import { useRecoilState } from 'recoil';
 import { addKidsState } from '../recoil/addKidsState';
 import { PageUrls } from '../constants/page-urls';
+import Layout from '../components/Layout';
 
 const Parents = () => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
@@ -81,7 +81,7 @@ const Parents = () => {
 	}, [institutionsName]);
 
 	return (
-		<Container>
+		<Layout>
 			{isModalOpen && (
 				<LastBottomSheet closeModal={() => setIsModalOpen(false)}>
 					<BottomSheet handleChoice={handleChoice} institutions={institutions} />
@@ -93,7 +93,7 @@ const Parents = () => {
 				키록에 오신 걸 환영합니다.
 				<br />
 				소중한 자녀의 정보를 등록해주세요
-				<LowerText>*정확한 자녀의 확인을 위해 실명을 입력해주세요</LowerText>
+				<LowerText>* 정확한 자녀의 확인을 위해 실명을 입력해주세요</LowerText>
 			</Description>
 			<ChoiceBtn onClick={handleClick}>
 				<Wrapper>
@@ -140,18 +140,11 @@ const Parents = () => {
 					</BtnWrapper>
 				</KidsInfoContainer>
 			)}
-		</Container>
+		</Layout>
 	);
 };
 
 export default Parents;
-
-const Container = styled.div`
-	padding: 60px 25px 0;
-	height: 100vh;
-	/* width: 100vw; */
-	font-family: ${fonts.suit.regular};
-`;
 
 const Description = styled.div`
 	/* margin-top : 50px; */
@@ -173,9 +166,8 @@ const ChoiceBtn = styled.button`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 335px;
-	/* width: 100%; */
-	height: 51px;
+	width: 100%;
+	padding: 8px 20px;
 	border: 1.5px solid #e0e5d6;
 	border-radius: 12px;
 	cursor: pointer;
@@ -186,8 +178,7 @@ const Wrapper = styled.div`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	width: 295px;
-	height: 35px;
+	width: 100%;
 `;
 
 const Content = styled.div`
@@ -205,7 +196,6 @@ const Arrow = styled.img`
 
 const KidsInfoContainer = styled.div`
 	margin-top: 40px;
-	/* height: 70%; */
 `;
 
 const Title = styled.div`
@@ -218,10 +208,10 @@ const Title = styled.div`
 const InfoContainer = styled.div`
 	display: flex;
 	flex-direction: row;
+	gap: 18px;
 `;
 
 const Photo = styled.img`
-	margin-right: 18px;
 	width: 80px;
 	height: 80px;
 `;
@@ -229,9 +219,11 @@ const Photo = styled.img`
 const InputWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
+	width: 100%;
 `;
 
 const BtnWrapper = styled.div`
 	display: flex;
 	gap: 8px;
+	width: 100%;
 `;
