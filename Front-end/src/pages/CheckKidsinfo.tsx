@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { fonts } from '../constants';
-import { useNavigate } from 'react-router-dom';
 
 // Recoil
 import { useRecoilState } from 'recoil';
@@ -9,54 +8,31 @@ import { parentsState } from '../recoil/parentsState';
 
 // Components
 import CheckInfo from '../components/CheckKidsInfo/CheckInfo';
-import HeaderContainer from '../components/Header/HeaderContainer';
 import LongBtn from '../components/Button/LongBtn';
 import { PageUrls } from '../constants/page-urls';
+import Layout from '../components/Layout';
+
 
 const CheckKidsinfo = () => {
 	const [parent] = useRecoilState(parentsState);
-	const navigate = useNavigate();
-
-	const goBackHandler = () => {
-		navigate(-1);
-	};
 
 	return (
-		<Container>
-			<HeaderContainer isGoback={true} goBackHandler={goBackHandler} />
-			<Disc>등록할 자녀의 정보를 확인해 주세요.</Disc>
-			<Contents>
+		<Layout hasGoback title={{ text: '등록할 자녀의 정보를 확인해 주세요.' }}>
+			<Layout.Body>
 				<Title>{parent.institution}</Title>
 				<CheckInfo name={parent.name} birth={parent.birth} gender={parent.gender} />
-			</Contents>
-			<BtnWrapper>
-				<LongBtn type="edit" path={PageUrls.PARENTS} />
-				<LongBtn type="request" path={PageUrls.PARENTS} />
-			</BtnWrapper>
-		</Container>
+			</Layout.Body>
+			<Layout.Footer>
+				<ButtonWrapper>
+					<LongBtn type="edit" path={PageUrls.PARENTS} />
+					<LongBtn type="request" path={PageUrls.PARENTS} />
+				</ButtonWrapper>
+			</Layout.Footer>
+		</Layout>
 	);
 };
 
 export default CheckKidsinfo;
-
-const Container = styled.div`
-	font-family: ${fonts.suit.regular};
-`;
-
-const Disc = styled.div`
-	margin: 12px 0px 44px;
-	padding-left: 20px;
-	font-weight: 600;
-	font-size: 20px;
-	line-height: 25px;
-`;
-
-const Contents = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-`;
 
 const Title = styled.div`
 	margin-bottom: 16px;
@@ -72,13 +48,8 @@ const Title = styled.div`
 	text-align: center;
 `;
 
-const BtnWrapper = styled.div`
+const ButtonWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
-	align-items: center;
-	position: absolute;
-	bottom: 40px;
-	left: 50%;
-	transform: translateX(-50%);
 	gap: 8px;
 `;

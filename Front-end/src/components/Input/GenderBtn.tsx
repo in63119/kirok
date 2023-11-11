@@ -29,13 +29,13 @@ export default GenderBtn;
 const Container = styled.div`
 	cursor: pointer;
 	-webkit-tap-highlight-color: transparent;
+	width: 100%;
 `;
 
 const Btn = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 114px;
 	height: 44px;
 	border-radius: 12px;
 	border: 1.5px solid #e0e3da;

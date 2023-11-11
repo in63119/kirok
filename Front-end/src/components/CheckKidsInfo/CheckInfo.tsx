@@ -27,11 +27,12 @@ const Container = styled.div`
 	padding: 18px 16px;
 	display: flex;
 	background-color: #ffffff;
-	width: 335px;
 	border-radius: 14px;
 	border: 1px solid #e0e5d6;
 	gap: 16px;
 	box-shadow: 0 0 10px 0 #5a624b29;
+
+	margin-bottom: 16px;
 `;
 
 const ProfileImg = styled.img`
@@ -43,11 +44,11 @@ const ProfileText = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 8px;
+	width: 100%;
 `;
 
 const Name = styled.div`
 	padding: 9px 20px;
-	width: 180px;
 	border-radius: 12px;
 	border: 1px solid #e0e5d6;
 	font-size: 16px;
@@ -57,7 +58,6 @@ const Name = styled.div`
 
 const Birth = styled.div`
 	padding: 9px 20px;
-	width: 180px;
 	border-radius: 12px;
 	border: 1px solid #e0e5d6;
 `;

@@ -49,7 +49,6 @@ const Container = styled.div<{ type: string }>`
 	padding: 16px 0;
 	display: flex;
 	justify-content: center;
-	width: 335px;
 	border-radius: 14px;
 	background-color: ${({ type }) => (type === 'edit' ? '#FFFFFF' : '#A1DC2E')};
 	color: ${({ type }) => (type === 'edit' ? '#969696' : '#FFFFFF')};
