@@ -10,15 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: harupy/auto-labeling@master
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          label-pattern: '- \[(.*?)\] ?`(.+?)`' # matches '- [x] `label`'
       - uses: toshimaru/auto-author-assign@v1.3.4
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: TimonVS/pr-labeler-action@v3
-        with:
-          configuration-path: .github/pr-labeler.yml # optional, .github/pr-labeler.yml is the default value
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
