@@ -10,18 +10,19 @@ import Login from './pages/Login';
 import Parents from './pages/Parents';
 import CheckKidsinfo from './pages/CheckKidsinfo';
 import Institution from './pages/Institution';
+import { PageUrls } from './constants/page-urls';
 
 function App() {
 	return (
 		<BrowserRouter>
 			<Routes>
-				<Route path="/" element={<Main />} />
+				<Route path={PageUrls.INTRO} element={<Main />} />
 				<Route path="/callback" element={<Callback />} />
-				<Route path="/Intro" element={<SelectIntro />} />
-				<Route path="/login" element={<Login />} />
-				<Route path="/parents" element={<Parents />} />
-				<Route path="/checkKidsinfo" element={<CheckKidsinfo />} />
-				<Route path="/Institution" element={<Institution />} />
+				<Route path={PageUrls.SELECT_INTRO} element={<SelectIntro />} />
+				<Route path={PageUrls.LOGIN} element={<Login />} />
+				<Route path={PageUrls.PARENTS} element={<Parents />} />
+				<Route path={PageUrls.CHECK_KIDS_INFO} element={<CheckKidsinfo />} />
+				<Route path={PageUrls.INSTITUTION} element={<Institution />} />
 			</Routes>
 		</BrowserRouter>
 	);

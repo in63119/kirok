@@ -4,6 +4,7 @@ import { kakaoState } from '../recoil/kakaoState';
 import styled from 'styled-components';
 import ShortBtn from '../components/Button/ShortBtn';
 import { useNavigate } from 'react-router-dom';
+import { PageUrls } from '../constants/page-urls';
 
 const Main = () => {
 	const kakao = useRecoilValue(kakaoState);
@@ -11,13 +12,9 @@ const Main = () => {
 
 	useEffect(() => {
 		if (kakao.kakaoEmail && kakao.kakaoId) {
-			navigate('/parents');
+			navigate(PageUrls.PARENTS);
 		}
 	}, [kakao, kakao.isLogin, navigate, kakao.kakaoEmail, kakao.kakaoId]);
-
-	if (kakao.kakaoEmail && kakao.kakaoId) {
-		navigate('/parents');
-	}
 
 	return (
 		<Container>

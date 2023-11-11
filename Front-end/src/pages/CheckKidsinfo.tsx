@@ -11,6 +11,7 @@ import { parentsState } from '../recoil/parentsState';
 import CheckInfo from '../components/CheckKidsInfo/CheckInfo';
 import HeaderContainer from '../components/Header/HeaderContainer';
 import LongBtn from '../components/Button/LongBtn';
+import { PageUrls } from '../constants/page-urls';
 
 const CheckKidsinfo = () => {
 	const [parent] = useRecoilState(parentsState);
@@ -29,8 +30,8 @@ const CheckKidsinfo = () => {
 				<CheckInfo name={parent.name} birth={parent.birth} gender={parent.gender} />
 			</Contents>
 			<BtnWrapper>
-				<LongBtn type="edit" path="/parents" />
-				<LongBtn type="request" path="/parents" />
+				<LongBtn type="edit" path={PageUrls.PARENTS} />
+				<LongBtn type="request" path={PageUrls.PARENTS} />
 			</BtnWrapper>
 		</Container>
 	);
