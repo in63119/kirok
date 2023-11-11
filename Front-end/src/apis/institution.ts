@@ -1,5 +1,5 @@
 // Type
-import { TinstitutionLogin } from '../utils/type';
+import { TinstitutionLogin } from '@kirok-fe/utils/type';
 
 import axios from 'axios';
 axios.defaults.withCredentials = true;

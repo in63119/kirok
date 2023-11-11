@@ -2,12 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 
 // Components
-import Login from '../components/Login';
-import RegistrationRequest from '../components/RegistrationRequest';
+import Login from '@kirok-fe/components/Login';
+import RegistrationRequest from '@kirok-fe/components/RegistrationRequest';
 
 // Recoil
 import { useRecoilValue, useResetRecoilState } from 'recoil';
-import { institutionState } from '../recoil/institutionState';
+import { institutionState } from '@kirok-fe/recoil/institutionState';
 
 const Institution = () => {
 	const { isLogin } = useRecoilValue(institutionState);

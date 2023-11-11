@@ -4,11 +4,11 @@ import { useNavigate } from 'react-router-dom';
 
 // recoil
 import { useRecoilValue } from 'recoil';
-import { kakaoState } from '../../recoil/kakaoState';
+import { kakaoState } from '@kirok-fe/recoil/kakaoState';
 
 // api
-import { kakaoOpen } from '../../apis/kakao';
-import { PageUrls } from '@constants/page-urls';
+import { kakaoOpen } from '@kirok-fe/apis/kakao';
+import { PageUrls } from '@kirok-fe/constants/page-urls';
 
 const ShortBtn = (props: any) => {
 	const { title } = props;

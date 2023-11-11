@@ -1,6 +1,6 @@
 import React from 'react';
 import { styled } from 'styled-components';
-import { fonts } from '../constants/index';
+import { fonts } from '@kirok-fe/constants/index';
 
 interface ProgressBtnProps {
 	title: string;

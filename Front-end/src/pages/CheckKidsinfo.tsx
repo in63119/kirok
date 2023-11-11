@@ -1,16 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
-import { fonts } from '../constants';
+import { fonts } from '@kirok-fe/constants';
 import { useNavigate } from 'react-router-dom';
 
 // Recoil
 import { useRecoilState } from 'recoil';
-import { parentsState } from '../recoil/parentsState';
+import { parentsState } from '@kirok-fe/recoil/parentsState';
 
 // Components
-import CheckInfo from '../components/CheckKidsInfo/CheckInfo';
-import HeaderContainer from '../components/Header/HeaderContainer';
-import LongBtn from '../components/Button/LongBtn';
+import CheckInfo from '@kirok-fe/components/CheckKidsInfo/CheckInfo';
+import HeaderContainer from '@kirok-fe/components/Header/HeaderContainer';
+import LongBtn from '@kirok-fe/components/Button/LongBtn';
 
 const CheckKidsinfo = () => {
 	const [parent] = useRecoilState(parentsState);

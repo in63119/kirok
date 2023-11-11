@@ -10,7 +10,7 @@ import { TkakaoState } from '../utils/type';
 
 // api
 import { postCodeToServer } from '../apis/kakao';
-import { PageUrls } from '@constants/page-urls';
+import { PageUrls } from '@kirok-fe/constants/page-urls';
 
 const Callback = () => {
 	const navigate = useNavigate();

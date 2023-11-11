@@ -1,5 +1,5 @@
 // Type
-import { TuserKidsRegist } from '../utils/type';
+import { TuserKidsRegist } from '@kirok-fe/utils/type';
 
 import axios from 'axios';
 axios.defaults.withCredentials = true;

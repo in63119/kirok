@@ -1,24 +1,24 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { styled } from 'styled-components';
-import useValid from '../hooks/useValid';
+import useValid from '@kirok-fe/hooks/useValid';
 import { useNavigate } from 'react-router-dom';
-import { fonts } from '../constants';
+import { fonts } from '@kirok-fe/constants';
 
 // Components
-import BottomSheet from '../components/BottomSheetModal/BottomSheet';
-import InputText from '../components/Input/InputText';
-import LastBottomSheet from '../components/BottomSheetModal/LastBottomSheet';
-import GenderBtn from '../components/Input/GenderBtn';
-import ProgressBtn from '../components/ProgressBtn';
+import BottomSheet from '@kirok-fe/components/BottomSheetModal/BottomSheet';
+import InputText from '@kirok-fe/components/Input/InputText';
+import LastBottomSheet from '@kirok-fe/components/BottomSheetModal/LastBottomSheet';
+import GenderBtn from '@kirok-fe/components/Input/GenderBtn';
+import ProgressBtn from '@kirok-fe/components/ProgressBtn';
 
 // Api
-import { getAllInstitution } from '../apis/institution';
+import { getAllInstitution } from '@kirok-fe/apis/institution';
 
 // Recoil
-import { parentsState } from '../recoil/parentsState';
+import { parentsState } from '@kirok-fe/recoil/parentsState';
 import { useRecoilState } from 'recoil';
-import { addKidsState } from '../recoil/addKidsState';
-import { PageUrls } from '@constants/page-urls';
+import { addKidsState } from '@kirok-fe/recoil/addKidsState';
+import { PageUrls } from '@kirok-fe/constants/page-urls';
 
 const Parents = () => {
 	const [isModalOpen, setIsModalOpen] = useState(false);

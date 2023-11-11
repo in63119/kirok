@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 
 // recoil
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { kidState } from '../../recoil/kidState';
-import { kakaoState } from '../../recoil/kakaoState';
+import { kidState } from '@kirok-fe/recoil/kidState';
+import { kakaoState } from '@kirok-fe/recoil/kakaoState';
 
 // apis
-import { childRegistration } from '../../apis/kids';
-import { getAllInstitution } from '../../apis/institution';
+import { childRegistration } from '@kirok-fe/apis/kids';
+import { getAllInstitution } from '@kirok-fe/apis/institution';
 
 /* 
   이 파일은 테스트용으로 만들어봤던 파일임.

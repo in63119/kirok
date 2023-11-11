@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
-import { kakaoState } from '../recoil/kakaoState';
+import { kakaoState } from '@kirok-fe/recoil/kakaoState';
 import styled from 'styled-components';
-import ShortBtn from '../components/Button/ShortBtn';
+import ShortBtn from '@kirok-fe/components/Button/ShortBtn';
 import { useNavigate } from 'react-router-dom';
-import { PageUrls } from '@constants/page-urls';
+import { PageUrls } from '@kirok-fe/constants/page-urls';
 
 const Main = () => {
 	const kakao = useRecoilValue(kakaoState);

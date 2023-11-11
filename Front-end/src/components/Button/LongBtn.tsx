@@ -1,15 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
-import { fonts } from '../../constants';
+import { fonts } from '@kirok-fe/constants';
 import { useNavigate } from 'react-router-dom';
 
 // Recoil
 import { useRecoilValue } from 'recoil';
-import { parentsState } from '../../recoil/parentsState';
-import { kakaoState } from '../../recoil/kakaoState';
+import { parentsState } from '@kirok-fe/recoil/parentsState';
+import { kakaoState } from '@kirok-fe/recoil/kakaoState';
 
 // Api
-import { childRegistration } from '../../apis/kids';
+import { childRegistration } from '@kirok-fe/apis/kids';
 
 interface Prop {
 	type: 'edit' | 'request';
