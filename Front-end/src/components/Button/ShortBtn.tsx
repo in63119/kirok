@@ -8,6 +8,7 @@ import { kakaoState } from '../../recoil/kakaoState';
 
 // api
 import { kakaoOpen } from '../../apis/kakao';
+import { PageUrls } from '../../constants/page-urls';
 
 const ShortBtn = (props: any) => {
 	const { title } = props;
@@ -17,9 +18,9 @@ const ShortBtn = (props: any) => {
 	const handleClick = () => {
 		if (title === '부모님용' && !isLogin) {
 			kakaoOpen();
-			navigate('/login');
+			navigate(PageUrls.LOGIN);
 		} else {
-			navigate('/Institution');
+			navigate(PageUrls.INSTITUTION);
 		}
 	};
 
