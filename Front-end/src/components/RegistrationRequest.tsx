@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from 'react';
-// import styled from "styled-components";
-
-// recoil
 import { useRecoilValue } from 'recoil';
 import { institutionState } from '../recoil/institutionState';
 
@@ -14,21 +11,32 @@ import { onSnapshot, query, collection } from 'firebase/firestore';
   용도: 기관에 등록요청 데이터가 추가되면 수락용
 */
 
+interface RegistrationItem {
+	birth: string;
+	gender: string;
+	institution: string;
+	isRegistered: boolean;
+	name: string;
+}
+
 const RegistrationRequest = () => {
 	const institution = useRecoilValue(institutionState);
-	const [realTimeRequest, setRealTimeRequest] = useState([]);
+	const [realTimeRequest, setRealTimeRequest] = useState<RegistrationItem[]>([]);
 	const q = query(collection(firestore, 'institution', `${institution.name}`, 'RegistrationRequest'));
 
 	useEffect(() => {
 		const unsubscribe = onSnapshot(
 			q,
 			(querySnapshot) => {
-				const requests = [];
+				const requests: RegistrationItem[] = [];
 
 				querySnapshot.forEach((doc) => {
-					// eslint-disable-next-line
-          requests.push(doc.data());
+					const data: RegistrationItem = doc.data() as RegistrationItem;
+					if (data) {
+						requests.push(data);
+					}
 				});
+
 				setRealTimeRequest(requests);
 			},
 			(err) => {
@@ -39,8 +47,7 @@ const RegistrationRequest = () => {
 		return () => {
 			unsubscribe();
 		};
-		// eslint-disable-next-line
-  }, []);
+	}, []);
 
 	return (
 		<div>

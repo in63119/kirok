@@ -17,7 +17,7 @@ import { getAllInstitution } from '../../apis/institution';
 const InputKids = () => {
 	const [kid, setKid] = useRecoilState(kidState);
 	const kakaoData = useRecoilValue(kakaoState);
-	const [institutions, setIntitutions] = useState<string | null>(null);
+	const [institutions, setIntitutions] = useState<string[] | null>(null);
 	const [selectedOption, setSelectedOption] = useState<string[] | any>('');
 	const [gender, setGender] = useState('');
 
