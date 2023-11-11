@@ -3,7 +3,14 @@ import { recoilPersist } from 'recoil-persist';
 
 const { persistAtom } = recoilPersist();
 
-export const kidState = atom({
+interface IKid {
+	institution: string;
+	name: string;
+	birth: string;
+	isRegistered: boolean;
+}
+
+export const kidState = atom<IKid>({
 	key: 'kid',
 	default: {
 		institution: '',

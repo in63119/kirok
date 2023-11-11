@@ -3,7 +3,15 @@ import { recoilPersist } from 'recoil-persist';
 
 const { persistAtom } = recoilPersist();
 
-export const parentsState = atom({
+interface IParent {
+	institution: string;
+	name: string;
+	birth: string;
+	gender: string;
+	isRegistered: boolean;
+}
+
+export const parentsState = atom<IParent>({
 	key: 'parent',
 	default: {
 		institution: '',
@@ -12,6 +20,5 @@ export const parentsState = atom({
 		gender: '',
 		isRegistered: false,
 	},
-
 	effects_UNSTABLE: [persistAtom],
 });

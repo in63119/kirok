@@ -3,7 +3,10 @@ import { recoilPersist } from 'recoil-persist';
 
 const { persistAtom } = recoilPersist();
 
-export const addKidsState = atom({
+interface IAddKid {}
+
+// TODO: Delete 불필요한듯?
+export const addKidsState = atom<IAddKid>({
 	key: 'addKids',
 	default: [],
 	effects_UNSTABLE: [persistAtom],
