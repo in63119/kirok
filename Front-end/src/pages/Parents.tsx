@@ -91,13 +91,16 @@ const Parents = () => {
 					<BottomSheet handleChoice={handleChoice} institutions={institutions} />
 				</LastBottomSheet>
 			)}
-			<ChoiceBtn onClick={handleClick}>
-				<Wrapper>
-					<Content>{isChoiced ? parent.institution : '어린이집을 선택해주세요.'}</Content>
-					<Arrow src="/images/icon_arrow.png" />
-				</Wrapper>
-			</ChoiceBtn>
+			<Layout.Body>
+				<ChoiceBtn onClick={handleClick}>
+					<Wrapper>
+						<Content>{isChoiced ? parent.institution : '어린이집을 선택해주세요.'}</Content>
+						<Arrow src="/images/icon_arrow.png" />
+					</Wrapper>
+				</ChoiceBtn>
+			</Layout.Body>
 			{isChoiced && !isModalOpen && (
+				// TODO: 자녀 정보 확인 컴포넌트랑 중복
 				<KidsInfoContainer>
 					<Title>자녀 정보 입력</Title>
 					<InfoContainer>
@@ -129,12 +132,14 @@ const Parents = () => {
 							</BtnWrapper>
 						</InputWrapper>
 					</InfoContainer>
-					<BtnWrapper>
-						<ProgressBtn title="자녀 추가 등록" onclick={addKid} />
-						<ProgressBtn title="다음" onclick={Checkinfo} />
-					</BtnWrapper>
 				</KidsInfoContainer>
 			)}
+			<Layout.Footer>
+				<BtnWrapper>
+					<ProgressBtn title="자녀 추가 등록" onclick={addKid} />
+					<ProgressBtn title="다음" onclick={Checkinfo} />
+				</BtnWrapper>
+			</Layout.Footer>
 		</Layout>
 	);
 };

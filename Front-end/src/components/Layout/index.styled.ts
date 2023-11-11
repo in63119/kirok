@@ -5,9 +5,12 @@ export const ParentLayout = styled.div`
 	width: 100%;
 	height: calc(100vh - ${HEADER_HEIGHT}px);
 	padding: 12px 20px 0;
+
+	position: relative;
+	overflow: scroll;
 `;
 
-export const ChildLayout = styled.div`
+export const Body = styled.div`
 	width: 100%;
 	margin-top: 48px;
 `;
@@ -26,4 +29,17 @@ export const SubTitle = styled.div<{ color: string }>`
 	line-height: 19px;
 	color: ${({ color }) => color};
 	white-space: pre-wrap;
+`;
+
+export const FooterWrapper = styled.div`
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	padding: 0 20px 15px;
+`;
+
+export const MarginBottom = styled.div`
+	/* TODO: 40px 보장 */
+	height: 180px;
 `;

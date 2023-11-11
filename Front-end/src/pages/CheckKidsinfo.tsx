@@ -17,7 +17,7 @@ const CheckKidsinfo = () => {
 
 	return (
 		<Layout hasGoback title={{ text: '등록할 자녀의 정보를 확인해 주세요.' }}>
-			<Contents>
+			<Layout.Body>
 				<Title>{parent.institution}</Title>
 				<CheckInfo name={parent.name} birth={parent.birth} gender={parent.gender} />
 			</Contents>
@@ -30,13 +30,6 @@ const CheckKidsinfo = () => {
 };
 
 export default CheckKidsinfo;
-
-const Contents = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-`;
 
 const Title = styled.div`
 	margin-bottom: 16px;
@@ -52,13 +45,8 @@ const Title = styled.div`
 	text-align: center;
 `;
 
-const BtnWrapper = styled.div`
+const ButtonWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
-	align-items: center;
-	position: absolute;
-	bottom: 40px;
-	left: 50%;
-	transform: translateX(-50%);
 	gap: 8px;
 `;

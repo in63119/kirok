@@ -28,10 +28,14 @@ const Layout: React.FC<LayoutProps> = ({ children, hasGoback = true, title, subT
 			<Styled.ParentLayout>
 				<Styled.Title>{title.text}</Styled.Title>
 				{subTitle && <Styled.SubTitle color={subTitle.color ?? '#696969'}>{subTitle.text}</Styled.SubTitle>}
-				<Styled.ChildLayout>{children}</Styled.ChildLayout>
+				{children}
+				<Styled.MarginBottom />
 			</Styled.ParentLayout>
 		</>
 	);
 };
 
-export default Layout;
+export default Object.assign(Layout, {
+	Body: Styled.Body,
+	Footer: Styled.FooterWrapper,
+});
