@@ -18,6 +18,7 @@ import { getAllInstitution } from '../apis/institution';
 import { parentsState } from '../recoil/parentsState';
 import { useRecoilState } from 'recoil';
 import { addKidsState } from '../recoil/addKidsState';
+import { PageUrls } from '@constants/page-urls';
 
 const Parents = () => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
@@ -72,7 +73,7 @@ const Parents = () => {
 	};
 
 	const Checkinfo = () => {
-		navigate('/checkKidsinfo');
+		navigate(PageUrls.CHECK_KIDS_INFO);
 	};
 
 	useEffect(() => {

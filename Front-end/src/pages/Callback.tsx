@@ -10,6 +10,7 @@ import { TkakaoState } from '../utils/type';
 
 // api
 import { postCodeToServer } from '../apis/kakao';
+import { PageUrls } from '@constants/page-urls';
 
 const Callback = () => {
 	const navigate = useNavigate();
@@ -30,7 +31,7 @@ const Callback = () => {
 				kakaoEmail: result.email,
 				kakaoId: result.kakaoId,
 			}));
-			navigate('/');
+			navigate(PageUrls.INTRO);
 		}
 	}, [codeFromUri, kakaoCode.isLogin, navigate, setKakaoCode]);
 
