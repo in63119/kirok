@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 import useValid from '../hooks/useValid';
 import { useNavigate } from 'react-router-dom';
-import { fonts } from '../constants';
 
 // Components
 import BottomSheet from '../components/BottomSheetModal/BottomSheet';
@@ -19,6 +18,7 @@ import { parentsState } from '../recoil/parentsState';
 import { useRecoilState } from 'recoil';
 import { addKidsState } from '../recoil/addKidsState';
 import { PageUrls } from '../constants/page-urls';
+import Layout from '../components/Layout';
 
 const Parents = () => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
@@ -81,28 +81,26 @@ const Parents = () => {
 	}, [institutionsName]);
 
 	return (
-		<Container>
+		<Layout
+			hasGoback={false}
+			title={{ text: '안녕하세요!\n키록에 오신 걸 환영합니다.\n소중한 자녀의 정보를 등록해주세요' }}
+			subTitle={{ text: '* 정확한 자녀의 확인을 위해 실명을 입력해주세요' }}
+		>
 			{isModalOpen && (
 				<LastBottomSheet closeModal={() => setIsModalOpen(false)}>
 					<BottomSheet handleChoice={handleChoice} institutions={institutions} />
 				</LastBottomSheet>
 			)}
-
-			<Description>
-				안녕하세요! <br />
-				키록에 오신 걸 환영합니다.
-				<br />
-				소중한 자녀의 정보를 등록해주세요
-				<LowerText>*정확한 자녀의 확인을 위해 실명을 입력해주세요</LowerText>
-			</Description>
-			<ChoiceBtn onClick={handleClick}>
-				<Wrapper>
-					<Content>{isChoiced ? parent.institution : '어린이집을 선택해주세요.'}</Content>
-					<Arrow src="/images/icon_arrow.png" />
-				</Wrapper>
-			</ChoiceBtn>
-
+			<Layout.Body>
+				<ChoiceBtn onClick={handleClick}>
+					<Wrapper>
+						<Content>{isChoiced ? parent.institution : '어린이집을 선택해주세요.'}</Content>
+						<Arrow src="/images/icon_arrow.png" />
+					</Wrapper>
+				</ChoiceBtn>
+			</Layout.Body>
 			{isChoiced && !isModalOpen && (
+				// TODO: 자녀 정보 확인 컴포넌트랑 중복
 				<KidsInfoContainer>
 					<Title>자녀 정보 입력</Title>
 					<InfoContainer>
@@ -134,48 +132,27 @@ const Parents = () => {
 							</BtnWrapper>
 						</InputWrapper>
 					</InfoContainer>
-					<BtnWrapper>
-						<ProgressBtn title="자녀 추가 등록" onclick={addKid} />
-						<ProgressBtn title="다음" onclick={Checkinfo} />
-					</BtnWrapper>
 				</KidsInfoContainer>
 			)}
-		</Container>
+			<Layout.Footer>
+				<BtnWrapper>
+					<ProgressBtn title="자녀 추가 등록" onclick={addKid} />
+					<ProgressBtn title="다음" onclick={Checkinfo} />
+				</BtnWrapper>
+			</Layout.Footer>
+		</Layout>
 	);
 };
 
 export default Parents;
-
-const Container = styled.div`
-	padding: 60px 25px 0;
-	height: 100vh;
-	/* width: 100vw; */
-	font-family: ${fonts.suit.regular};
-`;
-
-const Description = styled.div`
-	/* margin-top : 50px; */
-	margin-bottom: 30px;
-	font-size: 20px;
-	font-weight: 600;
-	line-height: 28px;
-`;
-
-const LowerText = styled.div`
-	font-size: 15px;
-	font-weight: 400;
-	line-height: 19px;
-	color: #696969;
-`;
 
 const ChoiceBtn = styled.button`
 	background-color: transparent;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 335px;
-	/* width: 100%; */
-	height: 51px;
+	width: 100%;
+	padding: 8px 20px;
 	border: 1.5px solid #e0e5d6;
 	border-radius: 12px;
 	cursor: pointer;
@@ -186,8 +163,7 @@ const Wrapper = styled.div`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	width: 295px;
-	height: 35px;
+	width: 100%;
 `;
 
 const Content = styled.div`
@@ -205,7 +181,6 @@ const Arrow = styled.img`
 
 const KidsInfoContainer = styled.div`
 	margin-top: 40px;
-	/* height: 70%; */
 `;
 
 const Title = styled.div`
@@ -218,10 +193,10 @@ const Title = styled.div`
 const InfoContainer = styled.div`
 	display: flex;
 	flex-direction: row;
+	gap: 18px;
 `;
 
 const Photo = styled.img`
-	margin-right: 18px;
 	width: 80px;
 	height: 80px;
 `;
@@ -229,9 +204,11 @@ const Photo = styled.img`
 const InputWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
+	width: 100%;
 `;
 
 const BtnWrapper = styled.div`
 	display: flex;
 	gap: 8px;
+	width: 100%;
 `;
