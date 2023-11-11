@@ -1,17 +1,17 @@
-import React from "react";
-import { styled } from "styled-components";
+import React from 'react';
+import { styled } from 'styled-components';
 
 const InputBox = (props) => {
-  const { title } = props;
-  return (
-    <div>
-      InputBox
-      <Container>
-        <Title></Title>
-        <InputBoxWrap></InputBoxWrap>
-      </Container>
-    </div>
-  );
+	const { title } = props;
+	return (
+		<div>
+			InputBox
+			<Container>
+				<Title>{title}</Title>
+				<InputBoxWrap></InputBoxWrap>
+			</Container>
+		</div>
+	);
 };
 
 export default InputBox;

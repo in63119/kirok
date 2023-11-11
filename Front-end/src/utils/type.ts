@@ -1,26 +1,26 @@
 export type TkakaoState = {
-  kakaoEmail: string;
-  isLogin: boolean;
+	kakaoEmail: string;
+	isLogin: boolean;
 };
 
 export type TuserKidsRegist = {
-  kakaoId: number;
-  requestKidInfo: requestKidInfo;
+	kakaoId: number;
+	requestKidInfo: requestKidInfo;
 };
 
 export type TinstitutionState = {
-  id: string;
-  password: string;
-  isLogin: boolean;
+	id: string;
+	password: string;
+	isLogin: boolean;
 };
 
 export type TinstitutionLogin = {
-  id: string;
-  password: string;
+	id: string;
+	password: string;
 };
 type requestKidInfo = {
-  institution: string;
-  birth: string;
-  isRegistered: boolean;
-  name: string;
+	institution: string;
+	birth: string;
+	isRegistered: boolean;
+	name: string;
 };
