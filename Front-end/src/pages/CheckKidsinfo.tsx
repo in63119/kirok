@@ -11,7 +11,7 @@ import { parentsState } from '../recoil/parentsState';
 import CheckInfo from '../components/CheckKidsInfo/CheckInfo';
 import HeaderContainer from '../components/Header/HeaderContainer';
 import LongBtn from '../components/Button/LongBtn';
-import { PageUrls } from '@constants/page-urls';
+import { PageUrls } from '../constants/page-urls';
 
 const CheckKidsinfo = () => {
 	const [parent] = useRecoilState(parentsState);

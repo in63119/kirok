@@ -10,7 +10,7 @@ import Login from './pages/Login';
 import Parents from './pages/Parents';
 import CheckKidsinfo from './pages/CheckKidsinfo';
 import Institution from './pages/Institution';
-import { PageUrls } from '@constants/page-urls';
+import { PageUrls } from './constants/page-urls';
 
 function App() {
 	return (
