@@ -10,7 +10,8 @@ import { parentsState } from '../recoil/parentsState';
 import CheckInfo from '../components/CheckKidsInfo/CheckInfo';
 import LongBtn from '../components/Button/LongBtn';
 import { PageUrls } from '../constants/page-urls';
-import Layout from 'components/Layout';
+import Layout from '../components/Layout';
+
 
 const CheckKidsinfo = () => {
 	const [parent] = useRecoilState(parentsState);
