@@ -1,16 +1,20 @@
 const fs = require("fs");
 const path = require("path");
+
 const basePath = __dirname;
 
+const base = path.join(basePath, "../");
+
 const makeFile = async (location, destination, address) => {
-  const json = await fs.readFileSync(path.join(basePath, location), {
+  console.log(
+    "다음 경로에 abi파일을 만듭니다. : ",
+    path.join(base, destination)
+  );
+  const json = await fs.readFileSync(path.join(base, location), {
     encoding: "utf-8",
   });
 
-  await fs.writeFileSync(
-    path.join(basePath, destination),
-    makeData(json, address)
-  );
+  await fs.writeFileSync(path.join(base, destination), makeData(json, address));
 };
 
 const makeData = (json, address) => {
@@ -22,10 +26,10 @@ const makeData = (json, address) => {
   });
 };
 
-const makeKNSData = async (address) => {
-  makeFile("/data/artifacts/KNS.json", "/data/KNSABI.json", address);
+const makeAbi = async (contract, address) => {
+  makeFile(`/data/low/${contract}.json`, `/data/abi/${contract}.json`, address);
 };
 
 module.exports = {
-  makeKNSData,
+  makeAbi,
 };

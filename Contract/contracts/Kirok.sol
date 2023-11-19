@@ -1,18 +1,20 @@
 pragma solidity ^0.8.0;
 
-contract KNS {
-  // KNS 관리자용
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract Kirok is Ownable {
   string[] public allNames;
   string[] public allTxtRecords;
 
   mapping(string => address) addresses;
   mapping(address => string) names;
 
-  // KNS를 등록한 사용자가 textrecord 등록 용
   mapping(string => string) txtRecordURIs;
 
+  constructor() Ownable(msg.sender) {} 
+
   // 등록
-  function register(string memory _name, address _address) public returns (bool) {
+  function register(string memory _name, address _address) public onlyOwner returns (bool) {
     require(addresses[_name] == address(0), "This name is already registered.");
     require(bytes(names[_address]).length == 0, "This address is already registered.");
 
@@ -23,7 +25,7 @@ contract KNS {
   }
 
   // 이름에 해당하는 주소 반환
-  function fromNameToAddress(string memory _name) public view returns (address) {
+  function fromNameToAddress(string memory _name) public view onlyOwner returns (address) {
     require(allNames.length > 0, "There are no registered addresses.");
 
     address _address = addresses[_name];
@@ -33,7 +35,7 @@ contract KNS {
   }
 
   // 주소에 해당하는 이름 반환
-  function fromAddressToName(address _address) public view returns (string memory) {
+  function fromAddressToName(address _address) public view onlyOwner returns (string memory) {
     require(allNames.length > 0, "There are no registered addresses.");
     string memory _name = names[_address];
     require(bytes(_name).length != 0, "This address is an unregistered address.");
@@ -42,7 +44,7 @@ contract KNS {
   }
 
   // textRecord 등록
-  function registerTxtRecord(string memory _name, string memory _txtRecordURI) public returns (bool) {
+  function registerTxtRecord(string memory _name, string memory _txtRecordURI) public onlyOwner returns (bool) {
     require(allNames.length > 0, "There are no registered addresses.");
 
     address _address = addresses[_name];
@@ -58,7 +60,7 @@ contract KNS {
   }
 
   // 이름으로 textRecord 조회
-  function checkTxtRecord(string memory _name) public view returns (string memory) {
+  function checkTxtRecord(string memory _name) public view onlyOwner returns (string memory) {
     require(allNames.length > 0, "There are no registered addresses.");
 
     address _address = addresses[_name];
