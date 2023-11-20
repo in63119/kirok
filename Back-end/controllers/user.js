@@ -10,10 +10,11 @@ const { collection, getDocs } = require("firebase/firestore");
 const {
   getAllUsers,
   getKids,
-  addKid,
+  setKid,
   getKidRegistered,
   registrationRequest,
   checkRegistrationRequest,
+  checkUser,
 } = require("./kirokDB");
 
 // Team Secret Key
@@ -72,6 +73,40 @@ module.exports = {
           res.status(400).send("DB 추가 중 실패");
         }
       }
+    }
+  },
+
+  // 사용자 자녀정보 수정
+  updateUserKids: async (req, res) => {
+    const { requestKidInfo } = req.body;
+    const { kakaoId } = req.params;
+    const checkKid = await getKids(kakaoId, requestKidInfo.name);
+    const check = await checkUser(kakaoId);
+
+    if (!check) {
+      res
+        .status(400)
+        .json({ message: "사용자 정보가 없습니다.", result: false });
+    }
+
+    if (checkKid) {
+      const isUpdate = await setKid(
+        kakaoId,
+        requestKidInfo.name,
+        requestKidInfo
+      );
+
+      if (isUpdate) {
+        res.status(200).json({ message: "정보를 수정했습니다.", result: true });
+      } else {
+        res
+          .status(201)
+          .json({ message: "정보를 수정하지 못했습니다.", result: false });
+      }
+    } else {
+      res
+        .status(202)
+        .json({ message: "일치하는 아이의 정보가 없습니다.", result: false });
     }
   },
 };

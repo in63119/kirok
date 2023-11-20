@@ -113,16 +113,20 @@ module.exports = {
     return result;
   },
 
-  // 자녀 등록
-  addKid: async (kakaoId, name, info) => {
-    const docRef = doc(collection(db, "user", `${kakaoId}`, "kids"), name);
-    await setDoc(docRef, info);
+  // 자녀 등록 & 수정
+  setKid: async (kakaoId, name, info) => {
+    try {
+      const docRef = doc(collection(db, "user", `${kakaoId}`, "kids"), name);
+      await setDoc(docRef, info);
 
-    const addedDocumentId = docRef.id;
-    if (addedDocumentId === name) {
-      return true;
-    } else {
-      return false;
+      const addedDocumentId = docRef.id;
+      if (addedDocumentId === name) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      console.log(e);
     }
   },
 
