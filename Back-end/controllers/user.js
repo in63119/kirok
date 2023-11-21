@@ -13,7 +13,7 @@ const {
   getKidRegistered,
   registrationRequest,
   checkRegistrationRequest,
-  checkUser,
+  checkDoc,
   getDocuments,
 } = require("./kirokDB");
 
@@ -81,7 +81,7 @@ module.exports = {
     const { requestKidInfo } = req.body;
     const { kakaoId } = req.params;
     const checkKid = await getKids(kakaoId, requestKidInfo.name);
-    const check = await checkUser("user", kakaoId);
+    const check = await checkDoc("user", kakaoId);
 
     if (!check) {
       res
