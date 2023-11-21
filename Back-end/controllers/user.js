@@ -8,13 +8,13 @@ const { collection, getDocs } = require("firebase/firestore");
 
 // kirokDB functions
 const {
-  getAllUsers,
   getKids,
   setKid,
   getKidRegistered,
   registrationRequest,
   checkRegistrationRequest,
   checkUser,
+  getDocuments,
 } = require("./kirokDB");
 
 // Team Secret Key
@@ -35,7 +35,7 @@ module.exports = {
 
     if (key1 && key2) {
       try {
-        const result = await getAllUsers();
+        const result = await getDocuments("user");
 
         res.status(200).send(result);
       } catch (err) {
@@ -81,7 +81,7 @@ module.exports = {
     const { requestKidInfo } = req.body;
     const { kakaoId } = req.params;
     const checkKid = await getKids(kakaoId, requestKidInfo.name);
-    const check = await checkUser(kakaoId);
+    const check = await checkUser("user", kakaoId);
 
     if (!check) {
       res

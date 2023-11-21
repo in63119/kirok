@@ -15,29 +15,21 @@ const {
 */
 
 module.exports = {
-  // 모든 institution 이름
-  getInstitutions: async (req, res) => {
+  /*  
+    getDocuments
+    @dev param에 따라서 Documents 조회
+	  @param(select : string) 
+      1. "institution" => 모든 기관명 조회
+      2. "user" => 유저의 아이디 조회
+	  @returns => [string]
+  */
+  getDocuments: async (select) => {
     try {
       let result = [];
-      const querySnapshot = await getDocs(collection(db, "institution"));
+      const querySnapshot = await getDocs(collection(db, select));
       querySnapshot.forEach((doc) => {
         result.push(doc.id);
         // console.log(doc.id, " => ", doc.data());
-      });
-      res.status(200).send(result);
-    } catch (err) {
-      res.status(400).send(err);
-    }
-  },
-
-  // 모든 유저 Id
-  getAllUsers: async () => {
-    const result = [];
-
-    try {
-      const querySnapshot = await getDocs(collection(db, "user"));
-      querySnapshot.forEach((doc) => {
-        result.push(doc.id);
       });
       return result;
     } catch (err) {
@@ -45,9 +37,19 @@ module.exports = {
     }
   },
 
-  // 유저 확인
-  checkUser: async (docName) => {
-    const document = doc(db, "user", `${docName}`);
+  /*  
+    checkDoc
+    @dev param에 따라서 특정 Document 존재 여부 리턴
+	  @param(select : string, docName : string) 
+      1. select
+        "institution" => 특정 기관 확인
+        "user" => 특정 유저 확인
+      2. docName(조회할 문서의 ID)
+        ex. "유랑단학원" or "3011940250"
+	  @returns => boolean
+  */
+  checkDoc: async (select, docName) => {
+    const document = doc(db, select, `${docName}`);
     const documentSnapshot = await getDoc(document);
 
     const result = documentSnapshot.exists();

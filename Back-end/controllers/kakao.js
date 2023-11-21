@@ -5,7 +5,7 @@ const axios = require("axios");
 const { KAKAO_API_KEY } = process.env;
 const kakaoUrl = "https://kauth.kakao.com";
 
-const { checkUser, addUser } = require("../controllers/kirokDB");
+const { checkDoc, addUser } = require("../controllers/kirokDB");
 
 /*
   카카오 API
@@ -58,7 +58,7 @@ module.exports = {
       const email = userInfo.data.kakao_account.email;
       const kakaoId = userInfo.data.id;
 
-      const isExists = await checkUser(kakaoId);
+      const isExists = await checkDoc("user", kakaoId);
 
       // kirok DB에 있으면
       if (isExists) {
