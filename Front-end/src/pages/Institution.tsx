@@ -9,9 +9,18 @@ import RegistrationRequest from '../components/RegistrationRequest';
 import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { institutionState } from '../recoil/institutionState';
 
+// Util
+import { upload } from '../utils/aws';
+
 const Institution = () => {
 	const { isLogin } = useRecoilValue(institutionState);
 	const logOut = useResetRecoilState(institutionState);
+
+	// test용
+	const handleClick = async () => {
+		await upload();
+	};
+
 	return (
 		<div>
 			<div>여기는 기업용입니다. 아직 기획과 디자인이 완성되지 않아서</div>
@@ -22,6 +31,8 @@ const Institution = () => {
 				<Container>
 					<RegistrationRequest />
 					<Button onClick={logOut}>기업 로그아웃</Button>
+					{/* 아래의 aws 테스트는 지워야 함 */}
+					<Button onClick={handleClick}>aws 테스트</Button>
 				</Container>
 			) : (
 				<div>
