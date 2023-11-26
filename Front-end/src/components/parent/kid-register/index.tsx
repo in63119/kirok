@@ -138,7 +138,15 @@ const KidRegister: React.FC = () => {
 		}
 	}, [mode, submit, scrollToTop]);
 
-	const setKidFormItem: KidRegisterItemProps['setForm'] = useCallback((idx, updatedForm) => {
+	const deleteKidFormItem: KidRegisterItemProps['deleteForm'] = useCallback((idx) => {
+		setKidForms((prev) => {
+			const result = [...prev.slice(0, idx), ...prev.slice(idx + 1)];
+
+			return result;
+		});
+	}, []);
+
+	const setKidFormItem: KidRegisterItemProps['updateForm'] = useCallback((idx, updatedForm) => {
 		setKidForms((prev) => {
 			const result = [...prev.slice(0, idx), { ...updatedForm }, ...prev.slice(idx + 1)];
 
@@ -191,7 +199,8 @@ const KidRegister: React.FC = () => {
 								editable={editable}
 								hasDeleteButton={idx !== 0 && editable}
 								form={form}
-								setForm={setKidFormItem}
+								updateForm={setKidFormItem}
+								deleteForm={deleteKidFormItem}
 							/>
 						</Layout.SidePaddingInner>
 						{idx !== kidForms.length - 1 && (

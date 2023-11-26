@@ -15,10 +15,18 @@ export interface KidRegisterItemProps {
 	editable: boolean;
 	hasDeleteButton: boolean;
 	form: KidRegisterForm;
-	setForm: (idx: number, updatedForm: KidRegisterForm) => void;
+	updateForm: (idx: number, updatedForm: KidRegisterForm) => void;
+	deleteForm: (idx: number) => void;
 }
 
-const KidRegisterItem: React.FC<KidRegisterItemProps> = ({ idx, form, editable, hasDeleteButton, setForm }) => {
+const KidRegisterItem: React.FC<KidRegisterItemProps> = ({
+	idx,
+	form,
+	editable,
+	hasDeleteButton,
+	updateForm,
+	deleteForm,
+}) => {
 	const [mode, setMode] = useState<'edit' | 'readOnly'>('edit');
 
 	const { name, birth, gender } = form;
@@ -38,7 +46,7 @@ const KidRegisterItem: React.FC<KidRegisterItemProps> = ({ idx, form, editable, 
 			<>
 				<Spacing size={20} />
 				{hasDeleteButton && (
-					<Styled.DeleteArea>
+					<Styled.DeleteArea onClick={() => deleteForm(idx)}>
 						<Styled.DeleteIcon src="/images/parent/minus-circle.png" />
 					</Styled.DeleteArea>
 				)}
@@ -51,7 +59,7 @@ const KidRegisterItem: React.FC<KidRegisterItemProps> = ({ idx, form, editable, 
 							type="name"
 							value={form.name}
 							onChange={(e) => {
-								setForm(idx, { ...form, name: e.target.value });
+								updateForm(idx, { ...form, name: e.target.value });
 							}}
 							// valid={!isValid.isName}
 						/>
@@ -62,7 +70,7 @@ const KidRegisterItem: React.FC<KidRegisterItemProps> = ({ idx, form, editable, 
 							value={form.birth}
 							onChange={(e) => {
 								console.log(e);
-								setForm(idx, { ...form, birth: e.target.value });
+								updateForm(idx, { ...form, birth: e.target.value });
 							}}
 							// valid={!isValid.isBirth}
 						/>
@@ -75,7 +83,7 @@ const KidRegisterItem: React.FC<KidRegisterItemProps> = ({ idx, form, editable, 
 								state={isGenderMan ? 'default' : 'disabled'}
 								variant="outline"
 								handleClick={() => {
-									setForm(idx, { ...form, gender: GENDER_MAN });
+									updateForm(idx, { ...form, gender: GENDER_MAN });
 								}}
 							/>
 							<SingleButton
@@ -85,7 +93,7 @@ const KidRegisterItem: React.FC<KidRegisterItemProps> = ({ idx, form, editable, 
 								state={!isGenderMan ? 'default' : 'disabled'}
 								variant="outline"
 								handleClick={() => {
-									setForm(idx, { ...form, gender: GENDER_WOMAN });
+									updateForm(idx, { ...form, gender: GENDER_WOMAN });
 								}}
 							/>
 						</Styled.BtnWrapper>
