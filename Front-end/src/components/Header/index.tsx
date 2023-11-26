@@ -1,4 +1,5 @@
 import React from 'react';
+import zIndex from 'constants/z-index';
 import styled from 'styled-components';
 
 interface HeaderProps {
@@ -26,6 +27,8 @@ const Container = styled.div`
 	align-items: center;
 	width: 100%;
 	height: ${HEADER_HEIGHT}px;
+
+	z-index: ${zIndex.gnb};
 `;
 
 const LeftMenu = styled.div`
