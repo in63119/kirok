@@ -1,10 +1,18 @@
 import { HEADER_HEIGHT } from 'components/Header';
-import { styled } from 'styled-components';
+import { css, styled } from 'styled-components';
 
-export const ParentLayout = styled.div`
+const SIDE_PADDING = '20px';
+
+export const SidePaddingStyle = css`
+	padding-left: ${SIDE_PADDING};
+	padding-right: ${SIDE_PADDING};
+`;
+
+export const ParentLayout = styled.div<{ hasSidePadding: boolean }>`
 	width: 100%;
 	height: calc(100vh - ${HEADER_HEIGHT}px);
-	padding: 12px 20px 0;
+	padding: 12px 0;
+	${({ hasSidePadding }) => hasSidePadding && SidePaddingStyle}
 
 	position: relative;
 	overflow: scroll;
@@ -13,6 +21,14 @@ export const ParentLayout = styled.div`
 export const Body = styled.div`
 	width: 100%;
 	margin-top: 48px;
+`;
+
+export const SidePaddingBody = styled(Body)`
+	${SidePaddingStyle}
+`;
+
+export const SidePaddingInner = styled.div`
+	${SidePaddingStyle}
 `;
 
 export const CenterizedBody = styled.div`
@@ -46,7 +62,7 @@ export const FooterWrapper = styled.div`
 	bottom: 0;
 	left: 0;
 	width: 100%;
-	padding: 0 20px 15px;
+	padding: 0 20px;
 `;
 
 export const MarginBottom = styled.div`

@@ -3,8 +3,9 @@ import * as Styled from './index.styled';
 import { useNavigate } from 'react-router-dom';
 import Header from 'components/Header';
 
-interface LayoutProps {
+export interface LayoutProps {
 	hasGoback?: boolean;
+	hasSidePadding?: boolean;
 	title?: {
 		text: string;
 	};
@@ -15,7 +16,7 @@ interface LayoutProps {
 	children: React.ReactNode;
 }
 
-const Layout: React.FC<LayoutProps> = ({ children, hasGoback = true, title, subTitle }) => {
+const Layout: React.FC<LayoutProps> = ({ children, hasGoback = true, hasSidePadding = true, title, subTitle }) => {
 	const navigate = useNavigate();
 
 	const goBackHandler = () => {
@@ -24,10 +25,16 @@ const Layout: React.FC<LayoutProps> = ({ children, hasGoback = true, title, subT
 
 	return (
 		<>
+			{/* Header 는 반대로 여백 처리 */}
 			<Header hasGoback={hasGoback} handleClickGoBack={goBackHandler} />
-			<Styled.ParentLayout>
-				{title && <Styled.Title>{title.text}</Styled.Title>}
-				{subTitle && <Styled.SubTitle color={subTitle.color ?? '#696969'}>{subTitle.text}</Styled.SubTitle>}
+			<Styled.ParentLayout hasSidePadding={hasSidePadding}>
+				{!hasSidePadding && (
+					<Styled.SidePaddingInner>
+						{title && <Styled.Title>{title.text}</Styled.Title>}
+						{subTitle && <Styled.SubTitle color={subTitle.color ?? '#696969'}>{subTitle.text}</Styled.SubTitle>}
+					</Styled.SidePaddingInner>
+				)}
+
 				{children}
 				<Styled.MarginBottom />
 			</Styled.ParentLayout>
@@ -38,5 +45,7 @@ const Layout: React.FC<LayoutProps> = ({ children, hasGoback = true, title, subT
 export default Object.assign(Layout, {
 	Body: Styled.Body,
 	CenterizedBody: Styled.CenterizedBody,
+	SidePaddingBody: Styled.SidePaddingBody,
+	SidePaddingInner: Styled.SidePaddingInner,
 	Footer: Styled.FooterWrapper,
 });

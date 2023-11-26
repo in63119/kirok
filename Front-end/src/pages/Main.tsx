@@ -12,7 +12,7 @@ const Main = () => {
 
 	useEffect(() => {
 		if (kakao.kakaoEmail && kakao.kakaoId) {
-			navigate(PageUrls.PARENTS);
+			navigate(PageUrls.PARENT.WELCOME); // TODO:
 		}
 	}, [kakao, kakao.isLogin, navigate, kakao.kakaoEmail, kakao.kakaoId]);
 
