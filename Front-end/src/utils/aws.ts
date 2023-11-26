@@ -58,6 +58,6 @@ export const deleteFile = async () => {
 			console.error('Error in file deletion: ', err);
 			throw err;
 		}
-		console.log('File deleted successfully');
+		console.log('File deleted successfully', data);
 	});
 };
