@@ -1,27 +1,51 @@
-import React, { useEffect } from 'react';
+import React, { useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import SingleButton from 'components/common/SingleButton';
+import { PageUrls } from '../constants/page-urls';
 import { useRecoilValue } from 'recoil';
 import { kakaoState } from '../recoil/kakaoState';
-import styled from 'styled-components';
-import ShortBtn from '../components/Button/ShortBtn';
-import { useNavigate } from 'react-router-dom';
-import { PageUrls } from '../constants/page-urls';
+import { kakaoOpen } from 'apis/kakao';
 
 const Main = () => {
-	const kakao = useRecoilValue(kakaoState);
 	const navigate = useNavigate();
+	const kakao = useRecoilValue(kakaoState);
 
-	useEffect(() => {
+	const handleClickParentButton = useCallback(() => {
 		if (kakao.kakaoEmail && kakao.kakaoId) {
-			navigate(PageUrls.PARENTS);
+			navigate(PageUrls.PARENT.WELCOME);
+		} else {
+			kakaoOpen();
+			navigate(PageUrls.PARENT.KAKAO_LOGIN);
 		}
-	}, [kakao, kakao.isLogin, navigate, kakao.kakaoEmail, kakao.kakaoId]);
+		// TODO: 부모 가입 상태에 따라 추가 분기하기
+	}, [navigate, kakao]);
 
 	return (
 		<Container>
 			<Logo src="/images/logo_kirok.png" />
 			<ButtonsWrap>
-				<ShortBtn title={'선생님용'} />
-				<ShortBtn title={'부모님용'} />
+				<SingleButton
+					size="large"
+					color="secondary"
+					state="default"
+					variant="solid-primary"
+					text="선생님용"
+					handleClick={() => {
+						navigate(PageUrls.INSTITUTION.LOGIN);
+					}}
+				/>
+				<SingleButton
+					size="large"
+					color="primary"
+					state="default"
+					variant="solid-primary"
+					text="부모님용"
+					handleClick={() => {
+						handleClickParentButton;
+						navigate(PageUrls.PARENT.WELCOME);
+					}}
+				/>
 			</ButtonsWrap>
 		</Container>
 	);
@@ -48,4 +72,5 @@ const ButtonsWrap = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 24px;
+	width: 168px;
 `;

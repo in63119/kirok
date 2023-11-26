@@ -1,6 +1,8 @@
 import * as AWS from 'aws-sdk';
 
-import kirok from './우럭.jpeg'; // test용 지워야 함
+// import kirok from './우럭.jpeg'; // test용 지워야 함
+
+const kirok = 'test body';
 
 const { REACT_APP_ACCESS_KEY, REACT_APP_SECRET_ACCESS_KEY, REACT_APP_REGION } = process.env;
 
@@ -58,6 +60,6 @@ export const deleteFile = async () => {
 			console.error('Error in file deletion: ', err);
 			throw err;
 		}
-		console.log('File deleted successfully');
+		console.log('File deleted successfully', data);
 	});
 };
