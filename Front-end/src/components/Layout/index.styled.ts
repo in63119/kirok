@@ -15,6 +15,16 @@ export const Body = styled.div`
 	margin-top: 48px;
 `;
 
+export const CenterizedBody = styled.div`
+	width: 100%;
+	height: 100%;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+`;
+
 export const Title = styled.div`
 	font-size: 20px;
 	font-weight: 600;

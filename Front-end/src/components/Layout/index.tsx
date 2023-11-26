@@ -5,7 +5,7 @@ import Header from 'components/Header';
 
 interface LayoutProps {
 	hasGoback?: boolean;
-	title: {
+	title?: {
 		text: string;
 	};
 	subTitle?: {
@@ -26,7 +26,7 @@ const Layout: React.FC<LayoutProps> = ({ children, hasGoback = true, title, subT
 		<>
 			<Header hasGoback={hasGoback} handleClickGoBack={goBackHandler} />
 			<Styled.ParentLayout>
-				<Styled.Title>{title.text}</Styled.Title>
+				{title && <Styled.Title>{title.text}</Styled.Title>}
 				{subTitle && <Styled.SubTitle color={subTitle.color ?? '#696969'}>{subTitle.text}</Styled.SubTitle>}
 				{children}
 				<Styled.MarginBottom />
@@ -37,5 +37,6 @@ const Layout: React.FC<LayoutProps> = ({ children, hasGoback = true, title, subT
 
 export default Object.assign(Layout, {
 	Body: Styled.Body,
+	CenterizedBody: Styled.CenterizedBody,
 	Footer: Styled.FooterWrapper,
 });

@@ -5,4 +5,5 @@ export const PageUrls = {
 	LOGIN: '/login',
 	CHECK_KIDS_INFO: '/checkKidsinfo',
 	INSTITUTION: 'Institution',
+	PARENT_WELCOME: '/parent/welcome',
 };
