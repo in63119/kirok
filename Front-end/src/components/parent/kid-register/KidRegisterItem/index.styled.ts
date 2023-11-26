@@ -1,37 +1,18 @@
 import styled from 'styled-components';
 
-// Readonly
-export const Container = styled.div`
-	padding: 18px 16px;
-	display: flex;
-	background-color: #ffffff;
-	border-radius: 14px;
-	border: 1px solid #e0e5d6;
-	gap: 16px;
-	box-shadow: 0 0 10px 0 #5a624b29;
-
-	margin-bottom: 16px;
-`;
-
-export const ProfileImg = styled.img`
-	width: 80px;
-	height: 80px;
-`;
-
-export const ProfileText = styled.div`
-	display: flex;
-	flex-direction: column;
-	gap: 8px;
+export const ReadonlyInput = styled.div`
 	width: 100%;
-`;
 
-export const Name = styled.div`
-	padding: 9px 20px;
+	display: flex;
+	height: 44px;
+	padding: 0px 20px;
+	justify-content: space-between;
+	align-items: center;
+	align-self: stretch;
+
 	border-radius: 12px;
-	border: 1px solid #e0e5d6;
-	font-size: 16px;
-	line-height: 24px;
-	font-weight: 500;
+	border: 1px solid var(--Grey, #f8f8f8);
+	background: var(--Grey, #f8f8f8);
 `;
 
 export const Birth = styled.div`

@@ -8,6 +8,7 @@ import SelectBox from 'components/common/SelectBox';
 import { GENDER_MAN } from './KidRegisterItem/index.constant';
 import Divider from 'components/common/Divider';
 import SingleButton from 'components/common/SingleButton';
+import * as Styled from './index.styled';
 
 const INITIAL_KID_FORM: KidRegisterForm = {
 	name: '',
@@ -60,6 +61,13 @@ const KidRegister: React.FC = () => {
 		console.log('kidForms', kidForms);
 	}, [kidForms]);
 
+	const scrollToTop = useCallback(() => {
+		if (window) {
+			// TODO: 기능 확인 필요
+			window.scrollTo({ top: 0, behavior: 'smooth' });
+		}
+	}, []);
+
 	const Button = useMemo(() => {
 		switch (mode) {
 			case 'create':
@@ -72,6 +80,7 @@ const KidRegister: React.FC = () => {
 							size: 'large',
 							state: 'default',
 							handleClick: () => {
+								scrollToTop();
 								setKidForms((prev) => [...prev, INITIAL_KID_FORM]);
 							},
 						}}
@@ -80,6 +89,7 @@ const KidRegister: React.FC = () => {
 							size: 'large',
 							state: 'default',
 							handleClick: () => {
+								scrollToTop();
 								setMode('confirm');
 							},
 						}}
@@ -95,6 +105,7 @@ const KidRegister: React.FC = () => {
 							size: 'large',
 							state: 'default',
 							handleClick: () => {
+								scrollToTop();
 								setMode('create');
 							},
 						}}
@@ -105,13 +116,13 @@ const KidRegister: React.FC = () => {
 							handleClick: () => {
 								submit();
 								// TODO: 통신 완료하고 complete 로 옮기기
+								scrollToTop();
 								setMode('complete');
 							},
 						}}
 					/>
 				);
 			case 'complete':
-			default:
 				return (
 					<SingleButton
 						text="키록에서 할 수 있는 ~?"
@@ -125,12 +136,11 @@ const KidRegister: React.FC = () => {
 					/>
 				);
 		}
-	}, [mode, submit]);
+	}, [mode, submit, scrollToTop]);
 
 	const setKidFormItem: KidRegisterItemProps['setForm'] = useCallback((idx, updatedForm) => {
 		setKidForms((prev) => {
 			const result = [...prev.slice(0, idx), { ...updatedForm }, ...prev.slice(idx + 1)];
-			console.log(idx, result);
 
 			return result;
 		});
@@ -153,13 +163,25 @@ const KidRegister: React.FC = () => {
 		<>
 			<Layout hasGoback={false} hasSidePadding={false} title={{ text: title }} subTitle={subTitle}>
 				<Layout.SidePaddingBody>
-					<SelectBox
-						selectedIdx={selectedInstitutionIdx}
-						data={institutionList}
-						placeholder="어린이집 선택"
-						handleClickItem={setSelectedInstitutionIdx}
-					/>
-					<Spacing size={56} />
+					{editable ? (
+						<SelectBox
+							selectedIdx={selectedInstitutionIdx}
+							data={institutionList}
+							placeholder="어린이집 선택"
+							handleClickItem={setSelectedInstitutionIdx}
+						/>
+					) : (
+						<>
+							{selectedInstitutionIdx !== undefined && (
+								<Styled.ReadOnlySelectBoxWrapper>
+									<Styled.ReadOnlySelectBoxLabel>
+										{institutionList[selectedInstitutionIdx]}
+									</Styled.ReadOnlySelectBoxLabel>
+								</Styled.ReadOnlySelectBoxWrapper>
+							)}
+						</>
+					)}
+					<Spacing size={36} />
 				</Layout.SidePaddingBody>
 				{kidForms.map((form, idx) => (
 					<React.Fragment key={idx}>

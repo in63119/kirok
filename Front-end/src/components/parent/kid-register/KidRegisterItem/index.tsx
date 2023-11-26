@@ -43,6 +43,7 @@ const KidRegisterItem: React.FC<KidRegisterItemProps> = ({ idx, form, editable, 
 					</Styled.DeleteArea>
 				)}
 				<Styled.InfoContainer>
+					{/* TODO: form.photo 업로드 */}
 					<Styled.Photo src="/images/parent/kid-register-profile.png" />
 					<Styled.RightArea>
 						<Styled.Input
@@ -95,14 +96,21 @@ const KidRegisterItem: React.FC<KidRegisterItemProps> = ({ idx, form, editable, 
 		);
 	} else if (mode === 'readOnly') {
 		return (
-			<Styled.Container>
-				<Styled.ProfileImg src="/images/icon_profile.png" />
-				<Styled.ProfileText>
-					<Styled.Name>{name}</Styled.Name>
-					<Styled.Birth>{birth}</Styled.Birth>
-					<Styled.Gender>{gender}</Styled.Gender>
-				</Styled.ProfileText>
-			</Styled.Container>
+			<>
+				<Spacing size={20} />
+				<Styled.InfoContainer>
+					{/* TODO: photo 업로드 */}
+					<Styled.Photo src="/images/parent/kid-register-profile.png" />
+					<Styled.RightArea>
+						<Styled.ReadonlyInput>{name}</Styled.ReadonlyInput>
+						<Spacing size={8} />
+						<Styled.ReadonlyInput>{birth}</Styled.ReadonlyInput>
+						<Spacing size={8} />
+						<Styled.Gender>{gender}</Styled.Gender>
+					</Styled.RightArea>
+				</Styled.InfoContainer>
+				<Spacing size={32} />
+			</>
 		);
 	} else {
 		return <>확인 필요 : 정의되지 않은 mode 입니다.</>;
