@@ -1,6 +1,8 @@
 import * as AWS from 'aws-sdk';
 
-import kirok from './우럭.jpeg'; // test용 지워야 함
+// import kirok from './우럭.jpeg'; // test용 지워야 함
+
+const kirok = 'test body';
 
 const { REACT_APP_ACCESS_KEY, REACT_APP_SECRET_ACCESS_KEY, REACT_APP_REGION } = process.env;
 
