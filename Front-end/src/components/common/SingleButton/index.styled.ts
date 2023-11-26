@@ -11,7 +11,9 @@ export const Wrapper = styled.div<SingleButtonStyleProps>`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+
 	border-radius: 14px;
+	width: 100%;
 
 	font-style: normal;
 	font-family: SUIT;

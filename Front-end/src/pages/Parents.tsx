@@ -8,7 +8,6 @@ import BottomSheet from '../components/BottomSheetModal/BottomSheet';
 import InputText from '../components/Input/InputText';
 import LastBottomSheet from '../components/BottomSheetModal/LastBottomSheet';
 import GenderBtn from '../components/Input/GenderBtn';
-import ProgressBtn from '../components/ProgressBtn';
 
 // Api
 import { getAllInstitution } from '../apis/institution';
@@ -19,6 +18,7 @@ import { useRecoilState } from 'recoil';
 import { addKidsState } from '../recoil/addKidsState';
 import { PageUrls } from '../constants/page-urls';
 import Layout from '../components/Layout';
+import DoubleButton from 'components/common/DoubleButton';
 
 const Parents = () => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
@@ -135,10 +135,21 @@ const Parents = () => {
 				</KidsInfoContainer>
 			)}
 			<Layout.Footer>
-				<BtnWrapper>
-					<ProgressBtn title="자녀 추가 등록" onclick={addKid} />
-					<ProgressBtn title="다음" onclick={Checkinfo} />
-				</BtnWrapper>
+				<DoubleButton
+					color="primary"
+					left={{
+						text: '자녀 추가 등록',
+						size: 'large',
+						state: 'default',
+						handleClick: addKid,
+					}}
+					right={{
+						text: '다음',
+						size: 'large',
+						state: 'default',
+						handleClick: Checkinfo,
+					}}
+				/>
 			</Layout.Footer>
 		</Layout>
 	);
