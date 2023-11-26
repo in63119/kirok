@@ -1,6 +1,8 @@
 export const PageUrls = {
 	INTRO: '/',
-	INSTITUTION: 'Institution',
+	INSTITUTION: {
+		LOGIN: '/institution/login',
+	},
 	PARENT: {
 		WELCOME: '/parent/welcome',
 		KID_REGISTER: '/parent/kid-register',

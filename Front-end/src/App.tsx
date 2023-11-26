@@ -21,7 +21,7 @@ function App() {
 					<Route path={PageUrls.INTRO} element={<Main />} />
 					<Route path="/callback" element={<Callback />} />
 					<Route path={PageUrls.PARENT.KAKAO_LOGIN} element={<Login />} />
-					<Route path={PageUrls.INSTITUTION} element={<Institution />} />
+					<Route path={PageUrls.INSTITUTION.LOGIN} element={<Institution />} />
 					<Route path={PageUrls.PARENT.WELCOME} element={<ParentWelcomePage />} />
 					<Route path={PageUrls.PARENT.KID_REGISTER} element={<ParentKidRegisterPage />} />
 				</Routes>

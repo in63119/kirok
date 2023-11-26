@@ -15,10 +15,10 @@ const Main = () => {
 		if (kakao.kakaoEmail && kakao.kakaoId) {
 			navigate(PageUrls.PARENT.WELCOME);
 		} else {
-			// TODO: 상태에 따라 분기하기
 			kakaoOpen();
 			navigate(PageUrls.PARENT.KAKAO_LOGIN);
 		}
+		// TODO: 부모 가입 상태에 따라 추가 분기하기
 	}, [navigate, kakao]);
 
 	return (
@@ -32,7 +32,7 @@ const Main = () => {
 					variant="solid-primary"
 					text="선생님용"
 					handleClick={() => {
-						navigate(PageUrls.INSTITUTION);
+						navigate(PageUrls.INSTITUTION.LOGIN);
 					}}
 				/>
 				<SingleButton
