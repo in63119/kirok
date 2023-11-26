@@ -24,18 +24,18 @@ export const Wrapper = styled.div<SingleButtonStyleProps>`
 		switch (size) {
 			case 'large':
 				return css`
-					padding: 16px 32px;
+					padding: 16px 0;
 					font-size: 18px;
 				`;
 			case 'medium':
 				return css`
-					padding: 12px 24px;
+					padding: 12px 0;
 					font-size: 17px;
 				`;
 
 			case 'small':
 				return css`
-					padding: 10px 20px;
+					padding: 10px 0;
 					font-size: 16px;
 				`;
 		}
