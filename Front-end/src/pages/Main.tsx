@@ -41,10 +41,7 @@ const Main = () => {
 					state="default"
 					variant="solid-primary"
 					text="부모님용"
-					handleClick={() => {
-						handleClickParentButton;
-						navigate(PageUrls.PARENT.WELCOME);
-					}}
+					handleClick={handleClickParentButton}
 				/>
 			</ButtonsWrap>
 		</Container>
