@@ -3,8 +3,12 @@ import * as Styled from './index.styled';
 import Layout from 'components/Layout';
 import Spacing from 'components/common/Spacing';
 import SingleButton from 'components/common/SingleButton';
+import { useNavigate } from 'react-router-dom';
+import { PageUrls } from 'constants/page-urls';
 
 const Welcome: React.FC = () => {
+	const navigate = useNavigate();
+
 	return (
 		<Layout hasGoback={false}>
 			<Layout.CenterizedBody>
@@ -26,7 +30,7 @@ const Welcome: React.FC = () => {
 					variant="solid-primary"
 					text="자녀 정보 입력하러 가기"
 					handleClick={() => {
-						console.log('TODO');
+						navigate(PageUrls.PARENT.KID_REGISTER);
 					}}
 				/>
 			</Layout.Footer>

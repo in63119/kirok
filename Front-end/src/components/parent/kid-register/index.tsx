@@ -50,7 +50,7 @@ const KidRegister: React.FC = () => {
 				return undefined;
 			case 'complete':
 				return {
-					text: '요청이 수락되면 사용할 수 있어요 :) 잠시만 기다려 주세요!',
+					text: '요청이 수락되면 사용할 수 있어요 :)\n잠시만 기다려 주세요!',
 					color: '282828',
 				};
 		}

@@ -81,7 +81,58 @@ export const Wrapper = styled.div<SingleButtonStyleProps>`
 						color: var(--text-grey-2, #969696);
 					`;
 			}
+		} else if (color === 'secondary' && state === 'default') {
+			switch (variant) {
+				case 'solid-primary':
+					return css`
+						background: var(--secondary-normal, #87bef0);
+						color: var(--White, #fff);
+					`;
+				case 'solid-secondary':
+					return css`
+						background: var(--secondary-assistive, #ecf5fb);
+						color: var(--secondary-normal, #87bef0);
+					`;
+				case 'outline':
+					return css`
+						border: 1.5px solid var(--secondary-normal, #87bef0);
+						border: 1.5px solid var(--secondary-normal, #87bef0);
+					`;
+				case 'text':
+					return css`
+						border: 1.5px solid var(--secondary-normal, #87bef0);
+					`;
+			}
+		} else if (color === 'primary' && state === 'disabled') {
+			switch (variant) {
+				case 'solid-primary':
+					return css`
+						background: var(--text-grey-2, #969696);
+						color: var(--White, #fff);
+					`;
+				case 'outline':
+					return css`
+						border: 1.5px solid var(--grey-3, #e0e5d6);
+						color: var(--text-grey-2, #969696);
+					`;
+				case 'text':
+					return css`
+						color: var(--text-grey-2, #969696);
+					`;
+			}
+		} else if (color === 'secondary' && state === 'disabled') {
+			switch (variant) {
+				case 'solid-primary':
+					return css`
+						background: #d0d0d0;
+						color: var(--White, #fff);
+					`;
+				case 'outline':
+					return css`
+						border: 1.5px solid #d0d0d0;
+						color: #d0d0d0;
+					`;
+			}
 		}
-		// color === 'secondary'
 	}}
 `;
