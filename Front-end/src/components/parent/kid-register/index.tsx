@@ -7,6 +7,7 @@ import Spacing from 'components/common/Spacing';
 import SelectBox from 'components/common/SelectBox';
 import { GENDER_MAN } from './KidRegisterItem/index.constant';
 import Divider from 'components/common/Divider';
+import SingleButton from 'components/common/SingleButton';
 
 const INITIAL_KID_FORM: KidRegisterForm = {
 	name: '',
@@ -20,25 +21,18 @@ const KidRegister: React.FC = () => {
 
 	const [kidForms, setKidForms] = useState<KidRegisterForm[]>([INITIAL_KID_FORM]);
 
-	const [mode] = useState<'create' | 'edit' | 'readOnly'>('create');
-	const editable = mode === 'edit' || mode === 'create';
-
-	const setKidFormItem: KidRegisterItemProps['setForm'] = useCallback((idx, updatedForm) => {
-		setKidForms((prev) => {
-			const result = [...prev.slice(0, idx), { ...updatedForm }, ...prev.slice(idx + 1)];
-			console.log(idx, result);
-
-			return result;
-		});
-	}, []);
+	const [mode, setMode] = useState<'create' | 'edit' | 'confirm' | 'complete'>('create');
+	const editable = mode === 'create' || mode === 'edit';
 
 	const title = useMemo(() => {
 		switch (mode) {
 			case 'create':
-				return '입력한 자녀의 정보를 확인 해주세요 :)';
+				return '소중한 자녀의 정보를 입력해 주세요 :)';
 			case 'edit':
 				return '등록할 자녀의 정보를 수정해 주세요 :)';
-			case 'readOnly':
+			case 'confirm':
+				return '입력한 자녀의 정보를 확인 해주세요 :)';
+			case 'complete':
 				return '어린이집으로\n 자녀 등록 요청이 완료되었어요!';
 		}
 	}, [mode]);
@@ -51,13 +45,96 @@ const KidRegister: React.FC = () => {
 					text: '*정확한 확인을 위해 실명을 입력해 주세요.',
 					color: '#696969',
 				};
-			case 'readOnly':
+			case 'confirm':
+				return undefined;
+			case 'complete':
 				return {
 					text: '요청이 수락되면 사용할 수 있어요 :) 잠시만 기다려 주세요!',
 					color: '282828',
 				};
 		}
 	}, [mode]);
+
+	const submit = useCallback(() => {
+		// TODO
+		console.log('kidForms', kidForms);
+	}, [kidForms]);
+
+	const Button = useMemo(() => {
+		switch (mode) {
+			case 'create':
+			case 'edit':
+				return (
+					<DoubleButton
+						color="primary"
+						left={{
+							text: '자녀 추가 등록',
+							size: 'large',
+							state: 'default',
+							handleClick: () => {
+								setKidForms((prev) => [...prev, INITIAL_KID_FORM]);
+							},
+						}}
+						right={{
+							text: '다음',
+							size: 'large',
+							state: 'default',
+							handleClick: () => {
+								setMode('confirm');
+							},
+						}}
+					/>
+				);
+			case 'confirm':
+				return (
+					//  TODO: 미니버튼 구조로 바꾸기
+					<DoubleButton
+						color="primary"
+						left={{
+							text: '수정하기',
+							size: 'large',
+							state: 'default',
+							handleClick: () => {
+								setMode('create');
+							},
+						}}
+						right={{
+							text: '등록요청',
+							size: 'large',
+							state: 'default',
+							handleClick: () => {
+								submit();
+								// TODO: 통신 완료하고 complete 로 옮기기
+								setMode('complete');
+							},
+						}}
+					/>
+				);
+			case 'complete':
+			default:
+				return (
+					<SingleButton
+						text="키록에서 할 수 있는 ~?"
+						size="large"
+						state="default"
+						color="primary"
+						variant="solid-primary"
+						handleClick={() => {
+							console.log('router');
+						}}
+					/>
+				);
+		}
+	}, [mode, submit]);
+
+	const setKidFormItem: KidRegisterItemProps['setForm'] = useCallback((idx, updatedForm) => {
+		setKidForms((prev) => {
+			const result = [...prev.slice(0, idx), { ...updatedForm }, ...prev.slice(idx + 1)];
+			console.log(idx, result);
+
+			return result;
+		});
+	}, []);
 
 	const getInstitutionList = useCallback(async () => {
 		const res = await getAllInstitution();
@@ -102,27 +179,7 @@ const KidRegister: React.FC = () => {
 						)}
 					</React.Fragment>
 				))}
-				<Layout.Footer>
-					<DoubleButton
-						color="primary"
-						left={{
-							text: '자녀 추가 등록',
-							size: 'large',
-							state: 'default',
-							handleClick: () => {
-								setKidForms((prev) => [...prev, INITIAL_KID_FORM]);
-							},
-						}}
-						right={{
-							text: '다음',
-							size: 'large',
-							state: 'default',
-							handleClick: () => {
-								console.log('checkinfo');
-							},
-						}}
-					/>
-				</Layout.Footer>
+				<Layout.Footer>{Button}</Layout.Footer>
 			</Layout>
 		</>
 	);

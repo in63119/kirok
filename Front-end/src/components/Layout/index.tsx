@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import * as Styled from './index.styled';
 import { useNavigate } from 'react-router-dom';
 import Header from 'components/Header';
@@ -42,10 +42,23 @@ const Layout: React.FC<LayoutProps> = ({ children, hasGoback = true, hasSidePadd
 	);
 };
 
+const Footer: React.FC<PropsWithChildren> = ({ children }) => {
+	return (
+		<Styled.FloatButtonWrapper>
+			<Styled.FloatButtonInner>
+				<Styled.GradientSection />
+				<Styled.ButtonSection>
+					<Styled.ButtonWrapper>{children}</Styled.ButtonWrapper>
+				</Styled.ButtonSection>
+			</Styled.FloatButtonInner>
+		</Styled.FloatButtonWrapper>
+	);
+};
+
 export default Object.assign(Layout, {
 	Body: Styled.Body,
 	CenterizedBody: Styled.CenterizedBody,
 	SidePaddingBody: Styled.SidePaddingBody,
 	SidePaddingInner: Styled.SidePaddingInner,
-	Footer: Styled.FooterWrapper,
+	Footer,
 });

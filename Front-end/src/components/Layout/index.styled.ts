@@ -2,6 +2,7 @@ import { HEADER_HEIGHT } from 'components/Header';
 import { css, styled } from 'styled-components';
 
 const SIDE_PADDING = '20px';
+const FOOTER_BACKGROUND = 'white';
 
 export const SidePaddingStyle = css`
 	padding-left: ${SIDE_PADDING};
@@ -57,13 +58,53 @@ export const SubTitle = styled.div<{ color: string }>`
 	white-space: pre-wrap;
 `;
 
-export const FooterWrapper = styled.div`
+export const FloatButtonWrapper = styled.div`
 	position: fixed;
-	bottom: 0;
 	left: 0;
+	bottom: 0;
 	width: 100%;
-	padding: 0 20px;
 `;
+
+export const FloatButtonInner = styled.div`
+	width: 100%;
+	box-sizing: border-box;
+	position: relative;
+`;
+
+export const GradientSection = styled.div`
+	width: 100%;
+	height: 100px;
+	background: linear-gradient(179deg, rgba(255, 255, 255, 0) 0.8%, ${FOOTER_BACKGROUND} 76%);
+`;
+
+export const ButtonSection = styled.div`
+	background-color: ${FOOTER_BACKGROUND};
+	width: 100%;
+	height: 65px;
+`;
+
+export const ButtonWrapper = styled.div`
+	width: 100%;
+	display: flex;
+	padding: 0 20px;
+	position: absolute;
+	bottom: 20px;
+	left: 50%;
+	transform: translate(-50%, 0%);
+`;
+
+// export const MiniButtonSection = styled.div`
+// 	width: 100%;
+// 	height: 48px;
+// 	display: flex;
+// 	justify-content: center;
+// 	position: relative;
+
+// 	& > * {
+// 		position: relative;
+// 		top: -2px;
+// 	}
+// `;
 
 export const MarginBottom = styled.div`
 	/* TODO: 40px 보장 */
