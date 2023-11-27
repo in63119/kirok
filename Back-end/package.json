@@ -11,6 +11,7 @@
     "reset": "rm yarn.lock && rm -rf node_modules && yarn"
   },
   "dependencies": {
+    "aws-sdk": "^2.1503.0",
     "axios": "^1.5.0",
     "cors": "^2.8.5",
     "crypto-js": "^4.1.1",
