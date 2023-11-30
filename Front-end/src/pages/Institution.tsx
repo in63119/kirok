@@ -1,24 +1,28 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 // Components
 import Login from '../components/Login';
 import RegistrationRequest from '../components/RegistrationRequest';
+import Header from 'components/Header';
 
 // Recoil
 import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { institutionState } from '../recoil/institutionState';
 
-const Institution = () => {
+const Institution = ({ hasGoback = true }) => {
 	const { isLogin } = useRecoilValue(institutionState);
 	const logOut = useResetRecoilState(institutionState);
 
+	const navigate = useNavigate();
+
+	const goBackHandler = () => {
+		navigate(-1);
+	};
+
 	return (
 		<div>
-			<div>여기는 기업용입니다. 아직 기획과 디자인이 완성되지 않아서</div>
-			<div>이 페이지로 어떻게 들어올지는 확인해야 함.</div>
-			<div>유랑단 ID: UandCrew</div>
-			<div>유랑단 PASSWORD: 1234</div>
 			{isLogin ? (
 				<Container>
 					<RegistrationRequest />
@@ -26,6 +30,7 @@ const Institution = () => {
 				</Container>
 			) : (
 				<div>
+					<Header hasGoback={hasGoback} handleClickGoBack={goBackHandler} />
 					<Login />
 				</div>
 			)}
