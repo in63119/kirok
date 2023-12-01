@@ -6,10 +6,14 @@ import { useNavigate } from 'react-router-dom';
 import Login from '../components/Login';
 import RegistrationRequest from '../components/RegistrationRequest';
 import Header from 'components/Header';
+// import * as Styled from 'components/parent/welcome/index.styled';
 
 // Recoil
 import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { institutionState } from '../recoil/institutionState';
+
+// CSS
+import fonts from 'constants/fonts';
 
 const Institution = ({ hasGoback = true }) => {
 	const { isLogin } = useRecoilValue(institutionState);
@@ -25,13 +29,22 @@ const Institution = ({ hasGoback = true }) => {
 		<div>
 			{isLogin ? (
 				<Container>
+					{/* 아래의 RegistrationRequest 대신 로그인 모션이 들어가야 함 */}
 					<RegistrationRequest />
 					<Button onClick={logOut}>기업 로그아웃</Button>
 				</Container>
 			) : (
 				<div>
-					<Header hasGoback={hasGoback} handleClickGoBack={goBackHandler} />
-					<Login />
+					<Container>
+						<Header hasGoback={hasGoback} handleClickGoBack={goBackHandler} />
+						<LogoContainer>
+							<Logo>
+								<LogoTitle>선생님 로그인</LogoTitle>
+								<Image src="/images/institution/login_institution.png" alt="Institution Login" />
+							</Logo>
+						</LogoContainer>
+						<Login />
+					</Container>
 				</div>
 			)}
 		</div>
@@ -44,9 +57,6 @@ const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	align-items: center;
-	width: 100vw;
-	height: 20vh;
 `;
 
 const Button = styled.button`
@@ -59,3 +69,24 @@ const Button = styled.button`
 	border-radius: 14px;
 	margin-top: 50px;
 `;
+
+const LogoContainer = styled.div`
+	display: flex;
+	justify-content: center;
+	margin-top: 156px;
+`;
+
+const Logo = styled.div`
+	width: 124px;
+	height: 156px;
+`;
+
+const LogoTitle = styled.div`
+	font-family: ${fonts.suit.bold};
+	font-weight: 700;
+	font-size: 18px;
+	line-height: 24px;
+	text-align: center;
+`;
+
+const Image = styled.img``;
