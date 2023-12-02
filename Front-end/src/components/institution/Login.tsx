@@ -3,10 +3,10 @@ import styled from 'styled-components';
 
 // Recoil
 import { useRecoilState } from 'recoil';
-import { institutionState } from '../recoil/institutionState';
+import { institutionState } from '../../recoil/institutionState';
 
 // Api
-import { institutionLogin } from '../apis/institution';
+import { institutionLogin } from '../../apis/institution';
 
 const Login = () => {
 	const [institution, setInstitution] = useRecoilState(institutionState);

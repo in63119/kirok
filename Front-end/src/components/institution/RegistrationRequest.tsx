@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
-import { institutionState } from '../recoil/institutionState';
+import { institutionState } from '../../recoil/institutionState';
 
 // DB
-import { firestore } from '../utils/firestore';
+import { firestore } from '../../utils/firestore';
 import { onSnapshot, query, collection } from 'firebase/firestore';
 
 /*

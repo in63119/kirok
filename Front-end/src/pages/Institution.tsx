@@ -3,10 +3,9 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
 // Components
-import Login from '../components/Login';
-import RegistrationRequest from '../components/RegistrationRequest';
+import Login from '../components/institution/Login';
+import RegistrationRequest from '../components/institution/RegistrationRequest';
 import Header from 'components/Header';
-// import * as Styled from 'components/parent/welcome/index.styled';
 
 // Recoil
 import { useRecoilValue, useResetRecoilState } from 'recoil';
