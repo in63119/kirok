@@ -3,10 +3,10 @@ import { styled } from 'styled-components';
 
 // Recoil
 import { useRecoilValue } from 'recoil';
-import { kakaoState } from '../recoil/kakaoState';
+import { kakaoState } from '../../recoil/kakaoState';
 
 // Api
-import { kakaoOpen } from '../apis/kakao';
+import { kakaoOpen } from '../../apis/kakao';
 
 const LoginButton = () => {
 	const { isLogin } = useRecoilValue(kakaoState);
