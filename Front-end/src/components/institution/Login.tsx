@@ -8,6 +8,9 @@ import { institutionState } from '../../recoil/institutionState';
 // Api
 import { institutionLogin } from '../../apis/institution';
 
+// CSS
+import fonts from 'constants/fonts';
+
 const Login = () => {
 	const [institution, setInstitution] = useRecoilState(institutionState);
 
@@ -40,13 +43,25 @@ const Login = () => {
 		}
 	};
 
+	const handleLinkClick = () => {
+		window.open('https://forms.gle/psNzHhK3vyAG4MVx7');
+	};
+
 	return (
 		<Container>
-			<ButtonsWrap>
-				<input type="text" placeholder="ID" onChange={(event) => handleInputId(event.target.value)} />
-				<input type="text" placeholder="PASSWORD" onChange={(event) => handleInputPassword(event.target.value)} />
-				<button onClick={handleInputClick}>기업 로그인</button>
-			</ButtonsWrap>
+			<FormContainer>
+				<InputContainer>
+					<Label htmlFor="username">아이디 입력</Label>
+					<StyledInput onChange={(event) => handleInputId(event.target.value)} />
+					<Label htmlFor="password">비밀번호 입력</Label>
+					<StyledInput type="password" onChange={(event) => handleInputPassword(event.target.value)} />
+					{/* Todo: 아무것도 입력하지 않고, 로그인 버튼 누르면 못하게끔 해야함. */}
+					<LoginButton onClick={handleInputClick}>로그인</LoginButton>
+				</InputContainer>
+				<HelpLinks>
+					<LinkButton onClick={handleLinkClick}>아이디 | 비밀번호 찾기</LinkButton>
+				</HelpLinks>
+			</FormContainer>
 		</Container>
 	);
 };
@@ -55,15 +70,75 @@ export default Login;
 
 const Container = styled.div`
 	display: flex;
-	flex-direction: column;
 	justify-content: center;
-	align-items: center;
 	width: 100vw;
-	height: 40vh;
 `;
 
-const ButtonsWrap = styled.div`
+const FormContainer = styled.div`
 	display: flex;
 	flex-direction: column;
-	gap: 24px;
+	align-items: center;
+	padding: 20px;
+	width: 335px;
+`;
+
+const InputContainer = styled.div`
+	width: 100%;
+	margin-bottom: 1rem;
+`;
+
+const StyledInput = styled.input`
+	width: 100%;
+	padding: 12px 10px;
+	font-size: 16px;
+	border: none;
+	border-bottom: 2px solid #ccc;
+	background-color: transparent;
+	margin-bottom: 20px;
+	outline: none;
+
+	&:focus {
+		border-bottom: 2px solid #a1dc2e;
+	}
+
+	&::placeholder {
+		color: #aaa;
+	}
+`;
+
+const LoginButton = styled.button`
+	width: 100%;
+	padding: 0.5rem;
+	background-color: #a1dc2e;
+	color: #282828;
+	border: none;
+	border-radius: 4px;
+	margin-top: 1rem;
+	cursor: pointer;
+	font-family: ${fonts.suit.bold};
+	font-weight: 700;
+	font-size: 17px;
+	line-height: 21.22px;
+`;
+
+const HelpLinks = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 1rem;
+`;
+
+const LinkButton = styled.button`
+	background: none;
+	border: none;
+	color: #0000ee;
+	cursor: pointer;
+`;
+
+const Label = styled.label`
+	display: block;
+	font-family: ${fonts.suit.bold};
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 20px;
 `;

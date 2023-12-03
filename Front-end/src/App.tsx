@@ -8,7 +8,7 @@ import { PageUrls } from './constants/page-urls';
 import Main from './pages/Main';
 import Callback from './pages/Callback';
 import Login from './pages/Login';
-import Institution from './pages/Institution';
+import Institution from './pages/institution/Institution';
 import ParentWelcomePage from './pages/parent/welcome';
 import ParentKidRegisterPage from 'pages/parent/kid-register';
 

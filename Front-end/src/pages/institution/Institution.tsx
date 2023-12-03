@@ -3,13 +3,13 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
 // Components
-import Login from '../components/institution/Login';
-import RegistrationRequest from '../components/institution/RegistrationRequest';
+import Login from '../../components/institution/Login';
+import RegistrationRequest from '../../components/institution/RegistrationRequest';
 import Header from 'components/Header';
 
 // Recoil
 import { useRecoilValue, useResetRecoilState } from 'recoil';
-import { institutionState } from '../recoil/institutionState';
+import { institutionState } from '../../recoil/institutionState';
 
 // CSS
 import fonts from 'constants/fonts';
@@ -72,7 +72,7 @@ const Button = styled.button`
 const LogoContainer = styled.div`
 	display: flex;
 	justify-content: center;
-	margin-top: 156px;
+	margin-top: 120px;
 `;
 
 const Logo = styled.div`
