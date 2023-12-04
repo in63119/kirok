@@ -28,6 +28,12 @@ const Login = () => {
 	};
 
 	const handleInputClick = async () => {
+		// 입력 값이 아무것도 없을 때, 임시조치
+		if (!institution.id || !institution.password) {
+			alert('아이디와 비밀번호를 입력해주세요.');
+			return;
+		}
+
 		const data = {
 			id: institution.id,
 			password: institution.password,
@@ -52,10 +58,9 @@ const Login = () => {
 			<FormContainer>
 				<InputContainer>
 					<Label htmlFor="username">아이디 입력</Label>
-					<StyledInput onChange={(event) => handleInputId(event.target.value)} />
+					<StyledInput id="username" type="text" onChange={(event) => handleInputId(event.target.value)} />
 					<Label htmlFor="password">비밀번호 입력</Label>
-					<StyledInput type="password" onChange={(event) => handleInputPassword(event.target.value)} />
-					{/* Todo: 아무것도 입력하지 않고, 로그인 버튼 누르면 못하게끔 해야함. */}
+					<StyledInput id="password" type="password" onChange={(event) => handleInputPassword(event.target.value)} />
 					<LoginButton onClick={handleInputClick}>로그인</LoginButton>
 				</InputContainer>
 				<HelpLinks>
