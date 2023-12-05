@@ -1,13 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import * as Styled from './index.styled';
+import React, { useCallback, useEffect, useState } from 'react';
 import { GENDER_MAN, GENDER_WOMAN } from './index.constant';
 import Spacing from 'components/common/Spacing';
 import SingleButton from 'components/common/SingleButton';
+import InputBox from 'components/Input/InputBox';
+import ValidationRule from 'utils/validators';
+import * as Styled from './index.styled';
+import ImageUpload, { ImageUploadProps } from 'components/Input/ImageUpload';
+
+const DEFUALT_PROFILE_IMAGE = '/images/parent/kid-register-profile.png';
 
 export interface KidRegisterForm {
 	name: string;
 	birth: string;
 	gender: string;
+	profileImageBase64: string;
 }
 
 export interface KidRegisterItemProps {
@@ -29,9 +35,16 @@ const KidRegisterItem: React.FC<KidRegisterItemProps> = ({
 }) => {
 	const [mode, setMode] = useState<'edit' | 'readOnly'>('edit');
 
-	const { name, birth, gender } = form;
+	const { name, birth, gender, profileImageBase64 } = form;
 
 	const isGenderMan = form.gender === GENDER_MAN;
+
+	const uploadImage: ImageUploadProps['uploadImage'] = useCallback(
+		(profileImageBase64: string) => {
+			updateForm(idx, { ...form, profileImageBase64 });
+		},
+		[idx, form, updateForm],
+	);
 
 	useEffect(() => {
 		if (editable) {
@@ -51,28 +64,28 @@ const KidRegisterItem: React.FC<KidRegisterItemProps> = ({
 					</Styled.DeleteArea>
 				)}
 				<Styled.InfoContainer>
-					{/* TODO: form.photo 업로드 */}
-					<Styled.Photo src="/images/parent/kid-register-profile.png" />
+					<Styled.LeftArea>
+						<ImageUpload src={profileImageBase64 || DEFUALT_PROFILE_IMAGE} uploadImage={uploadImage} />
+					</Styled.LeftArea>
 					<Styled.RightArea>
-						<Styled.Input
-							placeholder="이름을 입력하세요"
+						<InputBox
+							placeholder="이름"
 							type="name"
 							value={form.name}
 							onChange={(e) => {
 								updateForm(idx, { ...form, name: e.target.value });
 							}}
-							// valid={!isValid.isName}
+							validators={ValidationRule.name}
 						/>
 						<Spacing size={8} />
-						<Styled.Input
-							placeholder="생년월일을 입력하세요"
+						<InputBox
+							placeholder="생년월일(8자리)"
 							type="birth"
 							value={form.birth}
 							onChange={(e) => {
-								console.log(e);
 								updateForm(idx, { ...form, birth: e.target.value });
 							}}
-							// valid={!isValid.isBirth}
+							validators={ValidationRule.birthDate}
 						/>
 						<Spacing size={8} />
 						<Styled.BtnWrapper>
@@ -107,8 +120,9 @@ const KidRegisterItem: React.FC<KidRegisterItemProps> = ({
 			<>
 				<Spacing size={20} />
 				<Styled.InfoContainer>
-					{/* TODO: photo 업로드 */}
-					<Styled.Photo src="/images/parent/kid-register-profile.png" />
+					<Styled.LeftArea>
+						<Styled.ProfileImage src={profileImageBase64} />
+					</Styled.LeftArea>
 					<Styled.RightArea>
 						<Styled.ReadonlyInput>{name}</Styled.ReadonlyInput>
 						<Spacing size={8} />
