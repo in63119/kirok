@@ -14,6 +14,8 @@ import { registerKidInfos } from 'apis/parent';
 import { useRecoilState } from 'recoil';
 import { kakaoState } from 'recoil/kakaoState';
 
+const TEMP_IMAGE_SRC = 'https://t4.ftcdn.net/jpg/00/97/58/97/240_F_97589769_t45CqXyzjz0KXwoBZT9PRaWGHRk5hQqQ.jpg';
+
 const INITIAL_KID_FORM: KidRegisterForm = {
 	name: '',
 	birth: '',
@@ -82,7 +84,12 @@ const KidRegister: React.FC = () => {
 			const data = kidForms.map((item) => {
 				const gender = item.gender === GENDER_MAN ? 'M' : 'F';
 
-				return { ...item, gender, institutionName };
+				return {
+					...item,
+					gender,
+					institutionName,
+					profileImageBase64: TEMP_IMAGE_SRC, // TODO: DELETE
+				};
 			});
 
 			registerKidInfos({
