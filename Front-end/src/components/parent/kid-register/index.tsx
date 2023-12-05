@@ -10,6 +10,11 @@ import Divider from 'components/common/Divider';
 import SingleButton from 'components/common/SingleButton';
 import * as Styled from './index.styled';
 import ValidationRule from 'utils/validators';
+import { registerKidInfos } from 'apis/parent';
+import { useRecoilState } from 'recoil';
+import { kakaoState } from 'recoil/kakaoState';
+
+const TEMP_IMAGE_SRC = 'https://t4.ftcdn.net/jpg/00/97/58/97/240_F_97589769_t45CqXyzjz0KXwoBZT9PRaWGHRk5hQqQ.jpg';
 
 const INITIAL_KID_FORM: KidRegisterForm = {
 	name: '',
@@ -19,11 +24,11 @@ const INITIAL_KID_FORM: KidRegisterForm = {
 };
 
 const KidRegister: React.FC = () => {
+	const [{ kakaoId }] = useRecoilState(kakaoState);
+
 	const [selectedInstitutionIdx, setSelectedInstitutionIdx] = useState<number | undefined>();
 	const [institutionList, setIntitutionList] = useState<string[]>([]);
-
 	const [kidForms, setKidForms] = useState<KidRegisterForm[]>([INITIAL_KID_FORM]);
-
 	const [mode, setMode] = useState<'create' | 'edit' | 'confirm' | 'complete'>('create');
 	const editable = mode === 'create' || mode === 'edit';
 
@@ -73,9 +78,26 @@ const KidRegister: React.FC = () => {
 	}, [kidForms]);
 
 	const submit = useCallback(() => {
-		// TODO
-		console.log('kidForms', kidForms);
-	}, [kidForms]);
+		if (selectedInstitutionIdx !== undefined) {
+			const institutionName = institutionList[selectedInstitutionIdx];
+
+			const data = kidForms.map((item) => {
+				const gender = item.gender === GENDER_MAN ? 'M' : 'F';
+
+				return {
+					...item,
+					gender,
+					institutionName,
+					profileImageBase64: TEMP_IMAGE_SRC, // TODO: DELETE
+				};
+			});
+
+			registerKidInfos({
+				parentId: kakaoId,
+				data,
+			});
+		}
+	}, [kakaoId, kidForms, institutionList, selectedInstitutionIdx]);
 
 	const scrollToTop = useCallback(() => {
 		if (window) {
