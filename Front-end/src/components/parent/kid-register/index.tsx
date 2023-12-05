@@ -9,6 +9,7 @@ import { GENDER_MAN } from './KidRegisterItem/index.constant';
 import Divider from 'components/common/Divider';
 import SingleButton from 'components/common/SingleButton';
 import * as Styled from './index.styled';
+import ValidationRule from 'utils/validators';
 
 const INITIAL_KID_FORM: KidRegisterForm = {
 	name: '',
@@ -56,6 +57,20 @@ const KidRegister: React.FC = () => {
 		}
 	}, [mode]);
 
+	const validKidForms: boolean = useMemo(() => {
+		return kidForms.every(({ name, birth }) => {
+			if (name && birth) {
+				if (ValidationRule.name.every(({ condition }) => condition(name))) {
+					if (ValidationRule.birthDate.every(({ condition }) => condition(birth))) {
+						return true;
+					}
+				}
+			}
+
+			return false;
+		});
+	}, [kidForms]);
+
 	const submit = useCallback(() => {
 		// TODO
 		console.log('kidForms', kidForms);
@@ -87,7 +102,7 @@ const KidRegister: React.FC = () => {
 						right={{
 							text: '다음',
 							size: 'large',
-							state: 'default',
+							state: validKidForms ? 'default' : 'disabled',
 							handleClick: () => {
 								scrollToTop();
 								setMode('confirm');
@@ -136,7 +151,7 @@ const KidRegister: React.FC = () => {
 					/>
 				);
 		}
-	}, [mode, submit, scrollToTop]);
+	}, [mode, validKidForms, submit, scrollToTop]);
 
 	const deleteKidFormItem: KidRegisterItemProps['deleteForm'] = useCallback((idx) => {
 		setKidForms((prev) => {
