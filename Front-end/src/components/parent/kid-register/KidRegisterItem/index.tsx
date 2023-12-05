@@ -55,7 +55,7 @@ const KidRegisterItem: React.FC<KidRegisterItemProps> = ({
 					<Styled.Photo src="/images/parent/kid-register-profile.png" />
 					<Styled.RightArea>
 						<Styled.Input
-							placeholder="이름을 입력하세요"
+							placeholder="이름"
 							type="name"
 							value={form.name}
 							onChange={(e) => {
@@ -65,7 +65,7 @@ const KidRegisterItem: React.FC<KidRegisterItemProps> = ({
 						/>
 						<Spacing size={8} />
 						<Styled.Input
-							placeholder="생년월일을 입력하세요"
+							placeholder="생년월일(8자리)"
 							type="birth"
 							value={form.birth}
 							onChange={(e) => {
