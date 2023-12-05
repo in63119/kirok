@@ -1,3 +1,4 @@
+import { IMAGE_UPLOAD_PROFILE_SIZE } from 'components/Input/ImageUpload/index.styled';
 import styled from 'styled-components';
 
 export const ReadonlyInput = styled.div`
@@ -49,38 +50,14 @@ export const InfoContainer = styled.div`
 	gap: 18px;
 `;
 
-export const Input = styled.input`
-	display: flex;
-	height: 48px;
-	padding: 5.5px 20px;
-	justify-content: center;
-	align-items: center;
-
-	border-radius: 12px;
-	border: 1.5px solid var(--grey-3, #e0e5d6);
-	outline: none;
-	background: #fff;
-
-	color: var(--text-normal, #282828);
-	font-family: SUIT;
-	font-size: 16px;
-	font-style: normal;
-	font-weight: 500;
-	line-height: 24px; /* 150% */
-
-	&::placeholder {
-		color: var(--text-grey-2, #969696);
-		font-family: SUIT;
-		font-size: 16px;
-		font-style: normal;
-		font-weight: 500;
-		line-height: 24px; /* 150% */
-	}
+export const LeftArea = styled.div`
+	width: ${IMAGE_UPLOAD_PROFILE_SIZE}px;
 `;
 
-export const Photo = styled.img`
-	width: 80px;
-	height: 80px;
+export const ProfileImage = styled.img`
+	width: ${IMAGE_UPLOAD_PROFILE_SIZE}px;
+	height: ${IMAGE_UPLOAD_PROFILE_SIZE}px;
+	border-radius: 50%;
 `;
 
 export const RightArea = styled.div`

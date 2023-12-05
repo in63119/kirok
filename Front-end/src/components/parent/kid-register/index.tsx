@@ -15,6 +15,7 @@ const INITIAL_KID_FORM: KidRegisterForm = {
 	name: '',
 	birth: '',
 	gender: GENDER_MAN,
+	profileImageBase64: '',
 };
 
 const KidRegister: React.FC = () => {
