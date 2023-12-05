@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import * as Styled from './index.styled';
 import { GENDER_MAN, GENDER_WOMAN } from './index.constant';
 import Spacing from 'components/common/Spacing';
 import SingleButton from 'components/common/SingleButton';
+import InputBox from 'components/Input/InputBox';
+import ValidationRule from 'utils/validators';
+import * as Styled from './index.styled';
 
 export interface KidRegisterForm {
 	name: string;
@@ -54,25 +56,24 @@ const KidRegisterItem: React.FC<KidRegisterItemProps> = ({
 					{/* TODO: form.photo 업로드 */}
 					<Styled.Photo src="/images/parent/kid-register-profile.png" />
 					<Styled.RightArea>
-						<Styled.Input
+						<InputBox
 							placeholder="이름"
 							type="name"
 							value={form.name}
 							onChange={(e) => {
 								updateForm(idx, { ...form, name: e.target.value });
 							}}
-							// valid={!isValid.isName}
+							validators={ValidationRule.name}
 						/>
 						<Spacing size={8} />
-						<Styled.Input
+						<InputBox
 							placeholder="생년월일(8자리)"
 							type="birth"
 							value={form.birth}
 							onChange={(e) => {
-								console.log(e);
 								updateForm(idx, { ...form, birth: e.target.value });
 							}}
-							// valid={!isValid.isBirth}
+							validators={ValidationRule.birthDate}
 						/>
 						<Spacing size={8} />
 						<Styled.BtnWrapper>
