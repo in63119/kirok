@@ -1,50 +1,53 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { PageUrls } from 'constants/page-urls';
 
 // Components
 import Login from '../../components/institution/Login';
-import RegistrationRequest from '../../components/institution/RegistrationRequest';
 import Header from 'components/Header';
-
-// Recoil
-import { useRecoilValue, useResetRecoilState } from 'recoil';
-import { institutionState } from '../../recoil/institutionState';
+import Intro from 'components/common/Intro';
 
 // CSS
 import fonts from 'constants/fonts';
 
+// Recoil
+import { useRecoilValue } from 'recoil';
+import { institutionState } from '../../recoil/institutionState';
+
 const Institution = ({ hasGoback = true }) => {
 	const { isLogin } = useRecoilValue(institutionState);
-	const logOut = useResetRecoilState(institutionState);
-
 	const navigate = useNavigate();
 
 	const goBackHandler = () => {
 		navigate(-1);
 	};
 
+	useEffect(() => {
+		if (isLogin) {
+			const timer = setTimeout(() => {
+				navigate(PageUrls.INSTITUTION.MAIN);
+			}, 1500);
+
+			return () => clearTimeout(timer);
+		}
+	}, [isLogin, navigate]);
+
 	return (
 		<div>
 			{isLogin ? (
-				<Container>
-					{/* 아래의 RegistrationRequest 대신 로그인 모션이 들어가야 함 */}
-					<RegistrationRequest />
-					<Button onClick={logOut}>기업 로그아웃</Button>
-				</Container>
+				<Intro />
 			) : (
-				<div>
-					<Container>
-						<Header hasGoback={hasGoback} handleClickGoBack={goBackHandler} />
-						<LogoContainer>
-							<Logo>
-								<LogoTitle>선생님 로그인</LogoTitle>
-								<Image src="/images/institution/login_institution.png" alt="Institution Login" />
-							</Logo>
-						</LogoContainer>
-						<Login />
-					</Container>
-				</div>
+				<Container>
+					<Header hasGoback={hasGoback} handleClickGoBack={goBackHandler} />
+					<LogoContainer>
+						<Logo>
+							<LogoTitle>선생님 로그인</LogoTitle>
+							<Image src="/images/institution/login_institution.png" alt="Institution Login" />
+						</Logo>
+					</LogoContainer>
+					<Login />
+				</Container>
 			)}
 		</div>
 	);
@@ -56,17 +59,6 @@ const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-`;
-
-const Button = styled.button`
-	background-color: '#55B5E6';
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 168px;
-	height: 54px;
-	border-radius: 14px;
-	margin-top: 50px;
 `;
 
 const LogoContainer = styled.div`
