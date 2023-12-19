@@ -14,6 +14,10 @@ export const getAllInstitution = async () => {
 
 // 기관 로그인
 export const institutionLogin = async (data: TinstitutionLogin) => {
-	const result = await axios.get(`${serverURL}/institutions/login?id=${data.id}&password=${data.password}`);
-	return result.data;
+	try {
+		const result = await axios.get(`${serverURL}/institutions/login?id=${data.id}&password=${data.password}`);
+		return result.data;
+	} catch (e: any) {
+		return e.response.data.result;
+	}
 };
