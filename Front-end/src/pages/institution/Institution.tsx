@@ -20,7 +20,7 @@ const Institution = ({ hasGoback = true }) => {
 	const navigate = useNavigate();
 
 	const goBackHandler = () => {
-		navigate(-1);
+		navigate(PageUrls.INTRO);
 	};
 
 	useEffect(() => {
