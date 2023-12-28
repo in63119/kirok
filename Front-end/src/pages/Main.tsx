@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import SingleButton from 'components/common/SingleButton';
@@ -12,14 +12,17 @@ const Main = () => {
 	const kakao = useRecoilValue(kakaoState);
 
 	const handleClickParentButton = useCallback(() => {
+		kakaoOpen();
+		navigate(PageUrls.PARENT.KAKAO_LOGIN);
+
+		// TODO: 부모 가입 상태에 따라 추가 분기하기
+	}, [navigate]);
+
+	useEffect(() => {
 		if (kakao.kakaoEmail && kakao.kakaoId) {
 			navigate(PageUrls.PARENT.WELCOME);
-		} else {
-			kakaoOpen();
-			navigate(PageUrls.PARENT.KAKAO_LOGIN);
 		}
-		// TODO: 부모 가입 상태에 따라 추가 분기하기
-	}, [navigate, kakao]);
+	}, [kakao.kakaoEmail, kakao.kakaoId, navigate]);
 
 	return (
 		<Container>
