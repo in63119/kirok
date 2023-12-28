@@ -14,11 +14,10 @@ const Main = () => {
 	const handleClickParentButton = useCallback(() => {
 		kakaoOpen();
 		navigate(PageUrls.PARENT.KAKAO_LOGIN);
-
-		// TODO: 부모 가입 상태에 따라 추가 분기하기
 	}, [navigate]);
 
 	useEffect(() => {
+		// TODO: 부모 가입 상태에 따라 추가 분기하기
 		if (kakao.kakaoEmail && kakao.kakaoId) {
 			navigate(PageUrls.PARENT.WELCOME);
 		}
