@@ -1,6 +1,6 @@
-*.lock
 */node_modules/
-*/.env
+*/.env.local
+*/.env.production
 */ec2-kirok.pem
 Back-end/test.js
 Front-end/build/
