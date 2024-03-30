@@ -1,5 +1,6 @@
 */node_modules/
 */.env.local
+*/.env
 */.env.production
 */ec2-kirok.pem
 Back-end/test.js
