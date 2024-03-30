@@ -1,3 +1,5 @@
+import { getInstitutionInfo } from '../db/query';
+
 // Type
 import { TinstitutionLogin } from '../utils/type';
 
@@ -15,8 +17,8 @@ export const getAllInstitution = async () => {
 // 기관 로그인
 export const institutionLogin = async (data: TinstitutionLogin) => {
 	try {
-		const result = await axios.get(`${serverURL}/institutions/login?id=${data.id}&password=${data.password}`);
-		return result.data;
+		const result = await getInstitutionInfo(data);
+		return result;
 	} catch (e: any) {
 		return e.response.data.result;
 	}
