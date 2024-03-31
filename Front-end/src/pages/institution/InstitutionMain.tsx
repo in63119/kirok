@@ -35,7 +35,7 @@ const InstitutionMain = () => {
 					<TitleName>{name}</TitleName>
 				</Title>
 				<RegistContainer>
-					<ConfurmRequest src="/images/institution/frame_confirmRequest.png" />
+					<ConfirmRequest src="/images/institution/frame_confirmRequest.png" />
 					<ChildrenCheck src="/images/institution/frame_childrenCheck.png" />
 				</RegistContainer>
 			</Content>
@@ -78,32 +78,31 @@ const Title = styled.h1`
 	display: flex;
 	align-items: center;
 	font-size: 24px;
-	color: #333; /* Adjust to match the design */
-	margin-left: 16px; /* Align with the Logo in the Header */
-	/* Removed margin-top to allow Content's padding to handle vertical spacing */
+	color: #333;
+	margin-left: 6px;
 `;
 const TitleImg = styled.img`
-	width: 24px; /* Adjust width to match your title image size */
+	width: 24px;
 	height: auto;
 	margin-right: 8px;
 `;
 
 const RegistContainer = styled.div`
 	display: flex;
-	flex-direction: column;
 	width: 100%;
+	justify-content: center;
 `;
 
-const ConfurmRequest = styled.img`
-	width: 100%; /* Adjust width to fit your design */
+const ConfirmRequest = styled.img`
+	width: 159.5px;
 	height: auto;
-	margin: 8px 0; /* Adjust margin to match your design */
+	margin: 8px 14px;
 `;
 
 const ChildrenCheck = styled.img`
-	width: 100%; /* Adjust width to fit your design */
+	width: 159.5px;
 	height: auto;
-	margin: 8px 0; /* Adjust margin to match your design */
+	margin: 8px 14px;
 `;
 
 const TitleName = styled.div`
