@@ -18,7 +18,6 @@ export async function withFirestore<T>(operation: (db: Firestore) => Promise<T>)
 		return operation(db);
 	} catch (error) {
 		console.error(error);
-		// 여기서 더 상세한 에러 처리를 할 수 있습니다.
 		return undefined;
 	}
 }
