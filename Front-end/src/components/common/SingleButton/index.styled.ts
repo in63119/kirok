@@ -1,4 +1,5 @@
 import { css, styled } from 'styled-components';
+import isPropValid from '@emotion/is-prop-valid';
 
 export type SingleButtonStyleProps = {
 	size: 'large' | 'medium' | 'small';
@@ -7,7 +8,9 @@ export type SingleButtonStyleProps = {
 	variant: 'solid-primary' | 'solid-secondary' | 'outline' | 'text';
 };
 
-export const Wrapper = styled.div<SingleButtonStyleProps>`
+export const Wrapper = styled.div.withConfig({
+	shouldForwardProp: (prop) => isPropValid(prop) && prop !== 'variant' && prop !== 'state',
+})<SingleButtonStyleProps>`
 	display: flex;
 	justify-content: center;
 	align-items: center;
