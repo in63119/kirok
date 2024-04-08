@@ -14,11 +14,14 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v2
 
+      - name: Change to Front-end directory
+        run: cd Front-end
+
       - name: Install dependencies
-        run: npm install
+        run: yarn
 
       - name: Build static file
-        run: npm run build
+        run: yarn run build
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
