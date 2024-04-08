@@ -3,6 +3,7 @@ export const PageUrls = {
 	INSTITUTION: {
 		LOGIN: '/institution/login',
 		MAIN: '/institution',
+		REGISTRATION_REQUEST: '/institution/request',
 	},
 	PARENT: {
 		WELCOME: '/parent/welcome',

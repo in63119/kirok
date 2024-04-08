@@ -1,5 +1,6 @@
 import { HEADER_HEIGHT } from 'components/Header';
 import { css, styled } from 'styled-components';
+import isPropValid from '@emotion/is-prop-valid';
 
 const SIDE_PADDING = '20px';
 const FOOTER_BACKGROUND = 'white';
@@ -9,7 +10,9 @@ export const SidePaddingStyle = css`
 	padding-right: ${SIDE_PADDING};
 `;
 
-export const ParentLayout = styled.div<{ hasSidePadding: boolean }>`
+export const ParentLayout = styled.div.withConfig({
+	shouldForwardProp: (prop) => isPropValid(prop) && prop !== 'variant' && prop !== 'state',
+})<{ hasSidePadding: boolean }>`
 	width: 100%;
 	height: calc(100vh - ${HEADER_HEIGHT}px);
 	padding: 12px 0;
