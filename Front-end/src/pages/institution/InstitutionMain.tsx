@@ -35,7 +35,12 @@ const InstitutionMain = () => {
 					<TitleName>{name}</TitleName>
 				</Title>
 				<RegistContainer>
-					<ConfirmRequest src="/images/institution/frame_confirmRequest.png" />
+					<ConfirmRequest
+						src="/images/institution/frame_confirmRequest.png"
+						onClick={() => {
+							navigate(PageUrls.INSTITUTION.REGISTRATION_REQUEST);
+						}}
+					/>
 					<ChildrenCheck src="/images/institution/frame_childrenCheck.png" />
 				</RegistContainer>
 			</Content>
