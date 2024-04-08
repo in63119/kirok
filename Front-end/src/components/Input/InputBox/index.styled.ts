@@ -1,8 +1,11 @@
 import { css, styled } from 'styled-components';
+import isPropValid from '@emotion/is-prop-valid';
 
 export const InputFrame = styled.div``;
 
-export const Input = styled.input<{ isError: boolean }>`
+export const Input = styled.input.withConfig({
+	shouldForwardProp: (prop) => isPropValid(prop) && prop !== 'variant' && prop !== 'state',
+})<{ isError: boolean }>`
 	width: 100%;
 	display: flex;
 	height: 48px;

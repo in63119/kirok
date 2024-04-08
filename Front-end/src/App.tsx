@@ -12,6 +12,7 @@ import Institution from './pages/institution/Institution';
 import ParentWelcomePage from './pages/parent/welcome';
 import ParentKidRegisterPage from 'pages/parent/kid-register';
 import InstitutionMain from 'pages/institution/InstitutionMain';
+import RegistrationRequest from 'pages/institution/RegistrationRequest';
 
 function App() {
 	return (
@@ -26,6 +27,7 @@ function App() {
 					<Route path={PageUrls.PARENT.WELCOME} element={<ParentWelcomePage />} />
 					<Route path={PageUrls.PARENT.KID_REGISTER} element={<ParentKidRegisterPage />} />
 					<Route path={PageUrls.INSTITUTION.MAIN} element={<InstitutionMain />} />
+					<Route path={PageUrls.INSTITUTION.REGISTRATION_REQUEST} element={<RegistrationRequest />} />
 				</Routes>
 			</BrowserRouter>
 		</>
