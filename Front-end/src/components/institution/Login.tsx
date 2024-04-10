@@ -3,10 +3,10 @@ import styled from 'styled-components';
 
 // Recoil
 import { useRecoilState } from 'recoil';
-import { institutionState } from '../../recoil/institutionState';
+import { institutionState, IInstitution } from '../../recoil/institutionState';
 
-// Api
-import { institutionLogin } from '../../apis/institution';
+// DB
+import { getInstitutionInfo } from '../../db/query';
 
 // CSS
 import fonts from 'constants/fonts';
@@ -15,13 +15,13 @@ const Login = () => {
 	const [institution, setInstitution] = useRecoilState(institutionState);
 
 	const handleInputId = (value: string) => {
-		setInstitution((prev: any) => ({
+		setInstitution((prev: IInstitution) => ({
 			...prev,
 			id: value,
 		}));
 	};
 	const handleInputPassword = (value: string) => {
-		setInstitution((prev: any) => ({
+		setInstitution((prev: IInstitution) => ({
 			...prev,
 			password: value,
 		}));
@@ -38,10 +38,10 @@ const Login = () => {
 			id: institution.id,
 			password: institution.password,
 		};
-		const result = await institutionLogin(data);
+		const result = await getInstitutionInfo(data);
 
-		if (result.result) {
-			setInstitution((prev: any) => ({
+		if (result?.result) {
+			setInstitution((prev: IInstitution) => ({
 				...prev,
 				isLogin: result.result,
 				name: result.name,
