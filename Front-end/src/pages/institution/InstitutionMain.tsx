@@ -3,9 +3,6 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { PageUrls } from 'constants/page-urls';
 
-// Components
-// import RegistrationRequest from '../../components/institution/RegistrationRequest';
-
 // Recoil
 import { useResetRecoilState, useRecoilValue } from 'recoil';
 import { institutionState } from '../../recoil/institutionState';

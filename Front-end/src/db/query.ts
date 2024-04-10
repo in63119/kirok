@@ -105,13 +105,13 @@ export const getKidRegistered = (kakaoId: string, name: string) => {
 };
 
 // 자녀 등록 & 수정
-export const setKid = (kakaoId: string, name: string, info: any) => {
-	return withFirestore<boolean>(async (db) => {
-		const docRef = doc(collection(db, 'user', kakaoId, 'kids'), name);
-		await setDoc(docRef, info);
-		return docRef.id === name;
-	});
-};
+// export const setKid = (kakaoId: string, name: string, info: any) => {
+// 	return withFirestore<boolean>(async (db) => {
+// 		const docRef = doc(collection(db, 'user', kakaoId, 'kids'), name);
+// 		await setDoc(docRef, info);
+// 		return docRef.id === name;
+// 	});
+// };
 
 // 기업 로그인
 export const getInstitutionInfo = (data: TinstitutionLogin) => {
@@ -147,25 +147,25 @@ export const getInstitutionInfo = (data: TinstitutionLogin) => {
 };
 
 // 기관 등록 요청 대기열에 추가
-export const registrationRequest = (info: any) => {
-	return withFirestore(async (db) => {
-		const docRef = doc(collection(db, 'institution', info.institution, 'RegistrationRequest'), info.name);
-		await setDoc(docRef, info);
-		return docRef.id === info.name;
-	});
-};
+// export const registrationRequest = (info: any) => {
+// 	return withFirestore(async (db) => {
+// 		const docRef = doc(collection(db, 'institution', info.institution, 'RegistrationRequest'), info.name);
+// 		await setDoc(docRef, info);
+// 		return docRef.id === info.name;
+// 	});
+// };
 
 // 아이가 기관 등록 대기열에 있는지 조회
-export const checkRegistrationRequest = (info: any) => {
-	return withFirestore(async (db) => {
-		let result = false;
-		const q = query(collection(db, 'institution', info.institution, 'RegistrationRequest'));
-		const querySnapshot = await getDocs(q);
-		querySnapshot.forEach((doc) => {
-			if (info.name === doc.id && info.birth === doc.data().birth && info.gender === doc.data().gender) {
-				result = true;
-			}
-		});
-		return result;
-	});
-};
+// export const checkRegistrationRequest = (info: any) => {
+// 	return withFirestore(async (db) => {
+// 		let result = false;
+// 		const q = query(collection(db, 'institution', info.institution, 'RegistrationRequest'));
+// 		const querySnapshot = await getDocs(q);
+// 		querySnapshot.forEach((doc) => {
+// 			if (info.name === doc.id && info.birth === doc.data().birth && info.gender === doc.data().gender) {
+// 				result = true;
+// 			}
+// 		});
+// 		return result;
+// 	});
+// };
