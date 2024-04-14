@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import fonts from 'constants/fonts';
+import { RegistrationItem } from 'utils/type';
 
 // DB
-import { firestore } from '../../utils/firestore';
-import { onSnapshot, query, collection } from 'firebase/firestore';
+import { initialization } from 'db/firestore';
+import { query, collection, onSnapshot } from 'firebase/firestore';
 
 // Component
 import Header from 'components/Header';
@@ -15,48 +16,48 @@ import RequestKid from 'components/institution/RequestKid';
 import { useRecoilValue } from 'recoil';
 import { institutionState } from '../../recoil/institutionState';
 
-interface RegistrationItem {
-	birth: string;
-	gender: string;
-	institution: string;
-	isRegistered?: boolean;
-	name: string;
+interface StyledSelected {
+	selected: boolean;
 }
 
 const RegistrationRequest = ({ hasGoback = true }) => {
 	const institution = useRecoilValue(institutionState);
 	const [realTimeRequest, setRealTimeRequest] = useState<RegistrationItem[]>([]);
-	const q = query(collection(firestore, 'institution', `${institution.name}`, 'RegistrationRequest'));
+	const [selectedKids, setSelectedKids] = useState<Set<number>>(new Set());
 	const navigate = useNavigate();
+	const db = initialization();
 
 	const goBackHandler = () => {
 		navigate(-1);
 	};
 
+	const toggleSelection = (index: number) => {
+		setSelectedKids((prevSelected) => {
+			const newSelected = new Set(prevSelected);
+			if (newSelected.has(index)) {
+				newSelected.delete(index);
+			} else {
+				newSelected.add(index);
+			}
+			return newSelected;
+		});
+	};
+
 	useEffect(() => {
-		const unsubscribe = onSnapshot(
-			q,
-			(querySnapshot) => {
-				const requests: RegistrationItem[] = [];
-
-				querySnapshot.forEach((doc) => {
-					const data: RegistrationItem = doc.data() as RegistrationItem;
-					if (data) {
-						requests.push(data);
-					}
+		const fetchRealTimeRequests = () => {
+			const realTimeRequestsQuery = query(collection(db, 'institution', institution.name, 'RegistrationRequest'));
+			onSnapshot(realTimeRequestsQuery, (snapshot) => {
+				const realTimeRequestList = snapshot.docs.map((doc) => {
+					const { birth, gender, institution, name } = doc.data();
+					console.log(doc.data());
+					return { birth, gender, institution, name };
 				});
-
-				setRealTimeRequest(requests);
-			},
-			(err) => {
-				console.log('TODO: error 처리 일관화', err);
-			},
-		);
-
-		return () => {
-			unsubscribe();
+				setRealTimeRequest(realTimeRequestList);
+			});
 		};
-	}, [q]);
+
+		fetchRealTimeRequests();
+	}, [db, institution.name]);
 
 	return (
 		<Container>
@@ -67,12 +68,10 @@ const RegistrationRequest = ({ hasGoback = true }) => {
 			{realTimeRequest.length === 0
 				? null
 				: realTimeRequest?.map((kid: RegistrationItem, i: number) => (
-						<div key={i}>
-							<div>
-								{kid.name} {kid.gender} {kid.birth}
-							</div>
+						<KidContainer key={i} selected={selectedKids.has(i)} onClick={() => toggleSelection(i)}>
 							<RequestKid name={kid.name} gender={kid.gender} birth={kid.birth} index={i} />
-						</div>
+							<SelectionIndicator selected={selectedKids.has(i)} />
+						</KidContainer>
 					))}
 		</Container>
 	);
@@ -104,4 +103,26 @@ const HeaderContainer = styled.div`
 	justify-content: center;
 	align-items: center;
 	padding: 16px;
+`;
+
+const KidContainer = styled.div<StyledSelected>`
+	display: flex;
+	align-items: center;
+	background-color: ${({ selected }) => (selected ? '#E0F7FA' : 'transparent')};
+	transition: background-color 0.3s;
+	cursor: pointer;
+
+	&:hover {
+		background-color: #e0f7fa;
+	}
+`;
+
+const SelectionIndicator = styled.div<StyledSelected>`
+	width: 20px;
+	height: 20px;
+	border: 2px solid #009688;
+	border-radius: 50%;
+	margin-left: auto;
+	background-color: ${({ selected }) => (selected ? '#009688' : 'transparent')};
+	transition: background-color 0.3s;
 `;

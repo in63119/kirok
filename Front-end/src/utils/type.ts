@@ -24,3 +24,11 @@ type requestKidInfo = {
 	isRegistered: boolean;
 	name: string;
 };
+
+export interface RegistrationItem {
+	birth: string;
+	gender: string;
+	institution: string;
+	isRegistered?: boolean;
+	name: string;
+}
