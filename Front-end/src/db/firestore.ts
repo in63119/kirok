@@ -1,5 +1,5 @@
-import { initializeApp, FirebaseApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
+import { initializeApp, getApps, getApp } from 'firebase/app';
+import { getFirestore, Firestore } from 'firebase/firestore';
 
 // Firebase
 const firebaseConfig = {
@@ -12,12 +12,16 @@ const firebaseConfig = {
 	measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 };
 
-export const initialization = () => {
-	try {
-		const app: FirebaseApp = initializeApp(firebaseConfig);
-		const db = getFirestore(app);
-		return { app, db };
-	} catch (e) {
-		console.log('initialization : ', e);
+let app;
+let db;
+
+export const initialization = (): Firestore => {
+	if (!getApps().length) {
+		app = initializeApp(firebaseConfig);
+		db = getFirestore(app);
+	} else {
+		app = getApp();
+		db = getFirestore(app);
 	}
+	return db;
 };

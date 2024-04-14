@@ -14,7 +14,7 @@ export async function withFirestore<T>(operation: (db: Firestore) => Promise<T>)
 		if (!initializationResult) {
 			throw new Error('Database initialization failed');
 		}
-		const { db } = initializationResult;
+		const db = initializationResult;
 		return operation(db);
 	} catch (error) {
 		console.error(error);
