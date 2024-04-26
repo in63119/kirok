@@ -1,5 +1,6 @@
 import React from 'react';
 import { styled } from 'styled-components';
+import fonts from 'constants/fonts';
 
 interface RequestKidProps {
 	name: string;
@@ -8,16 +9,19 @@ interface RequestKidProps {
 	index: number;
 }
 
+interface KidContainerProps {
+	isOdd: boolean;
+}
+
 const RequestKid: React.FC<RequestKidProps> = ({ name, gender, birth, index }) => {
+	const isOdd = (index + 1) % 2 !== 0;
+
 	return (
-		<KidContainer>
-			<KidIndex>{index + 1}</KidIndex>
+		<KidContainer isOdd={isOdd}>
 			<KidInfo>
 				<KidName>{name}</KidName>
-				<KidDetails>
-					<KidBirth>{birth}</KidBirth>
-					<KidGender>{gender}</KidGender>
-				</KidDetails>
+				<KidBirth>{birth}</KidBirth>
+				<KidGender>{gender}</KidGender>
 			</KidInfo>
 		</KidContainer>
 	);
@@ -25,44 +29,41 @@ const RequestKid: React.FC<RequestKidProps> = ({ name, gender, birth, index }) =
 
 export default RequestKid;
 
-const KidContainer = styled.div`
+const KidContainer = styled.div.withConfig({
+	shouldForwardProp: (prop) => !['isOdd'].includes(prop),
+})<KidContainerProps>`
 	display: flex;
 	align-items: center;
-	padding: 10px;
-	margin: 5px 0;
-	background-color: #f8f8f8;
-	border-radius: 8px;
-`;
-
-const KidIndex = styled.div`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 30px;
-	height: 30px;
-	margin-right: 15px;
-	background-color: #e1e1e1;
-	border-radius: 50%;
-	font-weight: bold;
+	padding: 0 20.5px;
+	width: 258px;
+	height: 49px;
+	background-color: ${(props) => (props.isOdd ? '#ECF5FB' : '#F8F8F8')};
+	border-radius: 12px;
 `;
 
 const KidInfo = styled.div`
-	flex-grow: 1;
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
 `;
 
 const KidName = styled.div`
-	font-size: 1rem;
-	font-weight: bold;
-	margin-bottom: 5px;
-`;
-
-const KidDetails = styled.div`
-	font-size: 0.9rem;
-	color: #666;
+	font-family: ${fonts.suit.bold};
+	font-weight: 500;
+	font-size: 17px;
+	line-height: 21.22px;
 `;
 
 const KidBirth = styled.span`
-	margin-right: 10px;
+	font-family: ${fonts.suit.bold};
+	font-weight: 500;
+	font-size: 17px;
+	line-height: 21.22px;
 `;
 
-const KidGender = styled.span``;
+const KidGender = styled.span`
+	font-family: ${fonts.suit.bold};
+	font-weight: 500;
+	font-size: 17px;
+	line-height: 21.22px;
+`;

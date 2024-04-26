@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import fonts from 'constants/fonts';
-import { RegistrationItem } from 'utils/type';
+import { RegistrationItem, GroupedRequests } from 'utils/type';
 
 // DB
 import { initialization } from 'db/firestore';
-import { query, collection, onSnapshot } from 'firebase/firestore';
+import { collection, onSnapshot } from 'firebase/firestore';
 
 // Component
 import Header from 'components/Header';
@@ -24,6 +24,7 @@ const RegistrationRequest = ({ hasGoback = true }) => {
 	const institution = useRecoilValue(institutionState);
 	const [realTimeRequest, setRealTimeRequest] = useState<RegistrationItem[]>([]);
 	const [selectedKids, setSelectedKids] = useState<Set<number>>(new Set());
+	const [selectAll, setSelectAll] = useState(false);
 	const navigate = useNavigate();
 	const db = initialization();
 
@@ -43,21 +44,44 @@ const RegistrationRequest = ({ hasGoback = true }) => {
 		});
 	};
 
-	useEffect(() => {
-		const fetchRealTimeRequests = () => {
-			const realTimeRequestsQuery = query(collection(db, 'institution', institution.name, 'RegistrationRequest'));
-			onSnapshot(realTimeRequestsQuery, (snapshot) => {
-				const realTimeRequestList = snapshot.docs.map((doc) => {
-					const { birth, gender, institution, name } = doc.data();
-					console.log(doc.data());
-					return { birth, gender, institution, name };
-				});
-				setRealTimeRequest(realTimeRequestList);
-			});
-		};
+	const toggleSelectAll = () => {
+		if (selectAll) {
+			setSelectedKids(new Set());
+		} else {
+			const allIndices = new Set(realTimeRequest.map((_, index) => index));
+			setSelectedKids(allIndices);
+		}
+		setSelectAll(!selectAll);
+	};
 
-		fetchRealTimeRequests();
+	const groupedRequests = realTimeRequest.reduce((acc: GroupedRequests, item) => {
+		const date = `${item.created_at.split(' ')[1]} ${item.created_at.split(' ')[2]}`;
+		if (!acc[date]) {
+			acc[date] = [];
+		}
+		acc[date].push(item);
+		return acc;
+	}, {});
+
+	useEffect(() => {
+		const realTimeRequestsRef = collection(db, 'institution', institution.name, 'RegistrationRequest');
+		const unsubscribe = onSnapshot(realTimeRequestsRef, (snapshot) => {
+			const realTimeRequestList = snapshot.docs.map((doc) => {
+				const { birth, gender, institution, name, created_at } = doc.data() as RegistrationItem;
+				const time = created_at.split(' ')[3];
+				return { birth, gender, institution, name, created_at, time };
+			});
+			setRealTimeRequest(realTimeRequestList);
+		});
+
+		return () => unsubscribe();
 	}, [db, institution.name]);
+
+	useEffect(() => {
+		if (selectAll && realTimeRequest.length && selectedKids.size !== realTimeRequest.length) {
+			setSelectAll(false);
+		}
+	}, [realTimeRequest, selectAll, selectedKids]);
 
 	return (
 		<Container>
@@ -65,14 +89,25 @@ const RegistrationRequest = ({ hasGoback = true }) => {
 				<Header hasGoback={hasGoback} handleClickGoBack={goBackHandler} />
 				<Title>등록 요청 확인</Title>
 			</HeaderContainer>
-			{realTimeRequest.length === 0
-				? null
-				: realTimeRequest?.map((kid: RegistrationItem, i: number) => (
+			<SelectionAll onClick={toggleSelectAll}>
+				{selectAll ? (
+					<Check src="/images/institution/icon_check.png" alt="Check" />
+				) : (
+					<NotCheck src="/images/institution/icon_check_empty.png" alt="NotCheck" />
+				)}
+				전체 선택({selectedKids.size}/{realTimeRequest.length})
+			</SelectionAll>
+			{Object.entries(groupedRequests).map(([date, kids]) => (
+				<React.Fragment key={date}>
+					<DateTitle>{date}</DateTitle>
+					{kids.map((kid, i) => (
 						<KidContainer key={i} selected={selectedKids.has(i)} onClick={() => toggleSelection(i)}>
 							<RequestKid name={kid.name} gender={kid.gender} birth={kid.birth} index={i} />
-							<SelectionIndicator selected={selectedKids.has(i)} />
+							<RequestKidTime>{kid.time}</RequestKidTime>
 						</KidContainer>
 					))}
+				</React.Fragment>
+			))}
 		</Container>
 	);
 };
@@ -108,21 +143,50 @@ const HeaderContainer = styled.div`
 const KidContainer = styled.div<StyledSelected>`
 	display: flex;
 	align-items: center;
-	background-color: ${({ selected }) => (selected ? '#E0F7FA' : 'transparent')};
 	transition: background-color 0.3s;
 	cursor: pointer;
 
-	&:hover {
-		background-color: #e0f7fa;
+	&::before {
+		content: '';
+		display: block;
+		width: 24px;
+		height: 24px;
+		margin-right: 10px;
+		background: url(${(props) =>
+				props.selected ? '/images/institution/icon_check.png' : '/images/institution/icon_check_empty.png'})
+			no-repeat center center;
+		background-size: contain;
 	}
 `;
 
-const SelectionIndicator = styled.div<StyledSelected>`
-	width: 20px;
-	height: 20px;
-	border: 2px solid #009688;
-	border-radius: 50%;
-	margin-left: auto;
-	background-color: ${({ selected }) => (selected ? '#009688' : 'transparent')};
-	transition: background-color 0.3s;
+const DateTitle = styled.div`
+	font-family: ${fonts.suit.bold};
+	font-weight: 600;
+	font-size: 14px;
+	line-height: 17.47px;
+	padding: 8px 20px 8px 20px;
+`;
+
+const SelectionAll = styled.div`
+	font-family: ${fonts.suit.bold};
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 17.47px;
+`;
+
+const NotCheck = styled.img`
+	width: 24px;
+	height: 24px;
+`;
+
+const Check = styled.img`
+	width: 24px;
+	height: 24px;
+`;
+
+const RequestKidTime = styled.div`
+	font-family: ${fonts.suit.bold};
+	font-weight: 500;
+	font-size: 11px;
+	line-height: 13.73px;
 `;
