@@ -31,4 +31,10 @@ export interface RegistrationItem {
 	institution: string;
 	isRegistered?: boolean;
 	name: string;
+	created_at: string;
+	time: string;
 }
+
+export type GroupedRequests = {
+	[key: string]: RegistrationItem[];
+};
