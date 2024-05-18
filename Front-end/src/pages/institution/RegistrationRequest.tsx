@@ -23,7 +23,7 @@ interface StyledSelected {
 const RegistrationRequest = ({ hasGoback = true }) => {
 	const institution = useRecoilValue(institutionState);
 	const [realTimeRequest, setRealTimeRequest] = useState<RegistrationItem[]>([]);
-	const [selectedKids, setSelectedKids] = useState<Set<number>>(new Set());
+	const [selectedKids, setSelectedKids] = useState<{ [date: string]: { [index: number]: boolean } }>({});
 	const [selectAll, setSelectAll] = useState(false);
 	const navigate = useNavigate();
 	const db = initialization();
@@ -32,23 +32,32 @@ const RegistrationRequest = ({ hasGoback = true }) => {
 		navigate(-1);
 	};
 
-	const toggleSelection = (index: number) => {
+	const toggleSelection = (date: string, index: number) => {
 		setSelectedKids((prevSelected) => {
-			const newSelected = new Set(prevSelected);
-			if (newSelected.has(index)) {
-				newSelected.delete(index);
-			} else {
-				newSelected.add(index);
+			const newSelected = { ...prevSelected };
+			if (!newSelected[date]) {
+				newSelected[date] = {};
 			}
+			newSelected[date][index] = !newSelected[date][index];
 			return newSelected;
 		});
 	};
 
 	const toggleSelectAll = () => {
 		if (selectAll) {
-			setSelectedKids(new Set());
+			setSelectedKids({});
 		} else {
-			const allIndices = new Set(realTimeRequest.map((_, index) => index));
+			const allIndices = realTimeRequest.reduce(
+				(acc, item, index) => {
+					const date = `${item.created_at.split(' ')[1]} ${item.created_at.split(' ')[2]}`;
+					if (!acc[date]) {
+						acc[date] = {};
+					}
+					acc[date][index] = true;
+					return acc;
+				},
+				{} as { [date: string]: { [index: number]: boolean } },
+			);
 			setSelectedKids(allIndices);
 		}
 		setSelectAll(!selectAll);
@@ -78,7 +87,11 @@ const RegistrationRequest = ({ hasGoback = true }) => {
 	}, [db, institution.name]);
 
 	useEffect(() => {
-		if (selectAll && realTimeRequest.length && selectedKids.size !== realTimeRequest.length) {
+		const totalSelectedCount = Object.values(selectedKids).reduce(
+			(acc, dateObj) => acc + Object.keys(dateObj).length,
+			0,
+		);
+		if (selectAll && realTimeRequest.length && totalSelectedCount !== realTimeRequest.length) {
 			setSelectAll(false);
 		}
 	}, [realTimeRequest, selectAll, selectedKids]);
@@ -95,13 +108,18 @@ const RegistrationRequest = ({ hasGoback = true }) => {
 				) : (
 					<NotCheck src="/images/institution/icon_check_empty.png" alt="NotCheck" />
 				)}
-				전체 선택({selectedKids.size}/{realTimeRequest.length})
+				전체 선택({Object.values(selectedKids).reduce((acc, dateObj) => acc + Object.keys(dateObj).length, 0)}/
+				{realTimeRequest.length})
 			</SelectionAll>
 			{Object.entries(groupedRequests).map(([date, kids]) => (
 				<React.Fragment key={date}>
 					<DateTitle>{date}</DateTitle>
 					{kids.map((kid, i) => (
-						<KidContainer key={i} selected={selectedKids.has(i)} onClick={() => toggleSelection(i)}>
+						<KidContainer
+							key={`${date}-${i}`}
+							selected={selectedKids[date]?.[i] ?? false}
+							onClick={() => toggleSelection(date, i)}
+						>
 							<RequestKid name={kid.name} gender={kid.gender} birth={kid.birth} index={i} />
 							<RequestKidTime>{kid.time}</RequestKidTime>
 						</KidContainer>
@@ -145,6 +163,7 @@ const KidContainer = styled.div<StyledSelected>`
 	align-items: center;
 	transition: background-color 0.3s;
 	cursor: pointer;
+	background-color: ${(props) => (props.selected ? '#dff0ff' : 'transparent')};
 
 	&::before {
 		content: '';
@@ -172,6 +191,9 @@ const SelectionAll = styled.div`
 	font-weight: 400;
 	font-size: 14px;
 	line-height: 17.47px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
 `;
 
 const NotCheck = styled.img`
